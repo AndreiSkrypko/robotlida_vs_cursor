@@ -2656,42 +2656,201 @@
 <hr class="custom-divider">
 
 
-<!-- Блок с заголовком и картой -->
-<div class="container-fluid py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
-    <div class="row align-items-center justify-content-center">
-        <div class="col-12 col-lg-10">
-            <div class="text-center mb-5">
-                <h1 class="section-title fw-bold"
-                    style="color: #0d9488; font-size: 2.5rem; text-shadow: 0 2px 4px rgba(13, 148, 136, 0.1); margin-bottom: 1.5rem;">
-                    <i class="bi bi-geo-alt me-3" style="color: #ff6a00;"></i>
+<!-- === СТИЛИ ДЛЯ СЕКЦИИ С КАРТОЙ - ПРЕМИУМ === -->
+<style>
+    .map-section-premium {
+        background: linear-gradient(145deg, #f8fafc 0%, #ffffff 50%, #e9ecef 100%);
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .map-section-premium::before {
+        content: '';
+        position: absolute;
+        bottom: -100px;
+        right: -100px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(204, 85, 0, 0.06), transparent);
+        border-radius: 50%;
+        animation: float 20s ease-in-out infinite reverse;
+    }
+
+    .contact-card {
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 24px;
+        padding: 2.5rem;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        border: 2px solid rgba(13, 148, 136, 0.1);
+        margin-bottom: 2rem;
+        transition: all 0.5s ease;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .contact-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 60px rgba(13, 148, 136, 0.15);
+    }
+
+    .contact-icon-circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #0d9488, #17a2b8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        box-shadow: 0 12px 32px rgba(13, 148, 136, 0.3);
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .contact-card:hover .contact-icon-circle {
+        transform: rotate(360deg) scale(1.1);
+        box-shadow: 0 16px 48px rgba(13, 148, 136, 0.5);
+    }
+
+    .map-container {
+        border-radius: 28px;
+        overflow: hidden;
+        height: 500px;
+        box-shadow: 
+            0 16px 48px rgba(0, 0, 0, 0.15),
+            0 8px 24px rgba(13, 148, 136, 0.1);
+        border: 3px solid rgba(13, 148, 136, 0.2);
+        position: relative;
+        opacity: 0;
+        transform: scale(0.95);
+        animation: scaleIn 0.8s ease-out 0.3s forwards;
+        transition: all 0.5s ease;
+    }
+
+    .map-container:hover {
+        transform: scale(1.02);
+        box-shadow: 
+            0 24px 64px rgba(0, 0, 0, 0.2),
+            0 12px 32px rgba(13, 148, 136, 0.15);
+    }
+
+    .map-overlay-badge {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem 1.5rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        z-index: 10;
+        font-weight: 700;
+        color: #0d9488;
+        border: 2px solid rgba(13, 148, 136, 0.2);
+        animation: slideInLeft 0.8s ease-out 0.5s both;
+    }
+
+    .contact-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .contact-item {
+        text-align: center;
+        padding: 2rem;
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        transition: all 0.4s ease;
+        border: 2px solid rgba(13, 148, 136, 0.1);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .contact-item:nth-child(1) { animation-delay: 0.2s; }
+    .contact-item:nth-child(2) { animation-delay: 0.3s; }
+    .contact-item:nth-child(3) { animation-delay: 0.4s; }
+
+    .contact-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 16px 40px rgba(13, 148, 136, 0.15);
+        border-color: rgba(13, 148, 136, 0.3);
+    }
+
+    .contact-item i {
+        font-size: 2.5rem;
+        background: linear-gradient(135deg, #0d9488, #17a2b8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+        display: block;
+    }
+</style>
+
+<!-- Блок с картой - ПРЕМИУМ ДИЗАЙН -->
+<div class="container-fluid py-5 map-section-premium">
+    <div class="container">
+        <!-- Заголовок -->
+        <div class="text-center mb-5">
+            <div class="courses-title-wrapper">
+                <div>
+                    <i class="bi bi-geo-alt-fill courses-icon"></i>
+                </div>
+                <h1 class="courses-main-title">
                     Как нас найти
                 </h1>
-                <div class="title-underline"
-                    style="width: 150px; height: 4px; background: linear-gradient(90deg, #ff6a00, #17a2b8); margin: 0 auto; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 106, 0, 0.3);">
-                </div>
+                <p class="courses-subtitle">
+                    Мы находимся в центре г. Лида
+                </p>
+                <div class="courses-underline"></div>
             </div>
+        </div>
 
-            <div class="content-card"
-                style="background: white; border-radius: 20px; padding: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid rgba(13, 148, 136, 0.1);">
-                <!-- Адрес -->
-                <div class="address-info text-center mb-4"
-                    style="background: linear-gradient(135deg, rgba(23, 162, 184, 0.05) 0%, rgba(255, 106, 0, 0.05) 100%); border-radius: 15px; padding: 2rem; border-left: 4px solid #17a2b8;">
-                    <h4 class="fw-bold mb-3" style="color: #0d9488; text-shadow: 0 1px 2px rgba(23, 162, 184, 0.1);">
-                        <i class="bi bi-building me-2" style="color: #ff6a00;"></i>
-                        Наш адрес
-                    </h4>
-                    <p class="mb-0" style="font-size: 1.2rem; font-weight: 600; color: #495057; line-height: 1.6;">
-                        Республика Беларусь, г. Лида, ул. Замковая, 4
-                    </p>
-                </div>
+        <!-- Информация о контактах -->
+        <div class="contact-info-grid">
+            <div class="contact-item">
+                <i class="bi bi-geo-alt-fill"></i>
+                <h5 style="font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">Адрес</h5>
+                <p style="color: #64748b; margin: 0;">г. Лида, ул. Замковая, 4</p>
+            </div>
+            <div class="contact-item">
+                <i class="bi bi-clock-fill"></i>
+                <h5 style="font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">Режим работы</h5>
+                <p style="color: #64748b; margin: 0;">Пн-Вс: 9:00 - 20:00</p>
+            </div>
+            <div class="contact-item">
+                <i class="bi bi-telephone-fill"></i>
+                <h5 style="font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">Свяжитесь с нами</h5>
+                <p style="color: #64748b; margin: 0;">Оставьте заявку на сайте</p>
+            </div>
+        </div>
 
-                <!-- Контейнер карты -->
-                <div class="map-wrapper"
-                    style="border-radius: 15px; overflow: hidden; height: 400px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 2px solid rgba(23, 162, 184, 0.1);">
-                    <iframe
-                        src="https://yandex.ru/map-widget/v1/?ll=25.295021%2C53.885529&z=17&l=map&pt=25.295021,53.885529,pm2rdm&text=Республика%20Беларусь%2C%20г.%20Лида%2C%20ул.%20Замковая%2C%204"
-                        width="100%" height="100%" frameborder="0" allowfullscreen="true" style="border:0;">
-                    </iframe>
+        <!-- Карта -->
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="contact-card">
+                    <div class="contact-icon-circle">
+                        <i class="bi bi-map" style="font-size: 3rem; color: white;"></i>
+                    </div>
+                    <h3 class="text-center mb-4" style="font-weight: 800; color: #1e293b; font-family: 'Poppins', sans-serif;">
+                        Республика Беларусь, г. Лида
+                    </h3>
+                    
+                    <div class="map-container">
+                        <div class="map-overlay-badge">
+                            <i class="bi bi-pin-map-fill me-2" style="color: #CC5500;"></i>
+                            IT-клуб «Юные Инженеры»
+                        </div>
+                        <iframe
+                            src="https://yandex.ru/map-widget/v1/?ll=25.295021%2C53.885529&z=17&l=map&pt=25.295021,53.885529,pm2rdm&text=Республика%20Беларусь%2C%20г.%20Лида%2C%20ул.%20Замковая%2C%204"
+                            width="100%" height="100%" frameborder="0" allowfullscreen="true" style="border:0;">
+                        </iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3194,6 +3353,84 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     console.log('🚀 Все интерактивные элементы загружены!');
+    
+    
+    // ========== ИНТЕРАКТИВНОСТЬ КОНТАКТНЫХ КАРТОЧЕК ==========
+    const contactItems = document.querySelectorAll('.contact-item');
+    
+    contactItems.forEach(item => {
+        // Ripple эффект
+        item.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(13, 148, 136, 0.3);
+                transform: scale(0);
+                animation: ripple 0.6s ease-out;
+                pointer-events: none;
+            `;
+            
+            const rect = item.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            item.style.position = 'relative';
+            item.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+        
+        // Параллакс иконки
+        item.addEventListener('mousemove', function(e) {
+            const rect = item.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const moveX = (x - centerX) / 15;
+            const moveY = (y - centerY) / 15;
+            
+            const icon = item.querySelector('i');
+            if (icon) {
+                icon.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            }
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            const icon = item.querySelector('i');
+            if (icon) {
+                icon.style.transform = '';
+            }
+        });
+    });
+    
+    // Анимация при появлении карты
+    const mapContainer = document.querySelector('.map-container');
+    if (mapContainer) {
+        const mapObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('map-visible');
+                    mapObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        mapObserver.observe(mapContainer);
+    }
+    
+    
+    console.log('🗺️ Раздел с картой загружен!');
 });
 </script>
 
