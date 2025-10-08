@@ -5,6 +5,127 @@
 
 {% block content %}
 
+<!-- === ЕДИНЫЕ СТИЛИ РАЗДЕЛИТЕЛЕЙ === -->
+<style>
+    .custom-divider {
+        border: none;
+        height: 4px;
+        background: linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(13, 148, 136, 0.3) 15%, 
+            #CC5500 50%, 
+            rgba(13, 148, 136, 0.3) 85%, 
+            transparent 100%);
+        margin: 60px auto;
+        width: 70%;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(204, 85, 0, 0.25);
+        position: relative;
+    }
+
+    .custom-divider::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 16px;
+        height: 16px;
+        background: linear-gradient(135deg, #CC5500, #ff9500);
+        border-radius: 50%;
+        box-shadow: 0 0 16px rgba(204, 85, 0, 0.6);
+    }
+
+    /* === УЛУЧШЕННАЯ ТИПОГРАФИКА === */
+    h1, h2, h3, h4, h5 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+    }
+
+    p {
+        font-family: 'Nunito', sans-serif;
+        font-weight: 500;
+    }
+
+    .section-title {
+        font-weight: 800 !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    /* === СТИЛИ ДЛЯ РАЗДЕЛА О КЛУБЕ === */
+    .about-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #e9ecef 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .about-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, transparent, #0d9488, #CC5500, #ff9500, transparent);
+        animation: gradientSlide 3s linear infinite;
+        background-size: 200% 100%;
+    }
+
+    @keyframes gradientSlide {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 200% 50%; }
+    }
+
+    .section-title-modern {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 800;
+        color: #0d9488;
+        font-size: 2.5rem;
+        letter-spacing: 0.5px;
+        text-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        animation: fadeInScale 1s ease-out;
+    }
+
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .title-underline-modern {
+        width: 140px;
+        height: 5px;
+        background: linear-gradient(90deg, #0d9488, #CC5500, #ff9500);
+        margin: 0 auto 3rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(204, 85, 0, 0.3);
+        position: relative;
+    }
+
+    .title-underline-modern::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50%;
+        height: 150%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+        animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+        0%, 100% { opacity: 0; }
+        50% { opacity: 1; }
+    }
+</style>
+
 <style>
     /* --- Общие стили для мобильных устройств --- */
     @media (max-width: 991px) {
@@ -829,32 +950,34 @@
 
 
 <!-- Разделитель -->
-<hr class="custom-divider"
-    style="border: none; height: 3px; background: linear-gradient(90deg, transparent 0%, #CC5500 50%, transparent 100%); margin: 40px auto; width: 80%; border-radius: 2px; box-shadow: 0 2px 8px rgba(204, 85, 0, 0.3);">
+<hr class="custom-divider">
 
 
 <!-- Блок с текстом и общим описанием курсов -->
-<div class="container-fluid py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+<div class="container-fluid py-5 about-section">
     <div class="row align-items-center justify-content-center">
         <div class="col-12 col-lg-10">
             <div class="text-center mb-5">
-                <h1 class="section-title fw-bold"
-                    style="color: #0d9488; font-size: 2.5rem; text-shadow: 0 2px 4px rgba(13, 148, 136, 0.1); margin-bottom: 1.5rem;">
-                    <i class="bi bi-laptop me-3" style="color: #ff6a00;"></i>
-                    IT-клуб современных технологий для детей от 5 до 15 лет
+                <h1 class="section-title-modern">
+                    <i class="bi bi-laptop me-3" style="background: linear-gradient(135deg, #CC5500, #ff9500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 2.8rem;"></i>
+                    IT-клуб современных технологий
+                    <br>
+                    <span style="font-size: 1.8rem; color: #495057;">для детей от 5 до 15 лет</span>
                 </h1>
-                <div class="title-underline"
-                    style="width: 150px; height: 4px; background: linear-gradient(90deg, #ff6a00, #17a2b8); margin: 0 auto; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 106, 0, 0.3);">
-                </div>
+                <div class="title-underline-modern"></div>
             </div>
             <!-- Описание курсов общее -->
             <div class="content-card"
-                style="background: white; border-radius: 20px; padding: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid rgba(13, 148, 136, 0.1);">
+                style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border-radius: 32px; padding: 3rem; box-shadow: 0 16px 48px rgba(13, 148, 136, 0.12), 0 8px 24px rgba(0,0,0,0.08); border: 2px solid rgba(13, 148, 136, 0.15); position: relative; overflow: hidden;">
+                
+                <!-- Декоративные элементы фона -->
+                <div style="position: absolute; top: -30px; right: -30px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(204, 85, 0, 0.08), transparent); border-radius: 50%; pointer-events: none;"></div>
+                <div style="position: absolute; bottom: -40px; left: -40px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(13, 148, 136, 0.08), transparent); border-radius: 50%; pointer-events: none;"></div>
+                
                 <p class="text-content"
-                    style="font-size: 1.1rem; line-height: 1.8; color: #495057; margin-bottom: 2rem; text-align: justify;">
+                    style="font-size: 1.15rem; line-height: 1.9; color: #495057; margin-bottom: 2.5rem; text-align: justify; position: relative; z-index: 1;">
                     IT-клуб «<span class="highlight-text"
-                        style="color: #ff6a00; font-weight: 700; text-shadow: 0 1px 2px rgba(23, 162, 184, 0.1);">Юные
-                        Инженеры</span>» — это инновационное
+                        style="background: linear-gradient(135deg, #CC5500, #ff9500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; font-size: 1.2rem;">Юные Инженеры</span>» — это инновационное
                     образовательное пространство, где дети превращают свои идеи в реальные технологические проекты. Мы
                     специализируемся на обучении детей современным IT-навыкам, предлагая программы, охватывающие
                     направления от
@@ -864,8 +987,10 @@
                 </p>
 
                 <div class="feature-highlight"
-                    style="background: linear-gradient(135deg, rgba(23, 162, 184, 0.05) 0%, rgba(255, 106, 0, 0.05) 100%); border-left: 4px solid #0d9488; padding: 1.5rem; border-radius: 0 15px 15px 0; margin: 2rem 0;">
-                    <p class="mb-0" style="font-size: 1.1rem; line-height: 1.7; color: #495057;">
+                    style="background: linear-gradient(135deg, rgba(13, 148, 136, 0.08) 0%, rgba(204, 85, 0, 0.08) 100%); border-left: 5px solid transparent; border-image: linear-gradient(180deg, #0d9488, #CC5500, #ff9500) 1; padding: 2rem; border-radius: 0 20px 20px 0; margin: 2.5rem 0; box-shadow: 0 4px 16px rgba(13, 148, 136, 0.1); position: relative; z-index: 1;">
+                    <div style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 5px; height: 60%; background: linear-gradient(180deg, #0d9488, #CC5500, #ff9500); border-radius: 0 3px 3px 0;"></div>
+                    <p class="mb-0" style="font-size: 1.1rem; line-height: 1.8; color: #495057; padding-left: 1rem;">
+                        <i class="bi bi-rocket-takeoff-fill me-2" style="color: #CC5500; font-size: 1.3rem;"></i>
                         Наши курсы построены так, чтобы даже сложные темы воспринимались легко и интересно. Благодаря
                         практике,
                         интерактивным заданиям и командным проектам дети погружаются в процесс обучения с увлечением.
@@ -876,9 +1001,9 @@
                 </div>
 
                 <p class="text-content"
-                    style="font-size: 1.1rem; line-height: 1.8; color: #495057; margin-bottom: 2rem; text-align: justify;">
+                    style="font-size: 1.15rem; line-height: 1.9; color: #495057; margin-bottom: 2.5rem; text-align: justify; position: relative; z-index: 1;">
                     В клубе «<span class="highlight-text"
-                        style="color: #ff6a00; font-weight: 700; text-shadow: 0 1px 2px rgba(23, 162, 184, 0.1);">Юные
+                        style="background: linear-gradient(135deg, #0d9488, #17a2b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; font-size: 1.2rem;">Юные
                         Инженеры</span>» мы уделяем внимание каждому
                     ребенку. Мы стремимся раскрыть потенциал каждого ученика и подготовить его к успешному будущему.
                     Наши
@@ -888,10 +1013,13 @@
                 </p>
 
                 <div class="cta-section text-center"
-                    style="background: linear-gradient(135deg, #0d9488 0%, #138496 100%); border-radius: 15px; padding: 2rem; margin-top: 2rem; box-shadow: 0 8px 25px rgba(23, 162, 184, 0.3);">
-                    <p class="mb-0"
-                        style="font-size: 1.2rem; font-weight: 600; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                        <i class="bi bi-rocket-takeoff me-2"></i>
+                    style="background: linear-gradient(135deg, #0d9488 0%, #17a2b8 100%); border-radius: 24px; padding: 2.5rem; margin-top: 2.5rem; box-shadow: 0 12px 40px rgba(13, 148, 136, 0.3); position: relative; overflow: hidden; z-index: 1;">
+                    <!-- Декоративные элементы -->
+                    <div style="position: absolute; top: -20px; left: -20px; width: 100px; height: 100px; background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent); border-radius: 50%;"></div>
+                    <div style="position: absolute; bottom: -30px; right: -30px; width: 120px; height: 120px; background: radial-gradient(circle, rgba(204, 85, 0, 0.2), transparent); border-radius: 50%;"></div>
+                    
+                    <p class="mb-0" style="font-size: 1.25rem; font-weight: 700; color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.3); position: relative; z-index: 1; letter-spacing: 0.3px;">
+                        <i class="bi bi-stars me-2" style="font-size: 1.5rem; animation: rotate 4s ease-in-out infinite;"></i>
                         Станьте частью нашего сообщества и вместе с детьми начните увлекательное путешествие в мир
                         передовых технологий!
                     </p>
@@ -903,82 +1031,173 @@
 
 
 <!-- Разделитель -->
-<hr class="custom-divider"
-    style="border: none; height: 3px; background: linear-gradient(90deg, transparent 0%, #CC5500 50%, transparent 100%); margin: 40px auto; width: 80%; border-radius: 2px; box-shadow: 0 2px 8px rgba(204, 85, 0, 0.3);">
+<hr class="custom-divider">
 
+
+<!-- === СТИЛИ ДЛЯ СЕКЦИИ КУРСОВ === -->
+<style>
+    .courses-section-bg {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        padding: 60px 0;
+        position: relative;
+    }
+
+    .courses-title-wrapper {
+        text-align: center;
+        margin-bottom: 4rem;
+        position: relative;
+    }
+
+    .courses-main-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 800;
+        color: #0d9488;
+        font-size: 2.8rem;
+        text-shadow: 0 4px 16px rgba(13, 148, 136, 0.15);
+        letter-spacing: 0.8px;
+        margin-bottom: 1rem;
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .courses-subtitle {
+        font-size: 1.3rem;
+        color: #64748b;
+        font-weight: 600;
+        margin-top: 0.5rem;
+    }
+
+    .courses-icon {
+        background: linear-gradient(135deg, #CC5500, #ff9500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 3rem;
+        display: inline-block;
+        animation: iconBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes iconBounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .courses-underline {
+        width: 160px;
+        height: 5px;
+        background: linear-gradient(90deg, #0d9488, #CC5500, #ff9500);
+        margin: 0 auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(204, 85, 0, 0.3);
+        position: relative;
+    }
+
+    .courses-underline::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60%;
+        height: 150%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+        animation: shimmer 2s infinite;
+    }
+</style>
 
 <!-- Заголовок для блока "Наши курсы" -->
-<div id="courses" class="row align-items-center justify-content-center" style="margin-top: 30px; margin-bottom: 20px;">
-    <div class="col-12 col-lg-10">
-        <div class="text-center mb-5">
-            <h1 class="section-title fw-bold"
-                style="color: #0d9488; font-size: 2.5rem; text-shadow: 0 2px 4px rgba(13, 148, 136, 0.1); margin-bottom: 1.5rem;">
-                <i class="bi bi-journal-code me-3" style="color: #ff6a00;"></i>
-                Курсы программирования, робототехники и 3D моделирования в Лиде
-            </h1>
-            <div class="title-underline"
-                style="width: 150px; height: 4px; background: linear-gradient(90deg, #ff6a00, #17a2b8); margin: 0 auto; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 106, 0, 0.3);">
+<div id="courses" class="courses-section-bg">
+    <div class="container">
+        <div class="courses-title-wrapper">
+            <div>
+                <i class="bi bi-stars courses-icon"></i>
             </div>
+            <h1 class="courses-main-title">
+                Наши курсы
+            </h1>
+            <p class="courses-subtitle">
+                Программирование • Робототехника • 3D моделирование
+            </p>
+            <div class="courses-underline"></div>
         </div>
     </div>
-</div>
 
 
-<!-- Секция с карточками курсов для разных возрастных групп -->
-<div class="container position-relative">
-    <!-- Визуальный намёк на скролл только на мобильных -->
-    <div class="scroll-hint d-block d-md-none"
-        style="position: absolute; left: 0; right: 0; top: -30px; z-index: 10; text-align: center; pointer-events: none;">
-        <span
-            style="background: rgba(255,255,255,0.9); padding: 2px 14px; border-radius: 12px; font-size: 0.98rem; color: #0d9488; font-weight: 600; box-shadow: 0 2px 8px rgba(13,148,136,0.08);">
-            <i class="bi bi-arrow-left-right me-1"></i>Выберите курсы
-        </span>
-    </div>
-    <!-- Градиент справа для намёка на скролл -->
-    <div class="scroll-gradient-right d-block d-md-none"
-        style="position: absolute; top: 0; right: 0; width: 40px; height: 100%; pointer-events: none; z-index: 9; background: linear-gradient(to left, rgba(255,255,255,0.95) 60%, rgba(255,255,255,0));">
-    </div>
-    <div class="courses-carousel-row">
-        {% for course in courses %}
-        <div>
-            <a href="{{ course.url }}" class="course-card-link text-decoration-none">
-                <div class="course-card h-100 d-flex flex-column">
-                    <div class="course-image-wrapper flex-grow-1">
-                        <img src="{% static course.image %}" class="course-image w-100 h-100 object-fit-cover"
-                            alt="Курс {{ course.title }}">
-                    </div>
-                    <div class="course-content mt-3">
-                        <h5 class="course-title text-center mb-0">{{ course.title }}</h5>
-                    </div>
-                </div>
-            </a>
+    <!-- Секция с карточками курсов для разных возрастных групп -->
+    <div class="container position-relative">
+        <!-- Визуальный намёк на скролл только на мобильных -->
+        <div class="scroll-hint d-block d-md-none"
+            style="position: absolute; left: 0; right: 0; top: -30px; z-index: 10; text-align: center; pointer-events: none;">
+            <span
+                style="background: rgba(255,255,255,0.95); padding: 6px 18px; border-radius: 16px; font-size: 0.95rem; color: #0d9488; font-weight: 700; box-shadow: 0 4px 12px rgba(13,148,136,0.15); border: 2px solid rgba(13, 148, 136, 0.2);">
+                <i class="bi bi-arrow-left-right me-2" style="color: #CC5500;"></i>Листайте курсы
+            </span>
         </div>
-        {% endfor %}
+        <!-- Градиент справа для намёка на скролл -->
+        <div class="scroll-gradient-right d-block d-md-none"
+            style="position: absolute; top: 0; right: 0; width: 50px; height: 100%; pointer-events: none; z-index: 9; background: linear-gradient(to left, rgba(248,250,252,1) 40%, rgba(248,250,252,0));">
+        </div>
+        <div class="courses-carousel-row">
+            {% for course in courses %}
+            <div>
+                <a href="{{ course.url }}" class="course-card-link text-decoration-none">
+                    <div class="course-card h-100 d-flex flex-column">
+                        <div class="course-image-wrapper flex-grow-1">
+                            <img src="{% static course.image %}" class="course-image w-100 h-100 object-fit-cover"
+                                alt="Курс {{ course.title }}">
+                        </div>
+                        <div class="course-content mt-3">
+                            <h5 class="course-title text-center mb-0">{{ course.title }}</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 
 
 
 <!-- Разделитель -->
-<hr class="custom-divider"
-    style="border: none; height: 3px; background: linear-gradient(90deg, transparent 0%, #CC5500 50%, transparent 100%); margin: 40px auto; width: 80%; border-radius: 2px; box-shadow: 0 2px 8px rgba(204, 85, 0, 0.3);">
+<hr class="custom-divider">
 
+
+<!-- === СТИЛИ ДЛЯ FAQ СЕКЦИИ === -->
+<style>
+    .faq-section-bg {
+        background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #e9ecef 100%);
+        padding: 60px 0;
+        position: relative;
+    }
+
+    .faq-section-bg::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, transparent, #0d9488, #CC5500, #ff9500, transparent);
+        animation: gradientSlide 3s linear infinite;
+        background-size: 200% 100%;
+    }
+</style>
 
 <!-- Заголовок "Что вы обычно спрашиваете" -->
-<div id="faq" class="row align-items-center justify-content-center" style="margin-top: 30px; margin-bottom: 20px;">
-    <div class="col-12 col-lg-10">
-        <div class="text-center mb-5">
-            <h1 class="section-title fw-bold"
-                style="color: #0d9488; font-size: 2.5rem; text-shadow: 0 2px 4px rgba(13, 148, 136, 0.1); margin-bottom: 1.5rem;">
-                <i class="bi bi-question-circle me-3" style="color: #ff6a00;"></i>
-                Что вы обычно спрашиваете
-            </h1>
-            <div class="title-underline"
-                style="width: 150px; height: 4px; background: linear-gradient(90deg, #ff6a00, #17a2b8); margin: 0 auto; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 106, 0, 0.3);">
+<div id="faq" class="faq-section-bg">
+    <div class="container">
+        <div class="courses-title-wrapper">
+            <div>
+                <i class="bi bi-patch-question-fill courses-icon"></i>
             </div>
+            <h1 class="courses-main-title">
+                Часто задаваемые вопросы
+            </h1>
+            <p class="courses-subtitle">
+                Ответы на популярные вопросы о наших курсах
+            </p>
+            <div class="courses-underline"></div>
         </div>
-    </div>
-</div>
 
 
 <!-- FAQ -->
@@ -1146,19 +1365,64 @@
             </div>
         </div>
     </div>
-    <!-- Разделитель -->
-    <hr class="custom-divider"
-        style="border: none; height: 3px; background: linear-gradient(90deg, transparent 0%, #CC5500 50%, transparent 100%); margin: 40px auto; width: 80%; border-radius: 2px; box-shadow: 0 2px 8px rgba(204, 85, 0, 0.3);">
-
+</div>
 </div>
 
+<!-- Разделитель -->
+<hr class="custom-divider">
+
+<!-- === СТИЛИ ДЛЯ ФИНАЛЬНОЙ CTA СЕКЦИИ === -->
+<style>
+    .final-cta-section {
+        position: relative;
+        background-image: url('{% static 'main/img/index/2.jpeg' %}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding: 100px 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .final-cta-section .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, 
+            rgba(13, 148, 136, 0.8) 0%, 
+            rgba(0, 0, 0, 0.7) 50%, 
+            rgba(204, 85, 0, 0.6) 100%);
+        z-index: 1;
+    }
+
+    .final-cta-section .overlay::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 40%, rgba(23, 162, 184, 0.2) 0%, transparent 60%),
+                    radial-gradient(circle at 70% 60%, rgba(204, 85, 0, 0.2) 0%, transparent 60%);
+        animation: particlesFloat 8s ease-in-out infinite;
+    }
+
+    @media (max-width: 767px) {
+        .final-cta-section {
+            background-attachment: scroll;
+            padding: 60px 0;
+            min-height: 80vh;
+        }
+    }
+</style>
+
 <!-- Контейнер с фоном и призывом к действию -->
-<div class="position-relative d-flex justify-content-center align-items-center"
-    style="background-image: url('{% static 'main/img/index/2.jpeg' %}'); background-size: cover; background-position: center; padding: 80px 0; min-height: 100vh;">
+<div class="position-relative d-flex justify-content-center align-items-center final-cta-section">
 
     <!-- Затемняющий слой -->
-    <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-         background-color: rgba(0, 0, 0, 0.4); z-index: 1;"></div>
+    <div class="overlay"></div>
 
     <!-- Контент с призывом к действию -->
     <div class="container position-relative" style="z-index: 2;">
@@ -1166,27 +1430,33 @@
             <!-- Текстовый блок -->
             <div class="col-12 col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
                 <div class="hero-content" style="animation: fadeInLeft 1s ease-out;">
-                    <h1 class="hero-title fw-bold text-white mb-4"
-                        style="font-size: 3rem; text-shadow: 0 4px 8px rgba(0,0,0,0.5);">
-                        <i class="bi bi-rocket-takeoff me-3" style="color: #ff6a00;"></i>
-                        Готовы к будущему?
+                    <h1 class="fw-bold text-white mb-4"
+                        style="font-family: 'Poppins', sans-serif; font-size: 3.5rem; font-weight: 900; text-shadow: 0 6px 24px rgba(0,0,0,0.7); letter-spacing: 1px; line-height: 1.3;">
+                        <i class="bi bi-rocket-takeoff-fill me-3" style="background: linear-gradient(135deg, #ff9500, #CC5500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 4rem; animation: iconBounce 2s ease-in-out infinite;"></i>
+                        <br>Готовы к будущему?
                     </h1>
-                    <p class="hero-description text-white mb-4"
-                        style="font-size: 1.3rem; line-height: 1.6; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
-                        Присоединяйтесь к IT-клубу «Юные Инженеры» и откройте для ребенка мир современных технологий!
+                    <p class="text-white mb-5"
+                        style="font-size: 1.4rem; line-height: 1.8; text-shadow: 0 3px 12px rgba(0,0,0,0.6); font-weight: 500;">
+                        Присоединяйтесь к IT-клубу <span style="color: #ff9500; font-weight: 800;">«Юные Инженеры»</span> и откройте для ребенка мир современных технологий!
                     </p>
-                    <div class="hero-features mb-4">
-                        <div class="d-flex align-items-center justify-content-center justify-content-lg-start mb-2">
-                            <i class="bi bi-check-circle-fill me-2" style="color: #0d9488; font-size: 1.2rem;"></i>
-                            <span class="text-white">Бесплатное пробное занятие</span>
+                    <div class="hero-features mb-5">
+                        <div class="d-flex align-items-center justify-content-center justify-content-lg-start mb-3">
+                            <i class="bi bi-stars me-3" style="color: #ff9500; font-size: 1.6rem;"></i>
+                            <span class="text-white" style="font-size: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.5); font-weight: 600;">
+                                Бесплатное пробное занятие
+                            </span>
                         </div>
-                        <div class="d-flex align-items-center justify-content-center justify-content-lg-start mb-2">
-                            <i class="bi bi-check-circle-fill me-2" style="color: #0d9488; font-size: 1.2rem;"></i>
-                            <span class="text-white">Опытные преподаватели</span>
+                        <div class="d-flex align-items-center justify-content-center justify-content-lg-start mb-3">
+                            <i class="bi bi-people-fill me-3" style="color: #17a2b8; font-size: 1.6rem;"></i>
+                            <span class="text-white" style="font-size: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.5); font-weight: 600;">
+                                Опытные преподаватели
+                            </span>
                         </div>
                         <div class="d-flex align-items-center justify-content-center justify-content-lg-start">
-                            <i class="bi bi-check-circle-fill me-2" style="color: #0d9488; font-size: 1.2rem;"></i>
-                            <span class="text-white">Современное оборудование</span>
+                            <i class="bi bi-gear-fill me-3" style="color: #CC5500; font-size: 1.6rem;"></i>
+                            <span class="text-white" style="font-size: 1.2rem; text-shadow: 0 2px 8px rgba(0,0,0,0.5); font-weight: 600;">
+                                Современное оборудование
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -1302,8 +1572,7 @@
 </div>
 
 <!-- Разделитель -->
-<hr class="custom-divider"
-    style="border: none; height: 3px; background: linear-gradient(90deg, transparent 0%, #CC5500 50%, transparent 100%); margin: 40px auto; width: 80%; border-radius: 2px; box-shadow: 0 2px 8px rgba(204, 85, 0, 0.3);">
+<hr class="custom-divider">
 
 
 <!-- Блок с заголовком и картой -->
