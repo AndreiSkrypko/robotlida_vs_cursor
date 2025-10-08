@@ -9,20 +9,19 @@ class SignForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Имя'
+                'placeholder': 'Как к Вам обращаться?'
             }),
             'phone': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Телефон'
+                'placeholder': 'Номер телефона для связи'
             }),
             'course': forms.Select(attrs={
-                'class':
-                    'form-select'
+                'class': 'form-select'
             }),
 
             'comment': forms.Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Комментарий',
+                'placeholder': 'Ваши пожелания или вопросы',
                 'rows': 3
             }),
         }
@@ -30,8 +29,9 @@ class SignForm(forms.ModelForm):
     # Устанавливаем значение по умолчанию для поля "course"
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['course'].empty_label = None  # Убираем '--------'
-        self.fields['course'].initial = "1"  # или другой ID/значение по умолчанию
+        self.fields['course'].empty_label = "Выберите курс"
+        # Убираем initial, чтобы показывался placeholder
+        # self.fields['course'].initial = "1"
 
 
 class ReviewForm(forms.ModelForm):
