@@ -1,87 +1,207 @@
-<!-- Бирюзово-оранжевое модальное окно для записи на пробное занятие -->
+<!-- === ПРЕМИУМ МОДАЛЬНОЕ ОКНО ДЛЯ ЗАПИСИ === -->
 <style>
-    /* Бирюзово-оранжевый градиент для заголовка */
-    .modal-header.bg-turquoise-orange {
-        background: linear-gradient(90deg, #17a2b8 0%, #CC5500 100%);
+    /* Заголовок модального окна */
+    .modal-header.premium-modal-header {
+        background: linear-gradient(145deg, #0d9488 0%, #17a2b8 100%);
         color: #fff;
-        border-top-left-radius: 1.5rem !important;
-        border-top-right-radius: 1.5rem !important;
+        border-top-left-radius: 24px !important;
+        border-top-right-radius: 24px !important;
         border-bottom: none;
-        box-shadow: 0 2px 8px rgba(23,162,184,0.08);
+        box-shadow: 
+            0 8px 24px rgba(13, 148, 136, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        padding: 1.8rem 2rem;
+        position: relative;
+        overflow: hidden;
     }
-    .modal-content.turquoise-orange-style {
-        border-radius: 1.5rem;
-        border: 2px solid #17a2b8;
-        background: #f8fafc;
-        box-shadow: 0 8px 32px 0 rgba(23,162,184,0.10), 0 1.5px 0 #CC5500 inset;
+
+    /* Анимированный градиент на заголовке */
+    .modal-header.premium-modal-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        animation: modalShine 3s ease-in-out infinite;
     }
-    .modal-title.turquoise-orange-title {
-        font-family: 'Poppins', 'Nunito', sans-serif;
-        font-weight: 700;
+
+    @keyframes modalShine {
+        0%, 100% { left: -100%; }
+        50% { left: 100%; }
+    }
+
+    .modal-content.premium-modal {
+        border-radius: 24px;
+        border: 3px solid rgba(13, 148, 136, 0.3);
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        box-shadow: 
+            0 20px 60px rgba(13, 148, 136, 0.2),
+            0 10px 30px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+    }
+
+    .modal-title.premium-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 800;
         letter-spacing: 0.5px;
         color: #fff;
-        text-shadow: 0 2px 8px rgba(204,85,0,0.10);
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        font-size: 1.5rem;
+        position: relative;
+        z-index: 1;
     }
+
+    /* Кнопка закрытия */
+    .btn-close-white {
+        filter: brightness(0) invert(1);
+        opacity: 0.9;
+        transition: all 0.3s ease;
+    }
+
+    .btn-close-white:hover {
+        opacity: 1;
+        transform: rotate(90deg) scale(1.1);
+    }
+
+    /* Тело модального окна */
+    .modal-body {
+        padding: 2.5rem;
+        position: relative;
+    }
+
+    .modal-body::before {
+        content: '';
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(204, 85, 0, 0.05), transparent);
+        border-radius: 50%;
+    }
+
+    /* Поля формы */
     .modal-body .form-control,
     .modal-body select,
     .modal-body textarea {
-        border: 2px solid #e9ecef;
-        border-radius: 0.75rem;
-        transition: border-color 0.2s;
+        border: 2px solid rgba(13, 148, 136, 0.2);
+        border-radius: 16px;
+        transition: all 0.4s ease;
         font-size: 1.05rem;
+        padding: 14px 18px;
+        background: linear-gradient(white, white) padding-box,
+                    linear-gradient(135deg, rgba(13, 148, 136, 0.2), rgba(204, 85, 0, 0.2)) border-box;
     }
+
     .modal-body .form-control:focus,
     .modal-body select:focus,
     .modal-body textarea:focus {
-        border-color: #17a2b8;
-        box-shadow: 0 0 0 0.15rem rgba(23,162,184,0.15);
+        outline: none;
+        background: linear-gradient(white, white) padding-box,
+                    linear-gradient(135deg, #0d9488, #17a2b8, #CC5500) border-box;
+        box-shadow: 
+            0 0 0 4px rgba(13, 148, 136, 0.12),
+            0 8px 20px rgba(13, 148, 136, 0.25);
+        transform: translateY(-2px);
     }
+
     .modal-body label {
-        color: #0d9488;
-        font-weight: 600;
-    }
-    .btn-turquoise-orange {
-        background: linear-gradient(90deg, #17a2b8 0%, #CC5500 100%);
-        color: #fff !important;
+        color: #1e293b;
         font-weight: 700;
-        border: none;
-        border-radius: 2rem;
-        box-shadow: 0 2px 8px rgba(23,162,184,0.10);
-        transition: background 0.2s, box-shadow 0.2s;
+        margin-bottom: 0.5rem;
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: 0.3px;
     }
-    .btn-turquoise-orange:hover, .btn-turquoise-orange:focus {
-        background: linear-gradient(90deg, #CC5500 0%, #17a2b8 100%);
+
+    /* Премиум кнопка отправки */
+    .btn-premium-submit {
+        background: linear-gradient(145deg, #0d9488, #17a2b8);
         color: #fff !important;
-        box-shadow: 0 4px 16px rgba(204,85,0,0.12);
+        font-weight: 800;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50px;
+        box-shadow: 
+            0 8px 24px rgba(13, 148, 136, 0.4),
+            0 0 20px rgba(13, 148, 136, 0.2);
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        padding: 16px;
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        position: relative;
+        overflow: hidden;
     }
+
+    /* Блик на кнопке */
+    .btn-premium-submit::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+        transition: left 0.7s ease;
+        animation: btnShine 3s ease-in-out infinite;
+    }
+
+    @keyframes btnShine {
+        0%, 100% { left: -100%; }
+        50% { left: 100%; }
+    }
+
+    .btn-premium-submit:hover::before {
+        animation: none;
+        left: 100%;
+    }
+
+    .btn-premium-submit:hover {
+        background: linear-gradient(145deg, #17a2b8, #0d9488);
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 
+            0 12px 32px rgba(13, 148, 136, 0.6),
+            0 0 30px rgba(13, 148, 136, 0.3);
+    }
+
+    /* Alert сообщение об успехе */
     .modal-body .alert-success {
-        background: linear-gradient(90deg, #17a2b8 0%, #CC5500 100%);
+        background: linear-gradient(145deg, #28a745, #20c997);
         color: #fff;
         border: none;
-        font-weight: 600;
-        box-shadow: 0 2px 8px rgba(23,162,184,0.10);
+        font-weight: 700;
+        box-shadow: 0 8px 24px rgba(40, 167, 69, 0.3);
+        border-radius: 20px;
+        padding: 2rem;
+        font-size: 1.2rem;
     }
-    .modal-body a.text-turquoise-orange {
-        color: #17a2b8;
-        text-decoration: underline;
-        transition: color 0.2s;
+
+    .modal-body a.premium-link {
+        color: #0d9488;
+        text-decoration: none;
+        font-weight: 700;
+        border-bottom: 2px dashed rgba(13, 148, 136, 0.4);
+        transition: all 0.3s ease;
     }
-    .modal-body a.text-turquoise-orange:hover {
+
+    .modal-body a.premium-link:hover {
         color: #CC5500;
+        border-bottom-color: rgba(204, 85, 0, 0.6);
     }
 </style>
 
 <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content turquoise-orange-style">
+        <div class="modal-content premium-modal">
 
             <!-- Заголовок модального окна -->
-            <div class="modal-header bg-turquoise-orange">
-                <h5 class="modal-title turquoise-orange-title" id="signupModalLabel">
+            <div class="modal-header premium-modal-header">
+                <h5 class="modal-title premium-title" id="signupModalLabel">
                     {% if success %} 
-                        <i class="bi bi-check-circle-fill me-2" style="color: #fff;"></i>Вы записаны! 
+                        <i class="bi bi-check-circle-fill me-2"></i>Заявка отправлена! 
                     {% else %} 
-                        <i class="bi bi-pencil-square me-2" style="color: #fff;"></i>Запись на пробное занятие 
+                        <i class="bi bi-stars me-2"></i>Запись на пробное занятие 
                     {% endif %}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
@@ -91,8 +211,9 @@
             <!-- Тело модального окна -->
             <div class="modal-body p-4">
                 {% if success %}
-                <div class="alert alert-success text-center fs-5 rounded-3 py-3 mb-0">
-                    Спасибо за обращение!<br>
+                <div class="alert alert-success text-center rounded-3 mb-0">
+                    <i class="bi bi-heart-fill me-2" style="font-size: 1.5rem;"></i>
+                    <div style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem;">Спасибо за обращение!</div>
                     Мы с вами свяжемся в ближайшее время.
                 </div>
                 {% else %}
@@ -101,26 +222,39 @@
                     {{ form.non_field_errors }}
 
                     <div class="mb-3">
+                        <label class="form-label">
+                            <i class="bi bi-person-fill me-2" style="color: #0d9488;"></i>Ваше имя
+                        </label>
                         {{ form.name }}
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">
+                            <i class="bi bi-telephone-fill me-2" style="color: #17a2b8;"></i>Телефон
+                        </label>
                         {{ form.phone }}
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">
+                            <i class="bi bi-book-fill me-2" style="color: #CC5500;"></i>Выберите курс
+                        </label>
                         {{ form.course }}
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-4">
+                        <label class="form-label">
+                            <i class="bi bi-chat-dots-fill me-2" style="color: #ff9500;"></i>Комментарий (необязательно)
+                        </label>
                         {{ form.comment }}
                     </div>
 
-                    <button type="submit"
-                            class="btn btn-turquoise-orange w-100 py-3 fw-semibold rounded-pill">
-                        ОСТАВИТЬ ЗАЯВКУ
+                    <button type="submit" class="btn btn-premium-submit w-100">
+                        <i class="bi bi-rocket-takeoff-fill me-2"></i>
+                        <span style="position: relative; z-index: 1;">Оставить заявку</span>
                     </button>
 
                     <p class="text-muted text-center mt-3 mb-0" style="font-size: 0.9rem;">
+                        <i class="bi bi-shield-check-fill me-1" style="color: #0d9488;"></i>
                         Нажимая на кнопку, вы соглашаетесь с
-                        <a href="{% url 'about_cookies' %}" target="_blank" class="text-turquoise-orange">
+                        <a href="{% url 'about_cookies' %}" target="_blank" class="premium-link">
                             условиями соглашения*
                         </a>
                     </p>
@@ -131,3 +265,17 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('signupModal');
+    if (modal) {
+        modal.addEventListener('shown.bs.modal', function() {
+            const firstInput = modal.querySelector('input');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        });
+    }
+});
+</script>

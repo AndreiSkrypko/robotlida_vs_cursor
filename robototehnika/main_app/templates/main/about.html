@@ -127,57 +127,145 @@
         }
     }
 
-    /* === КАРТОЧКИ С ПРЕИМУЩЕСТВАМИ === */
+    /* === ПРЕМИУМ КАРТОЧКИ ПРЕИМУЩЕСТВ === */
     .about-feature-card {
-        background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
-        border: none;
-        border-radius: 1.5rem;
-        box-shadow: 0 6px 32px rgba(23,162,184,0.08);
-        padding: 2rem 1.5rem;
-        transition: transform 0.18s, box-shadow 0.18s;
-        min-height: 320px;
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border: 2px solid rgba(13, 148, 136, 0.1);
+        border-radius: 24px;
+        box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.08),
+            0 4px 16px rgba(0, 0, 0, 0.04);
+        padding: 2.5rem 2rem;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        min-height: 350px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .about-feature-card:nth-child(1) { animation-delay: 0.1s; }
+    .about-feature-card:nth-child(2) { animation-delay: 0.2s; }
+    .about-feature-card:nth-child(3) { animation-delay: 0.3s; }
+    .about-feature-card:nth-child(4) { animation-delay: 0.4s; }
+    .about-feature-card:nth-child(5) { animation-delay: 0.5s; }
+    .about-feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .about-feature-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 24px;
+        padding: 2px;
+        background: linear-gradient(135deg, #0d9488, #17a2b8, #CC5500, #ff9500);
+        background-size: 300% 300%;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        animation: gradientRotate 4s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes gradientRotate {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .about-feature-card:hover::before {
+        opacity: 1;
     }
 
     .about-feature-card:hover {
-        transform: translateY(-6px) scale(1.03);
-        box-shadow: 0 12px 40px rgba(23,162,184,0.13), 0 2px 12px rgba(204,85,0,0.10);
+        transform: translateY(-12px) scale(1.04);
+        box-shadow: 
+            0 16px 48px rgba(13, 148, 136, 0.2),
+            0 8px 24px rgba(0, 0, 0, 0.12);
+        border-color: rgba(13, 148, 136, 0.3);
+    }
+
+    .about-feature-icon-wrapper {
+        width: 90px;
+        height: 90px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.8rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        position: relative;
+    }
+
+    .about-feature-card:hover .about-feature-icon-wrapper {
+        transform: rotate(360deg) scale(1.15);
     }
 
     .about-feature-icon {
-        font-size: 3rem;
-        color: #17a2b8;
-        text-shadow: 0 2px 8px rgba(23,162,184,0.10);
-        margin-bottom: 1rem;
+        color: white;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     }
 
     .about-feature-title {
-        color: #0d9488;
-        font-weight: 700;
-        font-size: 1.2rem;
+        color: #1e293b;
+        font-weight: 800;
+        font-size: 1.4rem;
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: 1rem;
+        letter-spacing: 0.3px;
+        transition: all 0.3s ease;
+    }
+
+    .about-feature-card:hover .about-feature-title {
+        background: linear-gradient(135deg, #0d9488, #17a2b8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     .about-feature-hr {
         border: none;
-        height: 3px;
-        background: linear-gradient(90deg, #17a2b8, #CC5500);
-        border-radius: 2px;
-        width: 50%;
+        height: 4px;
+        background: linear-gradient(90deg, #0d9488, #CC5500, #ff9500);
+        border-radius: 3px;
+        width: 60%;
         margin: 1rem auto;
+        box-shadow: 0 2px 8px rgba(204, 85, 0, 0.3);
     }
 
     .about-feature-text {
-        font-size: 1.05rem;
-        color: #495057;
+        font-size: 1.08rem;
+        color: #64748b;
+        line-height: 1.7;
+        text-align: center;
     }
 
     @media (max-width: 991px) {
         .about-feature-card {
-            min-height: 220px;
-            padding: 1.2rem 0.5rem;
+            min-height: 280px;
+            padding: 2rem 1.5rem;
+        }
+        
+        .about-feature-icon-wrapper {
+            width: 75px;
+            height: 75px;
+            font-size: 2.3rem;
         }
     }
 
@@ -322,154 +410,236 @@
     }
 }
 
-    /* === ОТЗЫВЫ В ТЕКСТОВОМ ФОРМАТЕ === */
+    /* === ПРЕМИУМ ОТЗЫВЫ === */
     .reviews-section {
-        background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
+        background: linear-gradient(145deg, #f8fafc 0%, #ffffff 50%, #e9ecef 100%);
         position: relative;
         z-index: 1;
+        overflow: hidden;
+    }
+
+    .reviews-section::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        left: -100px;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(13, 148, 136, 0.06), transparent);
+        border-radius: 50%;
+        animation: float 18s ease-in-out infinite;
     }
 
     .review-card {
-        background: #fff;
-        border-radius: 1.5rem;
-        box-shadow: 0 6px 32px rgba(23, 162, 184, 0.08), 0 1.5px 8px rgba(204, 85, 0, 0.07);
-        transition: transform 0.2s, box-shadow 0.2s;
-        border: 2px solid #f1f5f9;
-        min-height: 420px;
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 24px;
+        box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.08),
+            0 4px 16px rgba(0, 0, 0, 0.04);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 2px solid rgba(13, 148, 136, 0.1);
+        min-height: 450px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
         position: relative;
+        padding: 2.5rem 2rem !important;
+        overflow: hidden;
+        opacity: 0;
+        transform: scale(0.9);
+        animation: scaleIn 0.8s ease-out forwards;
+    }
+
+    .review-card:nth-child(1) { animation-delay: 0.1s; }
+    .review-card:nth-child(2) { animation-delay: 0.2s; }
+    .review-card:nth-child(3) { animation-delay: 0.3s; }
+    .review-card:nth-child(4) { animation-delay: 0.4s; }
+    .review-card:nth-child(5) { animation-delay: 0.5s; }
+    .review-card:nth-child(6) { animation-delay: 0.6s; }
+    .review-card:nth-child(7) { animation-delay: 0.7s; }
+    .review-card:nth-child(8) { animation-delay: 0.8s; }
+
+    @keyframes scaleIn {
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .review-card::before {
+        content: '';
+        position: absolute;
+        top: -50px;
+        right: -50px;
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle, rgba(13, 148, 136, 0.06), transparent);
+        border-radius: 50%;
     }
 
     .review-card:hover {
-        transform: translateY(-8px) scale(1.03);
-        box-shadow: 0 12px 40px rgba(23, 162, 184, 0.13), 0 2px 12px rgba(204, 85, 0, 0.10);
-        border-color: #17a2b8;
+        transform: translateY(-12px) scale(1.03);
+        box-shadow: 
+            0 16px 48px rgba(13, 148, 136, 0.15),
+            0 8px 24px rgba(204, 85, 0, 0.1);
+        border-color: rgba(13, 148, 136, 0.3);
     }
 
-    .review-img {
-        width: 80px;
-        height: 80px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 3px solid #17a2b8;
-        box-shadow: 0 2px 8px rgba(23, 162, 184, 0.10);
-        margin-top: -50px;
-        background: #fff;
+    .review-quote-icon {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 3rem;
+        color: rgba(13, 148, 136, 0.1);
+        z-index: 0;
     }
 
     .review-text {
-        font-size: 1.08rem;
-        color: #495057;
-        margin: 1.2rem 0;
+        font-size: 1.05rem;
+        color: #475569;
+        margin: 1.5rem 0;
         font-style: italic;
-        min-height: 90px;
+        line-height: 1.8;
+        min-height: 120px;
+        position: relative;
+        z-index: 1;
     }
 
     .review-name {
         color: #0d9488;
-        font-weight: 600;
-        font-size: 1.05rem;
+        font-weight: 700;
+        font-size: 1.08rem;
         margin-top: auto;
-        letter-spacing: 0.01em;
+        letter-spacing: 0.3px;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #0d9488, #17a2b8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     @media (max-width: 991px) {
-        .review-card { min-height: 380px; }
+        .review-card { min-height: 400px; }
     }
 
     @media (max-width: 767px) {
         .review-card {
             min-height: 0;
             margin-bottom: 2rem;
+            padding: 2rem 1.5rem !important;
         }
-        .review-img { margin-top: 0; }
     }
 
-    /* === ОТЗЫВЫ С ВИДЕО === */
+    /* === ПРЕМИУМ ВИДЕО ОТЗЫВЫ === */
     .video-reviews-section {
-        background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 50%, #e9ecef 100%);
         position: relative;
         z-index: 1;
+        overflow: hidden;
+        padding: 80px 0;
     }
 
-    .video-reviews-section h2 {
-        color: #0d9488;
-        font-family: 'Poppins', 'Nunito', sans-serif;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        text-shadow: 0 2px 8px rgba(23,162,184,0.10);
-        font-size: 2rem;
+    .video-reviews-section::before {
+        content: '';
+        position: absolute;
+        bottom: -100px;
+        right: -100px;
+        width: 450px;
+        height: 450px;
+        background: radial-gradient(circle, rgba(204, 85, 0, 0.06), transparent);
+        border-radius: 50%;
+        animation: float 20s ease-in-out infinite reverse;
     }
 
     .video-review-card {
-        background: #fff;
-        border-radius: 1.5rem;
-        box-shadow: 0 6px 32px rgba(23, 162, 184, 0.08), 0 1.5px 8px rgba(204, 85, 0, 0.07);
-        transition: transform 0.2s, box-shadow 0.2s;
-        border: 2px solid #f1f5f9;
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 24px;
+        box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.08),
+            0 4px 16px rgba(0, 0, 0, 0.04);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 2px solid rgba(13, 148, 136, 0.1);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        min-height: 420px;
+        min-height: 450px;
         position: relative;
+        padding: 2rem !important;
+        overflow: visible;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease-out forwards;
     }
 
+    .video-review-card:nth-child(1) { animation-delay: 0.2s; }
+    .video-review-card:nth-child(2) { animation-delay: 0.3s; }
+    .video-review-card:nth-child(3) { animation-delay: 0.4s; }
+
     .video-review-card:hover {
-        transform: translateY(-8px) scale(1.03);
-        box-shadow: 0 12px 40px rgba(23, 162, 184, 0.13), 0 2px 12px rgba(204, 85, 0, 0.10);
-        border-color: #17a2b8;
+        transform: translateY(-12px) scale(1.03);
+        box-shadow: 
+            0 16px 48px rgba(13, 148, 136, 0.2),
+            0 8px 24px rgba(204, 85, 0, 0.1);
+        border-color: rgba(13, 148, 136, 0.3);
     }
 
     .video-review-card .ratio {
-        border-radius: 1.2rem;
-        box-shadow: 0 2px 12px rgba(23,162,184,0.10);
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(13, 148, 136, 0.15);
         background: #f8fafc;
         overflow: hidden;
+        border: 3px solid rgba(13, 148, 136, 0.2);
+        transition: all 0.4s ease;
+    }
+
+    .video-review-card:hover .ratio {
+        box-shadow: 0 12px 32px rgba(13, 148, 136, 0.25);
+        transform: scale(1.02);
     }
 
     .video-review-card video {
         width: 100%;
         height: 100%;
-        border-radius: 1.2rem;
+        border-radius: 17px;
         object-fit: cover;
         background: #e9ecef;
-        box-shadow: 0 2px 8px rgba(23,162,184,0.10);
-        transition: box-shadow 0.2s;
+        transition: all 0.3s ease;
     }
 
     .video-review-card video:focus {
-        outline: 2px solid #17a2b8;
-        box-shadow: 0 0 0 4px rgba(23,162,184,0.15);
+        outline: 3px solid #0d9488;
+        box-shadow: 0 0 0 6px rgba(13, 148, 136, 0.2);
     }
 
     .video-review-name {
-        color: #0d9488;
-        font-weight: 600;
-        font-size: 1.05rem;
-        margin-top: 1.2rem;
-        letter-spacing: 0.01em;
-        text-shadow: 0 1px 4px rgba(23,162,184,0.08);
+        color: #1e293b;
+        font-weight: 700;
+        font-size: 1.08rem;
+        margin-top: 1.5rem;
+        letter-spacing: 0.3px;
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.6;
+    }
+
+    .video-review-card:hover .video-review-name {
+        background: linear-gradient(135deg, #0d9488, #17a2b8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     @media (max-width: 991px) {
-        .video-review-card { min-height: 340px; }
-        .video-reviews-section h2 { font-size: 1.3rem; }
+        .video-review-card { min-height: 380px; }
     }
 
     @media (max-width: 600px) {
         .video-review-card {
-            min-height: 220px;
-            padding: 1.2rem 0.5rem;
+            min-height: 280px;
+            padding: 1.5rem !important;
         }
-        .video-reviews-section h2 {
-            font-size: 1.1rem;
-            margin-bottom: 1.2rem;
-        }
-        .video-review-name { font-size: 0.98rem; }
+        .video-review-name { font-size: 1rem; }
     }
 </style>
 
@@ -534,9 +704,11 @@
     <div class="row g-4 mb-4">
         <!-- Карточка 1 -->
         <div class="col-12 col-md-4">
-            <div class="about-feature-card text-center h-100">
-                <i class="bi bi-lightbulb-fill about-feature-icon"></i>
-                <h5 class="about-feature-title">5000+ учеников</h5>
+            <div class="about-feature-card text-center h-100" data-feature>
+                <div class="about-feature-icon-wrapper" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <i class="bi bi-people-fill about-feature-icon"></i>
+                </div>
+                <h5 class="about-feature-title">500+ учеников</h5>
                 <hr class="about-feature-hr">
                 <p class="about-feature-text">
                     С каждым годом всё больше детей выбирают нас, чтобы освоить технологии будущего.
@@ -545,8 +717,10 @@
         </div>
         <!-- Карточка 2 -->
         <div class="col-12 col-md-4">
-            <div class="about-feature-card text-center h-100">
-                <i class="bi bi-gear-fill about-feature-icon"></i>
+            <div class="about-feature-card text-center h-100" data-feature>
+                <div class="about-feature-icon-wrapper" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                    <i class="bi bi-gear-fill about-feature-icon"></i>
+                </div>
                 <h5 class="about-feature-title">Современные технологии</h5>
                 <hr class="about-feature-hr">
                 <p class="about-feature-text">
@@ -556,8 +730,10 @@
         </div>
         <!-- Карточка 3 -->
         <div class="col-12 col-md-4">
-            <div class="about-feature-card text-center h-100">
-                <i class="bi bi-person-check-fill about-feature-icon"></i>
+            <div class="about-feature-card text-center h-100" data-feature>
+                <div class="about-feature-icon-wrapper" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                    <i class="bi bi-person-check-fill about-feature-icon"></i>
+                </div>
                 <h5 class="about-feature-title">Опытные педагоги</h5>
                 <hr class="about-feature-hr">
                 <p class="about-feature-text">
@@ -569,8 +745,10 @@
     <div class="row g-4">
         <!-- Карточка 4 -->
         <div class="col-12 col-md-4">
-            <div class="about-feature-card text-center h-100">
-                <i class="bi bi-calendar-check-fill about-feature-icon"></i>
+            <div class="about-feature-card text-center h-100" data-feature>
+                <div class="about-feature-icon-wrapper" style="background: linear-gradient(135deg, #30cfd0, #330867);">
+                    <i class="bi bi-calendar-check-fill about-feature-icon"></i>
+                </div>
                 <h5 class="about-feature-title">Гибкий график</h5>
                 <hr class="about-feature-hr">
                 <p class="about-feature-text">
@@ -580,8 +758,10 @@
         </div>
         <!-- Карточка 5 -->
         <div class="col-12 col-md-4">
-            <div class="about-feature-card text-center h-100">
-                <i class="bi bi-award-fill about-feature-icon"></i>
+            <div class="about-feature-card text-center h-100" data-feature>
+                <div class="about-feature-icon-wrapper" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">
+                    <i class="bi bi-award-fill about-feature-icon"></i>
+                </div>
                 <h5 class="about-feature-title">Участие в конкурсах</h5>
                 <hr class="about-feature-hr">
                 <p class="about-feature-text">
@@ -591,8 +771,10 @@
         </div>
         <!-- Карточка 6 -->
         <div class="col-12 col-md-4">
-            <div class="about-feature-card text-center h-100">
-                <i class="bi bi-emoji-smile-fill about-feature-icon"></i>
+            <div class="about-feature-card text-center h-100" data-feature>
+                <div class="about-feature-icon-wrapper" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);">
+                    <i class="bi bi-emoji-smile-fill about-feature-icon"></i>
+                </div>
                 <h5 class="about-feature-title">Увлекательно и весело</h5>
                 <hr class="about-feature-hr">
                 <p class="about-feature-text">
@@ -809,19 +991,22 @@
         <div class="row g-4 justify-content-center">
             <!-- Каждый отзыв — отдельная карточка -->
             <div class="col-md-6 col-lg-4 d-flex">
-                <div class="review-card p-4 text-center w-100">
+                <div class="review-card text-center w-100" data-review>
+                    <i class="bi bi-quote review-quote-icon"></i>
                     <p class="review-text">
                         Очень довольны уроками и вообще подходом! Особенно хочу сказать спасибо Андрею Станиславовичу —
                         он отличный педагог, всегда находит подход к детям и объясняет всё понятно. После первого
                         занятия ребёнок так загорелся, что вместо одного курса сразу на три записались! Уроки проходят
                         весело и интересно, всем советую!
                     </p>
+                    <div style="width: 50px; height: 3px; background: linear-gradient(90deg, #0d9488, #CC5500); margin: 1rem auto; border-radius: 3px;"></div>
                     <p class="review-name">— Анна, мама Артёма (7 лет)</p>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-4 d-flex">
-                <div class="review-card p-4 text-center w-100">
+                <div class="review-card text-center w-100" data-review>
+                <i class="bi bi-quote review-quote-icon"></i>
                 <p class="review-text">
                     Очень интересный подход к обучению — детям не просто рассказывают теорию, а вовлекают в процесс
                     через практические задания, эксперименты и проектную деятельность. Педагоги — настоящие
@@ -829,77 +1014,84 @@
                     увлекательную атмосферу. Уроки проходят на ура — ребёнок с радостью бежит на занятия и с ещё большим
                     воодушевлением рассказывает, что нового узнал!
                 </p>
+                <div style="width: 50px; height: 3px; background: linear-gradient(90deg, #0d9488, #CC5500); margin: 1rem auto; border-radius: 3px;"></div>
                 <p class="review-name">— Дмитрий, папа Вани (9 лет)</p>
             </div>
         </div>
 
         <div class="col-md-6 col-lg-4 d-flex">
-            <div class="review-card p-4 text-center w-100">
-
+            <div class="review-card text-center w-100" data-review>
+                <i class="bi bi-quote review-quote-icon"></i>
                 <p class="review-text">
                     После занятий в вашей школе у сына появилось настоящее увлечение техникой и наукой. Теперь он
                     всерьёз мечтает стать инженером! Огромное спасибо всей команде за вдохновение, поддержку и ценные
                     знания, которые вы даёте детям. Вы помогаете раскрыть потенциал и увлечься важными и интересными
                     вещами — это бесценно!
                 </p>
+                <div style="width: 50px; height: 3px; background: linear-gradient(90deg, #0d9488, #CC5500); margin: 1rem auto; border-radius: 3px;"></div>
                 <p class="review-name">— Елена, мама Никиты (11 лет)</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-4 d-flex">
-            <div class="review-card p-4 text-center w-100">
-
+            <div class="review-card text-center w-100" data-review>
+                <i class="bi bi-quote review-quote-icon"></i>
                 <p class="review-text">
                     Мы переехали жить в Норвегию, и из-за расстояния было невозможно продолжать занятия очно. К счастью,
                     онлайн-курсы стали отличным решением — занятия проходят качественно, интересно и по делу! Ребёнок не
                     потерял мотивацию, а знания и навыки продолжают расти, несмотря на перемену страны и обстановки.
                     Очень рады, что обучение стало доступным и удобным, спасибо!
                 </p>
+                <div style="width: 50px; height: 3px; background: linear-gradient(90deg, #0d9488, #CC5500); margin: 1rem auto; border-radius: 3px;"></div>
                 <p class="review-name">— Игорь, отец Алисы (16 лет)</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-4 d-flex">
-            <div class="review-card p-4 text-center w-100">
-
+            <div class="review-card text-center w-100" data-review>
+                <i class="bi bi-quote review-quote-icon"></i>
                 <p class="review-text">
                     Дочь раньше совсем не интересовалась программированием, но благодаря вашему вдохновляющему и
                     доступному подходу к обучению она впервые по-настоящему увлеклась этой темой. Занятия идут легко и
                     интересно, и я вижу, как она с каждым уроком становится всё увереннее. Спасибо вам за такую
                     поддержку и мотивацию!
                 </p>
+                <div style="width: 50px; height: 3px; background: linear-gradient(90deg, #0d9488, #CC5500); margin: 1rem auto; border-radius: 3px;"></div>
                 <p class="review-name">— Татьяна, мама Лизы (8 лет)</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-4 d-flex">
-            <div class="review-card p-4 text-center w-100">
-
+            <div class="review-card text-center w-100" data-review>
+                <i class="bi bi-quote review-quote-icon"></i>
                 <p class="review-text">
                     Очень здорово, что есть такой клуб, который с самого детства помогает развивать мышление и полезные
                     навыки у детей. Это не просто занятия, а настоящее воспитание интереса к новым знаниям и умению
                     думать критически. Спасибо всем педагогам за ваш труд и внимание к детям!
                 </p>
+                <div style="width: 50px; height: 3px; background: linear-gradient(90deg, #0d9488, #CC5500); margin: 1rem auto; border-radius: 3px;"></div>
                 <p class="review-name">— Светлана, мама Ивана (6 лет)</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-4 d-flex">
-            <div class="review-card p-4 text-center w-100">
-
+            <div class="review-card text-center w-100" data-review>
+                <i class="bi bi-quote review-quote-icon"></i>
                 <p class="review-text">
                     София с большим нетерпением ждет каждого нового занятия! Ей очень нравится творческая и дружелюбная
                     атмосфера, которая царит в группе. Особенно ценно, что к каждому ребенку здесь находят
                     индивидуальный подход — это помогает ей раскрывать свои способности и чувствовать уверенность в
                     своих силах. Спасибо педагогам за такую поддержку и вдохновение!
                 </p>
+                <div style="width: 50px; height: 3px; background: linear-gradient(90deg, #0d9488, #CC5500); margin: 1rem auto; border-radius: 3px;"></div>
                 <p class="review-name">— Мария, мама Софии (8 лет)</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-4 d-flex">
-            <div class="review-card p-4 text-center w-100">
-
+            <div class="review-card text-center w-100" data-review>
+                <i class="bi bi-quote review-quote-icon"></i>
                 <p class="review-text">
                     Максим стал намного увереннее в себе, научился работать в команде и теперь самостоятельно собирает
                     сложные модели. Плюс, дома начал проявлять инициативу — стал помогать нам с уборкой и даже мыть
                     посуду без напоминаний. Спасибо педагогам за такой вдохновляющий и полезный подход!
                 </p>
+                <div style="width: 50px; height: 3px; background: linear-gradient(90deg, #0d9488, #CC5500); margin: 1rem auto; border-radius: 3px;"></div>
                 <p class="review-name">— Алексей, папа Максима (10 лет)</p>
             </div>
         </div>
@@ -957,5 +1149,97 @@
         </div>
     </div>
 </section>
+
+<!-- === ПРЕМИУМ ИНТЕРАКТИВНОСТЬ === -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // ========== RIPPLE ЭФФЕКТ ДЛЯ КАРТОЧЕК ПРЕИМУЩЕСТВ ==========
+    const featureCards = document.querySelectorAll('[data-feature]');
+    
+    featureCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(13, 148, 136, 0.3);
+                transform: scale(0);
+                animation: featureRipple 0.6s ease-out;
+                pointer-events: none;
+            `;
+            
+            const rect = card.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            card.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+    
+    const featureRippleStyle = document.createElement('style');
+    featureRippleStyle.textContent = `
+        @keyframes featureRipple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(featureRippleStyle);
+    
+    
+    // ========== RIPPLE ДЛЯ ОТЗЫВОВ ==========
+    const reviewCards = document.querySelectorAll('[data-review]');
+    
+    reviewCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(13, 148, 136, 0.25);
+                transform: scale(0);
+                animation: reviewRipple 0.8s ease-out;
+                pointer-events: none;
+            `;
+            
+            const rect = card.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            card.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 800);
+        });
+    });
+    
+    const reviewRippleStyle = document.createElement('style');
+    reviewRippleStyle.textContent = `
+        @keyframes reviewRipple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(reviewRippleStyle);
+    
+    
+    console.log('✨ Премиум About страница загружена!');
+});
+</script>
 
 {% endblock %}

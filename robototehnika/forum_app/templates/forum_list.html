@@ -3,110 +3,353 @@
 
 {% block content %}
 <style>
-  /* Цвета */
-  :root {
-    --orange: #ff6a00;
-    --teal: #0d9488;
+  /* === ПРЕМИУМ СТИЛИ ФОРУМА === */
+  .forum-section {
+    background: linear-gradient(145deg, #f8fafc 0%, #ffffff 50%, #e9ecef 100%);
+    min-height: calc(100vh - 200px);
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .forum-section::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(13, 148, 136, 0.06), transparent);
+    border-radius: 50%;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-50px, 50px); }
   }
 
   .forum-container {
-    max-width: 900px;
-    margin: 2rem auto;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
 
   h1.forum-title {
-    color: var(--orange);
-    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
     text-align: center;
+    margin-bottom: 3rem;
+    font-size: 3rem;
+    color: #1e293b;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #0d9488, #17a2b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .forum-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 2rem;
-    font-size: 2.5rem;
   }
 
   .btn-create-post {
-    background-color: var(--teal);
-    border: none;
-  }
-  .btn-create-post:hover {
-    background-color: #0b746e;
-  }
-
-  .card {
-    border: 2px solid var(--teal);
-    border-radius: 10px;
-    margin-bottom: 1.5rem;
-  }
-
-  .card-header {
-    background-color: var(--teal);
+    background: linear-gradient(145deg, #0d9488, #17a2b8);
+    border: 3px solid rgba(255, 255, 255, 0.3);
     color: white;
-    font-weight: 600;
-    font-size: 1.3rem;
+    font-weight: 800;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 8px 24px rgba(13, 148, 136, 0.4);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    overflow: hidden;
   }
 
-  .card-footer {
-    font-size: 0.85rem;
-    color: #555;
+  .btn-create-post::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transition: left 0.7s ease;
+  }
+
+  .btn-create-post:hover::before {
+    left: 100%;
+  }
+
+  .btn-create-post:hover {
+    background: linear-gradient(145deg, #17a2b8, #0d9488);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 32px rgba(13, 148, 136, 0.6);
+  }
+
+  /* Карточка поста */
+  .post-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    border: 2px solid rgba(13, 148, 136, 0.15);
+    border-radius: 24px;
+    margin-bottom: 2rem;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      0 4px 16px rgba(0, 0, 0, 0.04);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .post-card:nth-child(1) { animation-delay: 0.1s; }
+  .post-card:nth-child(2) { animation-delay: 0.2s; }
+  .post-card:nth-child(3) { animation-delay: 0.3s; }
+  .post-card:nth-child(4) { animation-delay: 0.4s; }
+  .post-card:nth-child(5) { animation-delay: 0.5s; }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .post-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+      0 16px 48px rgba(13, 148, 136, 0.15),
+      0 8px 24px rgba(0, 0, 0, 0.1);
+    border-color: rgba(13, 148, 136, 0.3);
+  }
+
+  .post-header {
+    background: linear-gradient(145deg, #0d9488, #17a2b8);
+    color: white;
+    font-weight: 700;
+    font-size: 1.4rem;
+    padding: 1.5rem 2rem;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.3px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .post-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    animation: headerShine 3s ease-in-out infinite;
+  }
+
+  @keyframes headerShine {
+    0%, 100% { right: -50%; }
+    50% { right: 150%; }
+  }
+
+  .post-body {
+    padding: 2rem;
+  }
+
+  .post-body p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #475569;
+    margin: 0;
+  }
+
+  .post-footer {
+    font-size: 0.95rem;
+    color: #64748b;
+    padding: 1rem 2rem;
+    background: linear-gradient(145deg, rgba(13, 148, 136, 0.05), rgba(23, 162, 184, 0.03));
+    border-top: 2px solid rgba(13, 148, 136, 0.1);
+    font-weight: 600;
+  }
+
+  .post-footer i {
+    color: #0d9488;
+    margin-right: 0.5rem;
+  }
+
+  /* Ответы */
+  .replies-section {
+    padding: 1.5rem 2rem;
+    background: linear-gradient(145deg, rgba(248, 250, 252, 0.8), rgba(233, 236, 239, 0.6));
+  }
+
+  .replies-section h6 {
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
   }
 
   .reply {
-    background-color: #f0f8f7;
-    border-left: 4px solid var(--orange);
-    padding: 10px 15px;
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-    border-radius: 5px;
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    border-left: 5px solid #CC5500;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .reply:hover {
+    transform: translateX(5px);
+    box-shadow: 0 6px 20px rgba(204, 85, 0, 0.15);
+  }
+
+  .reply p {
+    margin: 0 0 0.8rem 0;
+    color: #475569;
+    line-height: 1.7;
   }
 
   .reply small {
-    color: #666;
+    color: #64748b;
+    font-weight: 600;
   }
 
-  .btn-reply {
-    background-color: var(--orange);
-    border: none;
-    font-size: 0.9rem;
+  .reply small i {
+    color: #CC5500;
+    margin-right: 0.5rem;
   }
-  .btn-reply:hover {
-    background-color: #e05a00;
+
+  /* Форма ответа */
+  .reply-form-section {
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.5);
   }
 
   form.reply-form textarea.form-control {
-    font-size: 0.9rem;
+    font-size: 1rem;
     resize: vertical;
+    border: 2px solid rgba(13, 148, 136, 0.2);
+    border-radius: 16px;
+    padding: 14px;
+    transition: all 0.4s ease;
+    background: white;
+  }
+
+  form.reply-form textarea.form-control:focus {
+    outline: none;
+    border-color: #0d9488;
+    box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .btn-reply {
+    background: linear-gradient(145deg, #CC5500, #ff9500);
+    border: none;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 50px;
+    color: white;
+    letter-spacing: 0.5px;
+    box-shadow: 0 6px 20px rgba(204, 85, 0, 0.3);
+    transition: all 0.4s ease;
+  }
+
+  .btn-reply:hover {
+    background: linear-gradient(145deg, #ff9500, #CC5500);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(204, 85, 0, 0.5);
+  }
+
+  /* Alert */
+  .alert {
+    border-radius: 16px;
+    border: none;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .alert-info {
+    background: linear-gradient(145deg, rgba(13, 148, 136, 0.15), rgba(23, 162, 184, 0.1));
+    color: #0d9488;
+  }
+
+  .alert-info a {
+    color: #CC5500;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px dashed rgba(204, 85, 0, 0.4);
+  }
+
+  .alert-info a:hover {
+    color: #ff9500;
+    border-bottom-color: rgba(255, 149, 0, 0.6);
+  }
+
+  @media (max-width: 768px) {
+    h1.forum-title {
+      font-size: 2.2rem;
+    }
+
+    .post-header {
+      font-size: 1.2rem;
+      padding: 1.2rem 1.5rem;
+    }
+
+    .post-body, .replies-section, .reply-form-section {
+      padding: 1.2rem 1.5rem;
+    }
+
+    .btn-create-post {
+      padding: 12px 24px;
+      font-size: 1rem;
+    }
   }
 
   @media (max-width: 576px) {
     h1.forum-title {
-      font-size: 2rem;
+      font-size: 1.8rem;
     }
 
-    .card-header {
+    .post-header {
       font-size: 1.1rem;
     }
 
-    .reply {
-      font-size: 0.85rem;
-      padding: 8px 12px;
-    }
-
-    .btn-create-post, .btn-reply {
-      font-size: 0.85rem;
-      padding: 6px 10px;
+    .forum-section {
+      padding: 60px 1rem;
     }
   }
 </style>
 
-<div class="forum-container">
-    <h1 class="forum-title">Форум</h1>
+<div class="forum-section">
+  <div class="forum-container">
+    <h1 class="forum-title">
+      <i class="bi bi-chat-dots-fill me-3" style="color: #CC5500;"></i>Форум
+    </h1>
 
-    <div class="d-flex justify-content-end mb-4">
-        <a href="{% url 'create_post' %}" class="btn btn-create-post">Создать пост</a>
+    <div class="forum-header">
+      <div></div>
+      <a href="{% url 'create_post' %}" class="btn btn-create-post">
+        <i class="bi bi-plus-circle-fill me-2"></i>Создать пост
+      </a>
     </div>
 
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                {{ message }}
+                <i class="bi bi-info-circle-fill me-2"></i>{{ message }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         {% endfor %}
@@ -114,44 +357,113 @@
 
     {% if posts %}
         {% for post in posts %}
-            <div class="card">
-                <div class="card-header">
-                    {{ post.title }}
+            <div class="post-card" data-post>
+                <div class="post-header">
+                    <i class="bi bi-file-text-fill me-2"></i>{{ post.title }}
                 </div>
-                <div class="card-body">
+                <div class="post-body">
                     <p>{{ post.content }}</p>
                 </div>
-                <div class="card-footer">
-                    Автор: {{ post.author.username }} | Дата: {{ post.created_at|date:"d.m.Y H:i" }}
+                <div class="post-footer">
+                    <i class="bi bi-person-fill"></i>{{ post.author.username }}
+                    <span class="mx-2">•</span>
+                    <i class="bi bi-calendar-event"></i>{{ post.created_at|date:"d.m.Y H:i" }}
                 </div>
 
-                <div class="card-body">
-                    <h6>Ответы:</h6>
+                <div class="replies-section">
+                    <h6>
+                      <i class="bi bi-chat-left-text-fill me-2" style="color: #0d9488;"></i>
+                      Ответы ({{ post.replies.all.count }})
+                    </h6>
                     {% if post.replies.all %}
                         {% for reply in post.replies.all %}
-                            <div class="reply">
+                            <div class="reply" data-reply>
                                 <p>{{ reply.content }}</p>
-                                <small>Автор: {{ reply.author.username }} | {{ reply.created_at|date:"d.m.Y H:i" }}</small>
+                                <small>
+                                  <i class="bi bi-person-circle"></i>{{ reply.author.username }}
+                                  <span class="mx-2">•</span>
+                                  <i class="bi bi-clock"></i>{{ reply.created_at|date:"d.m.Y H:i" }}
+                                </small>
                             </div>
                         {% endfor %}
                     {% else %}
-                        <p>Ответов пока нет.</p>
+                        <p style="color: #94a3b8; font-style: italic;">
+                          <i class="bi bi-chat-quote me-2"></i>Ответов пока нет. Будьте первым!
+                        </p>
                     {% endif %}
                 </div>
 
-                <div class="card-body">
+                <div class="reply-form-section">
                     <form method="post" action="{% url 'create_reply' post.id %}" class="reply-form">
                         {% csrf_token %}
                         {{ reply_forms|get_item:post.id }}
-                        <button type="submit" class="btn btn-reply mt-2">Добавить ответ</button>
+                        <button type="submit" class="btn btn-reply mt-3">
+                          <i class="bi bi-reply-fill me-2"></i>Добавить ответ
+                        </button>
                     </form>
                 </div>
             </div>
         {% endfor %}
     {% else %}
-        <div class="alert alert-info text-center">
-            Постов пока нет. <a href="{% url 'create_post' %}">Создайте первый пост!</a>
+        <div class="alert alert-info text-center" style="padding: 2rem; font-size: 1.2rem;">
+            <i class="bi bi-inbox-fill me-2" style="font-size: 2rem;"></i>
+            <div>Постов пока нет.</div>
+            <a href="{% url 'create_post' %}" class="mt-2 d-inline-block">
+              <i class="bi bi-plus-circle me-2"></i>Создайте первый пост!
+            </a>
         </div>
     {% endif %}
+  </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Ripple эффект для постов
+    const postCards = document.querySelectorAll('[data-post]');
+    
+    postCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('form') || e.target.closest('button')) return;
+            
+            const ripple = document.createElement('span');
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(13, 148, 136, 0.2);
+                transform: scale(0);
+                animation: postRipple 0.8s ease-out;
+                pointer-events: none;
+            `;
+            
+            const rect = card.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            card.style.position = 'relative';
+            card.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 800);
+        });
+    });
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes postRipple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    console.log('✨ Премиум Forum страница загружена!');
+});
+</script>
+
 {% endblock %}
