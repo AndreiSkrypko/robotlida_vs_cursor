@@ -1,5 +1,22 @@
 <!-- === ПРЕМИУМ МОДАЛЬНОЕ ОКНО ДЛЯ ЗАПИСИ === -->
 <style>
+    /* Позиционирование модального окна ниже навбара */
+    .modal-dialog.modal-dialog-centered {
+        margin-top: 80px !important;
+    }
+    
+    @media (max-width: 767.98px) {
+        .modal-dialog.modal-dialog-centered {
+            margin-top: 70px !important;
+        }
+    }
+    
+    @media (max-width: 575.98px) {
+        .modal-dialog.modal-dialog-centered {
+            margin-top: 65px !important;
+        }
+    }
+
     /* Заголовок модального окна */
     .modal-header.premium-modal-header {
         background: linear-gradient(145deg, #0d9488 0%, #17a2b8 100%);

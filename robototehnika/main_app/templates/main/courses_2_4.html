@@ -4,70 +4,494 @@
 {% block title %}Курсы для 2-4 лет{% endblock %}
 
 {% block css %}
-
 <link rel="stylesheet" href="{% static 'main/css/courses.css' %}">
 
+<style>
+    /* === ГЛОБАЛЬНЫЕ АНИМАЦИИ === */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes bounceIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        70% {
+            opacity: 1;
+            transform: scale(0.9);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* === HERO СЕКЦИЯ === */
+    .hero-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 50%, #ffffff 100%);
+        padding: 60px 0;
+        margin-top: -20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(13, 148, 136, 0.08), transparent);
+        border-radius: 50%;
+        animation: float 15s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0) rotate(0deg); }
+        33% { transform: translate(30px, -30px) rotate(120deg); }
+        66% { transform: translate(-20px, 20px) rotate(240deg); }
+    }
+
+    .section-title {
+        color: #0d9488;
+        font-size: 2.5rem;
+        font-weight: 800;
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: 0.5px;
+        text-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        opacity: 1;
+        position: relative;
+        display: inline-block;
+        transition: transform 0.05s ease-out;
+    }
+
+    /* Мигающий курсор */
+    .section-title::after {
+        content: '|';
+        color: #CC5500;
+        animation: blink 0.7s infinite;
+        margin-left: 5px;
+    }
+
+    .section-title.typing-complete::after {
+        display: none;
+    }
+
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+    .title-underline {
+        width: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #0d9488, #CC5500, #ff9500);
+        margin: 1.5rem auto 3rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(204, 85, 0, 0.3);
+        opacity: 0;
+        transition: all 0.4s ease-out;
+    }
+
+    @keyframes expandLine {
+        from {
+            opacity: 0;
+            width: 0;
+        }
+        to {
+            opacity: 1;
+            width: 140px;
+        }
+    }
+
+    .description-text {
+        text-align: justify;
+        font-size: 1.15rem;
+        line-height: 1.8;
+        color: #475569;
+        max-width: 1200px;
+        margin: 0 auto;
+        opacity: 0;
+        animation: fadeInUp 1s ease-out 0.4s forwards;
+    }
+
+    /* === INFO КАРТОЧКИ === */
+    .info-card {
+        background: linear-gradient(145deg, #ffffff, #f8fafc);
+        border-radius: 20px;
+        padding: 2rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        border: 2px solid rgba(13, 148, 136, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .info-card:nth-child(1) { animation: fadeInUp 0.8s ease-out 0.6s forwards; }
+    .info-card:nth-child(2) { animation: fadeInUp 0.8s ease-out 0.7s forwards; }
+    .info-card:nth-child(3) { animation: fadeInUp 0.8s ease-out 0.8s forwards; }
+    .info-card:nth-child(4) { animation: fadeInUp 0.8s ease-out 0.9s forwards; }
+
+    .info-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        padding: 2px;
+        background: linear-gradient(135deg, #0d9488, #17a2b8, #CC5500);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s;
+    }
+
+    .info-card:hover::before {
+        opacity: 1;
+    }
+
+    .info-card:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 16px 40px rgba(13, 148, 136, 0.2);
+    }
+
+    .info-icon {
+        font-size: 3rem;
+        color: #0d9488;
+        margin-bottom: 1rem;
+        transition: all 0.4s;
+    }
+
+    .info-card:hover .info-icon {
+        transform: scale(1.2) rotate(360deg);
+        color: #CC5500;
+    }
+
+    .info-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1e293b;
+        text-align: center;
+        margin: 0;
+    }
+
+    /* === COURSE CARD === */
+    .course-card {
+        background: linear-gradient(145deg, #ffffff, #f8fafc);
+        border-radius: 24px;
+        padding: 2.5rem;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+        border: 2px solid rgba(13, 148, 136, 0.15);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        animation: fadeInScale 1s ease-out 1s forwards;
+    }
+
+    .course-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 24px 60px rgba(13, 148, 136, 0.25);
+    }
+
+    .course-image {
+        border-radius: 20px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        transition: all 0.4s;
+    }
+
+    .course-image:hover {
+        transform: scale(1.05);
+    }
+
+    .text-turquoise {
+        color: #0d9488 !important;
+        font-size: 1.8rem;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* === ABONEMENT CARDS === */
+    .abonement-card {
+        background: linear-gradient(135deg, #0d9488, #14b8a6);
+        color: white;
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 12px 32px rgba(13, 148, 136, 0.3);
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .col-md-3:nth-child(1) .abonement-card { 
+        opacity: 0;
+    }
+    .col-md-3:nth-child(2) .abonement-card { 
+        opacity: 0;
+    }
+    .col-md-3:nth-child(3) .abonement-card { 
+        opacity: 0;
+    }
+    .col-md-3:nth-child(4) .abonement-card { 
+        opacity: 0;
+    }
+
+    .abonement-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transform: rotate(45deg);
+        transition: all 0.6s;
+    }
+
+    .abonement-card:hover::before {
+        left: 100%;
+    }
+
+    .abonement-card:hover {
+        transform: translateY(-12px) scale(1.05);
+        box-shadow: 0 20px 50px rgba(13, 148, 136, 0.5);
+        background: linear-gradient(135deg, #CC5500, #ff9500);
+    }
+
+    .abonement-card h4 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+    }
+
+    /* === КНОПКА ЗАПИСИ === */
+    .btn-signup {
+        background: linear-gradient(145deg, #CC5500, #ff9500);
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 800;
+        font-family: 'Poppins', sans-serif;
+        padding: 18px 40px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50px;
+        box-shadow: 0 12px 32px rgba(204, 85, 0, 0.4);
+        transition: all 0.4s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        animation: btnPulse 2s ease-in-out infinite;
+        opacity: 0;
+        animation: fadeInUp 1s ease-out 1.6s forwards, btnPulse 2s ease-in-out 2.6s infinite;
+    }
+
+    @keyframes btnPulse {
+        0%, 100% {
+            box-shadow: 0 12px 32px rgba(204, 85, 0, 0.4), 0 0 0 0 rgba(204, 85, 0, 0.4);
+        }
+        50% {
+            box-shadow: 0 12px 32px rgba(204, 85, 0, 0.4), 0 0 0 20px rgba(204, 85, 0, 0);
+        }
+    }
+
+    .btn-signup:hover {
+        transform: translateY(-5px) scale(1.08);
+        box-shadow: 0 20px 50px rgba(204, 85, 0, 0.6);
+        background: linear-gradient(145deg, #ff9500, #CC5500);
+    }
+
+    /* === DIVIDER === */
+    .custom-divider {
+        border: none;
+        height: 4px;
+        background: linear-gradient(90deg, transparent 0%, rgba(13, 148, 136, 0.3) 15%, #CC5500 50%, rgba(13, 148, 136, 0.3) 85%, transparent 100%);
+        margin: 60px auto;
+        width: 70%;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(204, 85, 0, 0.25);
+        opacity: 0;
+        animation: fadeInScale 0.8s ease-out 1.1s forwards;
+    }
+
+    /* === RIPPLE ЭФФЕКТ === */
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: ripple-animation 0.6s ease-out;
+        pointer-events: none;
+    }
+
+    @keyframes ripple-animation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+
+    /* === МОБИЛЬНАЯ АДАПТАЦИЯ === */
+    @media (max-width: 767.98px) {
+        .section-title {
+            font-size: 1.5rem !important;
+        }
+        
+        .section-title::after {
+            font-size: 1.5rem;
+        }
+        
+        .title-underline {
+            width: 100px !important;
+        }
+        
+        .description-text {
+            font-size: 1rem;
+        }
+        
+        .info-card {
+            min-height: 150px;
+        }
+        
+        .btn-signup {
+            font-size: 0.95rem;
+            padding: 14px 28px;
+        }
+        
+        .abonement-card {
+            padding: 2rem 1.5rem;
+        }
+        
+        .abonement-card h4 {
+            font-size: 1.3rem;
+        }
+    }
+    
+    @media (max-width: 575.98px) {
+        .section-title {
+            font-size: 1.2rem !important;
+        }
+        
+        .title-underline {
+            width: 80px !important;
+        }
+        
+        .btn-signup {
+            font-size: 0.85rem;
+            padding: 12px 20px;
+        }
+    }
+</style>
 {% endblock %}
 
 {% block content %}
 
-<div class="container my-5">
+<!-- HERO СЕКЦИЯ -->
+<div class="hero-section">
+    <div class="container my-5">
+        <div class="row align-items-center justify-content-center" style="margin-top: 30px; margin-bottom: 20px;">
+            <h2 class="text-center section-title" id="typingTitle" data-text="КУРСЫ ДЛЯ ДЕТЕЙ 2,5-4 ГОДА"></h2>
+            <div class="title-underline"></div>
+        </div>
+        
+        <div class="row align-items-center justify-content-center" style="margin-bottom: 40px;">
+            <p class="description-text">
+                Курсы для детей от 2,5 до 4 лет — это лёгкий старт в мир общения, знаний и открытий.
+                В тёплой, дружелюбной атмосфере малыши играют, учатся взаимодействовать друг с другом и с радостью познают
+                окружающий мир.
+                Через простые задания, яркие материалы и творчество дети развивают речь, внимание, мышление, воображение и
+                моторику.
+                Занятия проходят в игровой форме, чтобы обучение было лёгким, естественным и радостным.
+                Мы помогаем ребёнку раскрыться, почувствовать уверенность и полюбить учиться с самого начала.
+            </p>
+        </div>
 
-    <div class="row align-items-center justify-content-center" style="margin-top: 30px; margin-bottom: 20px;">
-        <h2 class="text-center section-title"
-            style="font-weight: 600; font-size: 2.2rem; width: 100%; max-width: 900px; margin: 0 auto;">
-            КУРСЫ ДЛЯ ДЕТЕЙ 2,5-4 ГОДА
-        </h2>
+        <div class="row justify-content-center g-4">
+            <div class="col-md-3 col-sm-6">
+                <div class="info-card" data-card>
+                    <i class="bi bi-person-fill info-icon"></i>
+                    <p class="info-text">Возраст:<br><span style="color:#17a2b8; font-weight:700;">от 2,5 до 4 лет</span></p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="info-card" data-card>
+                    <i class="bi bi-clock-fill info-icon"></i>
+                    <p class="info-text">Длительность:<br><span style="color:#17a2b8; font-weight:700;">60 минут</span></p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="info-card" data-card>
+                    <i class="bi bi-calendar2-check-fill info-icon"></i>
+                    <p class="info-text">Абонемент на месяц:<br><span style="color:#17a2b8; font-weight:700;">48 рублей</span></p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="info-card" data-card>
+                    <i class="bi bi-cash-stack info-icon"></i>
+                    <p class="info-text">Пробное занятие:<br><span style="color:#17a2b8; font-weight:700;">БЕСПЛАТНО</span></p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row align-items-center justify-content-center" style="margin-top: 20px; margin-bottom: 40px;">
-        <p style="text-align: justify; font-size: 1.2rem; font-weight: 350; max-width: 1200px; width: 100%; margin: 0 auto; line-height: 1.5;">
-            Курсы для детей от 2,5 до 4 лет — это лёгкий старт в мир общения, знаний и открытий.
-            В тёплой, дружелюбной атмосфере малыши играют, учатся взаимодействовать друг с другом и с радостью познают
-            окружающий мир.
-            Через простые задания, яркие материалы и творчество дети развивают речь, внимание, мышление, воображение и
-            моторику.
-            Занятия проходят в игровой форме, чтобы обучение было лёгким, естественным и радостным.
-            Мы помогаем ребёнку раскрыться, почувствовать уверенность и полюбить учиться с самого начала.
-        </p>
-    </div>
+</div>
 
-    <div class="row justify-content-center g-4">
-        <div class="col-md-2 col-sm-6">
-            <div class="info-card">
-                <i class="bi bi-person-fill info-icon"></i>
-                <p class="info-text">Возраст:<br><span style="color:#17a2b8; font-weight:600;">от 2,5 до 4</span></p>
-            </div>
-        </div>
-        <div class="col-md-2 col-sm-6">
-            <div class="info-card">
-                <i class="bi bi-clock-fill info-icon"></i>
-                <p class="info-text">Длительность:<br><span style="color:#17a2b8; font-weight:600;">60 минут</span></p>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="info-card">
-                <i class="bi bi-calendar2-check-fill info-icon"></i>
-                <p class="info-text">Абонемент на месяц:<br><span
-                        style="color:#17a2b8; font-weight:600;">48 рублей</span></p>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="info-card">
-                <i class="bi bi-cash-stack info-icon"></i>
-                <p class="info-text">Пробное занятие:<br><span style="color:#17a2b8; font-weight:600;">бесплатно</span>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Презентация и описание курсов для возраста 2,5–4 года -->
+<!-- ПРЕЗЕНТАЦИЯ КУРСА -->
+<div class="container">
     <div class="row justify-content-center my-5">
-        <div class="col-12 col-md-8 col-lg-6">
+        <div class="col-12 col-md-10 col-lg-8">
             <div class="course-card">
-                <img src="{% static 'main/img/courses/lego_razv.jpeg' %}" alt="Лего-развивайка"
-                     class="img-fluid course-image">
-                <h4 class="fw-bold text-turquoise mb-3" style="text-align: center;">«Лего-развивайка»</h4>
-                <p style="text-align: justify; margin-bottom: 0; font-size: 1.08rem;">
+                <img src="{% static 'main/img/courses/lego_razv.jpeg' %}" alt="Лего-развивайка" class="img-fluid course-image">
+                <h4 class="fw-bold text-turquoise mb-3 text-center">«Лего-развивайка»</h4>
+                <p style="text-align: justify; margin-bottom: 0; font-size: 1.08rem; line-height: 1.7; color: #475569;">
                     Весёлая и полезная программа раннего развития с LEGO® DUPLO, которая помогает малышам раскрыть
                     потенциал. Через игру и простое моделирование развиваются речь, воображение, мышление и мелкая
                     моторика. Занятия в мини-группах проходят в уютной атмосфере с творческими сюжетами, что делает
@@ -80,56 +504,248 @@
 
     <hr class="custom-divider">
 
+    <!-- АБОНЕМЕНТЫ -->
     <div class="row align-items-center justify-content-center my-5">
-        <h2 class="text-center section-title fw-semibold">
-            АБОНЕМЕНТЫ НА ЗАНЯТИЯ
-        </h2>
+        <h2 class="text-center section-title" id="typingTitle2" data-text="АБОНЕМЕНТЫ НА ЗАНЯТИЯ"></h2>
+        <div class="title-underline" id="underline2"></div>
     </div>
 
-    <div class="row g-4">
+    <div class="row g-4 mb-5">
         <div class="col-md-3 col-sm-6">
-            <div class="abonement-card text-center h-100">
-                <h4>1 месяц / 60 BYN</h4>
-                <p class="info-text mb-0">1 занятие в абонементе — 15 BYN</p>
+            <div class="abonement-card text-center h-100" data-card>
+                <h4>1 месяц</h4>
+                <p style="font-size: 2rem; font-weight: 900; margin: 1rem 0;">60 BYN</p>
+                <p class="info-text mb-0" style="opacity: 0.9;">1 занятие — 15 BYN</p>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
-            <div class="abonement-card text-center h-100">
-                <h4>3 месяца / 56 BYN</h4>
-                <p class="info-text mb-0">1 занятие в абонементе — 14 BYN</p>
+            <div class="abonement-card text-center h-100" data-card>
+                <h4>3 месяца</h4>
+                <p style="font-size: 2rem; font-weight: 900; margin: 1rem 0;">56 BYN</p>
+                <p class="info-text mb-0" style="opacity: 0.9;">1 занятие — 14 BYN</p>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
-            <div class="abonement-card text-center h-100">
-                <h4>6 месяцев / 52 BYN</h4>
-                <p class="info-text mb-0">1 занятие в абонементе — 13 BYN</p>
+            <div class="abonement-card text-center h-100" data-card>
+                <h4>6 месяцев</h4>
+                <p style="font-size: 2rem; font-weight: 900; margin: 1rem 0;">52 BYN</p>
+                <p class="info-text mb-0" style="opacity: 0.9;">1 занятие — 13 BYN</p>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
-            <div class="abonement-card text-center h-100">
-                <h4>9 месяцев / 48 BYN</h4>
-                <p class="info-text mb-0">1 занятие в абонементе — 12 BYN</p>
+            <div class="abonement-card text-center h-100" data-card>
+                <h4>9 месяцев</h4>
+                <p style="font-size: 2rem; font-weight: 900; margin: 1rem 0;">48 BYN</p>
+                <p class="info-text mb-0" style="opacity: 0.9;">1 занятие — 12 BYN</p>
             </div>
         </div>
     </div>
 
-    <div class="mt-5 text-center">
-        <button type="button"
-                class="btn-signup"
-                data-bs-toggle="modal"
-                data-bs-target="#signupModal">
-            ЗАПИСАТЬСЯ НА БЕСПЛАТНОЕ ПРОБНОЕ ЗАНЯТИЕ
+    <div class="mt-5 mb-5 text-center">
+        <button type="button" class="btn-signup" data-bs-toggle="modal" data-bs-target="#signupModal">
+            <i class="bi bi-pencil-square me-2"></i>ЗАПИСАТЬСЯ НА БЕСПЛАТНОЕ ПРОБНОЕ ЗАНЯТИЕ
         </button>
     </div>
 </div>
 
+<!-- ПРЕМИУМ JAVASCRIPT -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      {% if success %}
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // === ЭФФЕКТ ПЕЧАТАЮЩЕГОСЯ ТЕКСТА ===
+    const typingElement = document.getElementById('typingTitle');
+    const text = typingElement.getAttribute('data-text');
+    typingElement.textContent = '';
+    
+    let charIndex = 0;
+    
+    function typeWriter() {
+        if (charIndex < text.length) {
+            typingElement.textContent += text.charAt(charIndex);
+            
+            // Легкая встряска текста при печати
+            typingElement.style.transform = 'scale(1.01)';
+            setTimeout(() => {
+                typingElement.style.transform = 'scale(1)';
+            }, 50);
+            
+            charIndex++;
+            
+            // Случайная скорость для реалистичности (80-120мс)
+            const randomSpeed = Math.random() * 40 + 80;
+            setTimeout(typeWriter, randomSpeed);
+        } else {
+            // Убираем мигающий курсор после завершения
+            setTimeout(() => {
+                typingElement.classList.add('typing-complete');
+                
+                // Показываем подчеркивание с адаптивной шириной
+                const underline = document.querySelector('.title-underline');
+                if (underline) {
+                    const targetWidth = window.innerWidth <= 576 ? '80px' : 
+                                       window.innerWidth <= 768 ? '100px' : '140px';
+                    underline.style.width = targetWidth;
+                    underline.style.opacity = '1';
+                }
+            }, 500);
+        }
+    }
+    
+    // Начинаем печатать через 400мс после загрузки
+    setTimeout(typeWriter, 400);
+    
+    // === ОТКРЫТИЕ МОДАЛЬНОГО ОКНА ПРИ УСПЕШНОЙ ОТПРАВКЕ ===
+    {% if success %}
         var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
         signupModal.show();
-      {% endif %}
+    {% endif %}
+    
+    // === RIPPLE ЭФФЕКТ ДЛЯ КАРТОЧЕК ===
+    const cards = document.querySelectorAll('[data-card]');
+    
+    cards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            
+            const rect = card.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            card.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
     });
+    
+    // === ЭФФЕКТ ПЕЧАТИ ДЛЯ ВТОРОГО ЗАГОЛОВКА ПРИ СКРОЛЛЕ ===
+    const typingElement2 = document.getElementById('typingTitle2');
+    const text2 = typingElement2.getAttribute('data-text');
+    typingElement2.textContent = '';
+    let typed2 = false;
+    
+    const titleObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !typed2) {
+                typed2 = true;
+                let charIndex2 = 0;
+                
+                function typeWriter2() {
+                    if (charIndex2 < text2.length) {
+                        typingElement2.textContent += text2.charAt(charIndex2);
+                        
+                        // Легкая встряска
+                        typingElement2.style.transform = 'scale(1.01)';
+                        setTimeout(() => {
+                            typingElement2.style.transform = 'scale(1)';
+                        }, 50);
+                        
+                        charIndex2++;
+                        const randomSpeed = Math.random() * 40 + 80;
+                        setTimeout(typeWriter2, randomSpeed);
+                    } else {
+                        // Убираем курсор и показываем подчеркивание
+                        setTimeout(() => {
+                            typingElement2.classList.add('typing-complete');
+                            
+                            const underline2 = document.getElementById('underline2');
+                            if (underline2) {
+                                const targetWidth = window.innerWidth <= 576 ? '80px' : 
+                                                   window.innerWidth <= 768 ? '100px' : '140px';
+                                underline2.style.width = targetWidth;
+                                underline2.style.opacity = '1';
+                            }
+                            
+                            // Запускаем анимацию карточек абонементов
+                            const abonementCards = document.querySelectorAll('.abonement-card');
+                            abonementCards.forEach((card, index) => {
+                                setTimeout(() => {
+                                    card.style.animation = 'bounceIn 0.6s ease-out forwards';
+                                }, index * 100);
+                            });
+                        }, 500);
+                    }
+                }
+                
+                typeWriter2();
+            }
+        });
+    }, {
+        threshold: 0.3,
+        rootMargin: '0px'
+    });
+    
+    titleObserver.observe(typingElement2);
+    
+    // === ПЛАВНОЕ ПОЯВЛЕНИЕ ЭЛЕМЕНТОВ ПРИ СКРОЛЛЕ ===
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    // Наблюдаем за всеми анимируемыми элементами
+    document.querySelectorAll('.info-card, .abonement-card, .course-card').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // === ПАРАЛЛАКС ЭФФЕКТ ДЛЯ HERO СЕКЦИИ ===
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            heroSection.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    }
+    
+    // === АНИМАЦИЯ ЧИСЕЛ В КАРТОЧКАХ АБОНЕМЕНТОВ ===
+    const animateNumbers = () => {
+        const numberElements = document.querySelectorAll('.abonement-card p[style*="font-size: 2rem"]');
+        
+        numberElements.forEach(el => {
+            const finalNumber = parseInt(el.textContent);
+            if (isNaN(finalNumber)) return;
+            
+            let currentNumber = 0;
+            const increment = finalNumber / 30;
+            const timer = setInterval(() => {
+                currentNumber += increment;
+                if (currentNumber >= finalNumber) {
+                    el.textContent = finalNumber + ' BYN';
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(currentNumber) + ' BYN';
+                }
+            }, 30);
+        });
+    };
+    
+    // Запускаем анимацию чисел через 1.5 секунды после загрузки
+    setTimeout(animateNumbers, 1500);
+    
+    // === HOVER ЗВУК (опционально) ===
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.03) rotate(1deg)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+        });
+    });
+    
+    console.log('✨ Премиум страница курса загружена!');
+});
 </script>
 
 {% endblock %}
