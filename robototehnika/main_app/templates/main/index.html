@@ -320,210 +320,62 @@
         }
     }
 
-    /* === КРУТЫЕ БОЛЬШИЕ КАРТОЧКИ КУРСОВ === */
+    /* Стили для карточек "Наши курсы" нужно перенести, после переноса они не работают */
     .course-card {
-        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-        border-radius: 28px;
-        box-shadow: 0 12px 40px rgba(13, 148, 136, 0.15);
+        background: white;
+        border-radius: 18px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
         overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        border: 3px solid rgba(13, 148, 136, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid transparent;
         display: flex;
         flex-direction: column;
-        position: relative;
-        animation: cardFadeIn 0.6s ease-out backwards;
     }
 
-    /* Анимация появления карточек с задержкой */
-    @keyframes cardFadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .course-card:nth-child(1) { animation-delay: 0.1s; }
-    .course-card:nth-child(2) { animation-delay: 0.2s; }
-    .course-card:nth-child(3) { animation-delay: 0.3s; }
-    .course-card:nth-child(4) { animation-delay: 0.4s; }
-    .course-card:nth-child(5) { animation-delay: 0.5s; }
-    .course-card:nth-child(6) { animation-delay: 0.6s; }
-    .course-card:nth-child(7) { animation-delay: 0.7s; }
-
-    /* Светящийся ореол при hover */
-    .course-card::after {
-        content: '';
-        position: absolute;
-        inset: -3px;
-        border-radius: 28px;
-        background: linear-gradient(135deg, rgba(13, 148, 136, 0.3), rgba(204, 85, 0, 0.3));
-        opacity: 0;
-        z-index: -1;
-        filter: blur(15px);
-        transition: opacity 0.4s;
-    }
-
-    .course-card:hover::after {
-        opacity: 1;
-    }
-
-    /* Градиентная полоска сверху */
-    .course-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 6px;
-        background: linear-gradient(90deg, #0d9488, #CC5500, #ff9500);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 2;
-    }
-
-    .course-card:hover::before {
-        transform: scaleX(1);
-    }
-
-    /* Анимация при наведении */
     .course-card:hover {
-        transform: translateY(-16px) scale(1.03);
-        box-shadow: 0 24px 60px rgba(13, 148, 136, 0.25), 0 12px 30px rgba(204, 85, 0, 0.2);
-        border-color: rgba(204, 85, 0, 0.4);
+        transform: translateY(-8px);
+        box-shadow: 0 10px 30px rgba(255, 106, 0, 0.3);
+        border-color: #ff6a00;
     }
 
     .course-image-wrapper {
         position: relative;
         width: 100%;
-        height: 280px;
+        height: 200px;
         overflow: hidden;
-    }
-
-    /* Градиентный оверлей на изображении */
-    .course-image-wrapper::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, transparent 0%, rgba(13, 148, 136, 0.8) 100%);
-        opacity: 0;
-        transition: opacity 0.4s;
-        z-index: 1;
-    }
-
-    .course-card:hover .course-image-wrapper::before {
-        opacity: 1;
-    }
-
-    /* Иконка на изображении */
-    .course-image-wrapper::after {
-        content: '→';
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        width: 56px;
-        height: 56px;
-        background: linear-gradient(135deg, #CC5500, #ff9500);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2.2rem;
-        font-weight: bold;
-        color: white;
-        opacity: 0;
-        transform: scale(0.5) rotate(-45deg);
-        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 2;
-        box-shadow: 0 6px 20px rgba(204, 85, 0, 0.6);
-        border: 3px solid rgba(255, 255, 255, 0.8);
-    }
-
-    .course-card:hover .course-image-wrapper::after {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-        animation: bounce 0.6s ease-out;
-    }
-
-    @keyframes bounce {
-        0%, 100% { transform: scale(1) rotate(0deg); }
-        50% { transform: scale(1.1) rotate(5deg); }
-    }
-
-    /* Светящийся эффект вокруг кнопки */
-    .course-card:hover .course-image-wrapper::after {
-        box-shadow: 0 6px 20px rgba(204, 85, 0, 0.6), 0 0 0 8px rgba(204, 85, 0, 0.15);
+        border-bottom: 3px solid #0d9488;
     }
 
     .course-image {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.3s ease;
     }
 
     .course-card:hover .course-image {
-        transform: scale(1.15) rotate(2deg);
+        transform: scale(1.07);
     }
 
     .course-content {
-        padding: 2rem 1.5rem;
+        padding: 1.25rem;
         text-align: center;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        position: relative;
     }
 
     .course-title {
         color: #0d9488;
-        font-weight: 800;
-        font-size: 1.4rem;
+        font-weight: 700;
+        font-size: 1.1rem;
         margin: 0;
-        font-family: 'Poppins', sans-serif;
-        letter-spacing: 0.5px;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        text-shadow: 0 2px 8px rgba(13, 148, 136, 0.1);
-        position: relative;
+        transition: color 0.3s ease;
     }
 
-    /* Градиентный текст при hover */
     .course-card:hover .course-title {
-        background: linear-gradient(135deg, #0d9488, #CC5500, #ff9500);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        transform: scale(1.08);
-        text-shadow: none;
-    }
-
-    /* Анимированное подчеркивание заголовка */
-    .course-title::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #CC5500, #ff9500);
-        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        border-radius: 2px;
-    }
-
-    .course-card:hover .course-title::after {
-        width: 60%;
-    }
-
-    .course-card-link {
-        text-decoration: none;
-        display: block;
-        height: 100%;
+        color: #ff6a00;
     }
 
     .course-card-link:hover {
@@ -533,29 +385,29 @@
     /* Адаптация под мобильные устройства */
     @media (max-width: 768px) {
         .course-image-wrapper {
-            height: 200px;
+            height: 160px;
         }
 
         .course-title {
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
         .course-content {
-            padding: 1.5rem;
+            padding: 1rem;
         }
     }
 
     @media (max-width: 576px) {
         .course-card {
-            border-radius: 24px;
+            border-radius: 15px;
         }
 
         .course-image-wrapper {
-            height: 180px;
+            height: 140px;
         }
 
         .course-title {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
         }
     }
 
@@ -584,15 +436,15 @@
             display: flex !important;
             flex-wrap: wrap !important;
             justify-content: center;
-            gap: 40px 32px;
+            gap: 32px 24px;
             margin-left: auto;
             margin-right: auto;
-            max-width: 1400px;
+            max-width: 1200px;
         }
         .courses-carousel-row > div {
-            flex: 1 1 340px !important;
-            max-width: 380px !important;
-            min-width: 300px !important;
+            flex: 1 1 260px !important;
+            max-width: 300px !important;
+            min-width: 220px !important;
             margin: 0;
             display: flex;
         }
@@ -1185,43 +1037,9 @@
 <!-- === СТИЛИ ДЛЯ СЕКЦИИ КУРСОВ === -->
 <style>
     .courses-section-bg {
-        background: 
-            radial-gradient(circle at 20% 30%, rgba(13, 148, 136, 0.05) 0%, transparent 50%),
-            radial-gradient(circle at 80% 70%, rgba(204, 85, 0, 0.05) 0%, transparent 50%),
-            linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #e9ecef 100%);
-        padding: 60px 0 80px 0;
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        padding: 60px 0;
         position: relative;
-        overflow: hidden;
-    }
-
-    /* Анимированные декоративные элементы */
-    .courses-section-bg::before {
-        content: '';
-        position: absolute;
-        top: -100px;
-        right: -100px;
-        width: 300px;
-        height: 300px;
-        background: radial-gradient(circle, rgba(204, 85, 0, 0.08), transparent);
-        border-radius: 50%;
-        animation: floatCircle 6s ease-in-out infinite;
-    }
-
-    .courses-section-bg::after {
-        content: '';
-        position: absolute;
-        bottom: -80px;
-        left: -80px;
-        width: 250px;
-        height: 250px;
-        background: radial-gradient(circle, rgba(13, 148, 136, 0.08), transparent);
-        border-radius: 50%;
-        animation: floatCircle 7s ease-in-out infinite reverse;
-    }
-
-    @keyframes floatCircle {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        50% { transform: translate(-20px, -20px) scale(1.1); }
     }
 
     .courses-title-wrapper {
