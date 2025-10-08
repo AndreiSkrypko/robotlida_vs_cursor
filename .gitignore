@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Django
+*.log
+db.sqlite3
+db.sqlite3-journal
+/media
+/static
+*.pot
+
+# Local development files
+.env
+.env.local
+local_settings.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local run scripts (не нужны на сервере)
+robototehnika/start_server.bat
+robototehnika/run_server.ps1
+robototehnika/README_RUN.md
+
+# Passenger
+tmp/restart.txt
+

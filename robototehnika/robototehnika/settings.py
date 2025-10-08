@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # === Безопасность ===
 SECRET_KEY = 'django-insecure--^-$0sj_8oonw7-&v@b^(q$m=3v#l%)-tt4h6nz)dcqe3r@z58'
 DEBUG = True  # В продакшене — False
-ALLOWED_HOSTS = ['robotlida.by', 'www.robotlida.by']
+ALLOWED_HOSTS = ['robotlida.by', 'www.robotlida.by', 'localhost', '127.0.0.1']
 
 # === Приложения ===
 INSTALLED_APPS = [
