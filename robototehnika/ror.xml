@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:ror="http://rorweb.com/0.1/" >
+<channel>
+  <title>ROR Sitemap for https://robotlida.by/</title>
+  <link>https://robotlida.by/</link>
+
+<item>
+     <link>https://robotlida.by/</link>
+     <title>Робототехника в Лиде</title>
+     <description>Детский центр робототехники и программирования в г. Лида</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>0</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://robotlida.by/about-cookies/</link>
+     <title>Условия соглашения</title>
+     <description>Детский центр робототехники и программирования в г. Лида</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://robotlida.by/about/</link>
+     <title>О клубе</title>
+     <description>Детский центр робототехники и программирования в г. Лида</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://robotlida.by/courses_2_4/</link>
+     <title>Курсы для 2-4 лет</title>
+     <description>Детский центр робототехники и программирования в г. Лида</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://robotlida.by/courses_4_6/</link>
+     <title>Курсы для 4-6 лет</title>
+     <description>Детский центр робототехники и программирования в г. Лида</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://robotlida.by/courses_6_7/</link>
+     <title>Курсы для 6-7 лет</title>
+     <description>Детский центр робототехники и программирования в г. Лида</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://robotlida.by/courses_7_9/</link>
+     <title>Курсы для 7-9 лет</title>
+     <description>Детский центр робототехники и программирования в г. Лида</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://robotlida.by/courses_9_11/</link>
+     <title>Курсы для 9-11 лет</title>
+     <description>Детский центр робототехники и программирования в г. Лида</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://robotlida.by/courses_11_13/</link>
+     <title>Курсы для 11-13 лет</title>
+     <description>Детский центр робототехники и программирования в г. Лида</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://robotlida.by/courses_13_16/</link>
+     <title>Курсы для 13-16 лет</title>
+     <description>Детский центр робототехники и программирования в г. Лида</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://robotlida.by/login/</link>
+     <title>Вход</title>
+     <description>Вход</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://robotlida.by/static/main/pdf/pravila-bezopasnosti.pdf</link>
+     <title></title>
+     
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://robotlida.by/login/register/</link>
+     <title>Регистрация</title>
+     <description>Регистрация</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>2</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+</channel>
+</rss>
+  

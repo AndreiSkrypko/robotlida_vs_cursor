@@ -1,0 +1,961 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}О клубе{% endblock %}
+
+{% block content %}
+
+<!--
+    =========================
+    ГЛАВНЫЕ СТИЛИ СТРАНИЦЫ О КЛУБЕ
+    =========================
+-->
+
+<style>
+    /* === HERO-БЛОК (верхний баннер с изображением) === */
+
+    .about-hero-bg {
+        background-image: url("{% static 'main/img/about/1.jpeg' %}"); /* Фоновое изображение */
+        background-size: cover; /* Растягиваем фон по блоку */
+        background-position: center; /* Центрируем изображение */
+        position: relative;
+        padding: 120px 0 180px 0; /* Внутренние отступы сверху и снизу */
+        min-height: 520px; /* Минимальная высота блока */
+        overflow: hidden; /* Скрытие выходящих за границы элементов */
+    }
+
+    .about-hero-bg::before {
+        content: '';
+        position: absolute;
+        inset: 0; /* Занимает весь родительский блок */
+        background: linear-gradient(120deg, rgba(23,162,184,0.25) 0%, rgba(0,0,0,0.55) 100%);
+        z-index: 1; /* Помещается под основным контентом */
+    }
+
+    .about-hero-content {
+        position: relative;
+        z-index: 2; /* Выше затемняющего слоя */
+        margin-top: 120px;
+        margin-bottom: 120px;
+    }
+
+    .about-hero-title {
+        font-family: 'Poppins', 'Nunito', sans-serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        color: #fff;
+        text-shadow: 0 4px 24px rgba(23,162,184,0.10), 0 2px 8px rgba(0,0,0,0.18);
+        line-height: 1.2;
+        letter-spacing: 0.5px;
+        animation: fadeInUp 1s; /* Анимация появления */
+    }
+
+    .about-hero-title span {
+        color: #17a2b8; /* Акцентный цвет */
+        text-shadow: 0 2px 8px rgba(23,162,184,0.18);
+    }
+
+    .about-hero-btn {
+        background: linear-gradient(90deg, #17a2b8 0%, #CC5500 100%);
+        color: #fff !important;
+        font-weight: 700;
+        border: none;
+        border-radius: 2rem;
+        font-size: 1.25rem;
+        padding: 0.95rem 2.5rem;
+        box-shadow: 0 4px 16px rgba(23,162,184,0.18), 0 1.5px 0 #CC5500 inset;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+
+    .about-hero-btn:hover,
+    .about-hero-btn:focus {
+        background: linear-gradient(90deg, #CC5500 0%, #17a2b8 100%);
+        box-shadow: 0 8px 32px rgba(204,85,0,0.13);
+        transform: scale(1.04);
+    }
+
+    @media (max-width: 767px) {
+        /* Мобильные стили hero-блока */
+        .about-hero-title {
+            font-size: 1.35rem;
+        }
+        .about-hero-content {
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+        .about-hero-bg {
+            padding: 60px 0 80px 0;
+            min-height: 320px;
+        }
+    }
+
+    /* === ДЕКОРАТИВНЫЙ РАЗДЕЛИТЕЛЬ === */
+    .custom-divider {
+        border: none;
+        height: 3px;
+        background: linear-gradient(90deg, transparent 0%, #CC5500 50%, transparent 100%);
+        margin: 40px auto;
+        width: 80%;
+        border-radius: 2px;
+        box-shadow: 0 2px 8px rgba(204, 85, 0, 0.3);
+    }
+
+    /* === СЕКЦИЯ С ПОДЗАГОЛОВКОМ === */
+    .section-title {
+        color: #0d9488;
+        font-size: 2.2rem;
+        text-shadow: 0 2px 4px rgba(13, 148, 136, 0.1);
+    }
+
+    .title-underline {
+        width: 120px;
+        height: 4px;
+        background: linear-gradient(90deg, #ff6a00, #17a2b8);
+        margin: 0 auto 2.5rem auto;
+        border-radius: 2px;
+        box-shadow: 0 2px 8px rgba(255, 106, 0, 0.2);
+    }
+
+    @media (max-width: 600px) {
+        .section-title {
+            font-size: 1.2rem;
+        }
+        .title-underline {
+            width: 80px;
+            height: 3px;
+            margin-bottom: 1.2rem;
+        }
+    }
+
+    /* === КАРТОЧКИ С ПРЕИМУЩЕСТВАМИ === */
+    .about-feature-card {
+        background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
+        border: none;
+        border-radius: 1.5rem;
+        box-shadow: 0 6px 32px rgba(23,162,184,0.08);
+        padding: 2rem 1.5rem;
+        transition: transform 0.18s, box-shadow 0.18s;
+        min-height: 320px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .about-feature-card:hover {
+        transform: translateY(-6px) scale(1.03);
+        box-shadow: 0 12px 40px rgba(23,162,184,0.13), 0 2px 12px rgba(204,85,0,0.10);
+    }
+
+    .about-feature-icon {
+        font-size: 3rem;
+        color: #17a2b8;
+        text-shadow: 0 2px 8px rgba(23,162,184,0.10);
+        margin-bottom: 1rem;
+    }
+
+    .about-feature-title {
+        color: #0d9488;
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .about-feature-hr {
+        border: none;
+        height: 3px;
+        background: linear-gradient(90deg, #17a2b8, #CC5500);
+        border-radius: 2px;
+        width: 50%;
+        margin: 1rem auto;
+    }
+
+    .about-feature-text {
+        font-size: 1.05rem;
+        color: #495057;
+    }
+
+    @media (max-width: 991px) {
+        .about-feature-card {
+            min-height: 220px;
+            padding: 1.2rem 0.5rem;
+        }
+    }
+
+    /* === КАРУСЕЛЬ ИЗОБРАЖЕНИЙ === */
+.carousel-wrapper {
+    max-width: 1400px;
+    position: relative;
+    margin: 0 auto 60px auto;
+    padding: 32px 0 24px 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
+    border-radius: 2rem;
+    box-shadow: 0 8px 32px rgba(23,162,184,0.08);
+}
+
+.carousel-wrapper h1 {
+    color: #0d9488;
+    font-family: 'Poppins', 'Nunito', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px rgba(23,162,184,0.10);
+}
+
+.carousel-inner-custom {
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 16px rgba(23,162,184,0.10);
+    background: #fff;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 16px;
+    transition: none;
+    padding: 12px 0;
+    align-items: center;
+}
+
+/* === УВЕЛИЧЕННЫЕ ЭЛЕМЕНТЫ КАРУСЕЛИ === */
+.carousel-item-custom {
+    min-width: 520px;
+    max-width: 520px;
+    flex: 0 0 320px;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(23,162,184,0.10);
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-item-custom img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 1.2rem;
+    transition: transform 0.3s;
+}
+
+.carousel-item-custom img:hover {
+    transform: scale(1.04) rotate(-1deg);
+    box-shadow: 0 4px 16px rgba(204,85,0,0.10);
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background: linear-gradient(90deg, #17a2b8 0%, #CC5500 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(23,162,184,0.10);
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.92;
+}
+
+.carousel-control:hover,
+.carousel-control:focus {
+    background: linear-gradient(90deg, #CC5500 0%, #17a2b8 100%);
+    box-shadow: 0 4px 16px rgba(204,85,0,0.12);
+    opacity: 1;
+}
+
+.carousel-control-left {
+    left: 8px;
+}
+
+.carousel-control-right {
+    right: 8px;
+}
+
+/* === Адаптация под планшеты === */
+@media (max-width: 991px) {
+    .carousel-wrapper {
+        max-width: 98vw;
+        padding: 18px 0 12px 0;
+    }
+    .carousel-item-custom,
+    .carousel-item-custom img {
+        min-width: 240px;
+        max-width: 240px;
+        height: 160px;
+    }
+    .carousel-control {
+        width: 38px;
+        height: 38px;
+        font-size: 1.5rem;
+    }
+}
+
+/* === Адаптация под телефоны === */
+@media (max-width: 600px) {
+    .carousel-wrapper {
+        padding: 10px 0 6px 0;
+    }
+    .carousel-item-custom,
+    .carousel-item-custom img {
+        min-width: 180px;
+        max-width: 180px;
+        height: 120px;
+    }
+    .carousel-control {
+        width: 28px;
+        height: 28px;
+        font-size: 1.1rem;
+    }
+    .carousel-wrapper h1 {
+        font-size: 1.2rem;
+        margin-bottom: 1.2rem;
+    }
+}
+
+    /* === ОТЗЫВЫ В ТЕКСТОВОМ ФОРМАТЕ === */
+    .reviews-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
+        position: relative;
+        z-index: 1;
+    }
+
+    .review-card {
+        background: #fff;
+        border-radius: 1.5rem;
+        box-shadow: 0 6px 32px rgba(23, 162, 184, 0.08), 0 1.5px 8px rgba(204, 85, 0, 0.07);
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: 2px solid #f1f5f9;
+        min-height: 420px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+    }
+
+    .review-card:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 12px 40px rgba(23, 162, 184, 0.13), 0 2px 12px rgba(204, 85, 0, 0.10);
+        border-color: #17a2b8;
+    }
+
+    .review-img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #17a2b8;
+        box-shadow: 0 2px 8px rgba(23, 162, 184, 0.10);
+        margin-top: -50px;
+        background: #fff;
+    }
+
+    .review-text {
+        font-size: 1.08rem;
+        color: #495057;
+        margin: 1.2rem 0;
+        font-style: italic;
+        min-height: 90px;
+    }
+
+    .review-name {
+        color: #0d9488;
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin-top: auto;
+        letter-spacing: 0.01em;
+    }
+
+    @media (max-width: 991px) {
+        .review-card { min-height: 380px; }
+    }
+
+    @media (max-width: 767px) {
+        .review-card {
+            min-height: 0;
+            margin-bottom: 2rem;
+        }
+        .review-img { margin-top: 0; }
+    }
+
+    /* === ОТЗЫВЫ С ВИДЕО === */
+    .video-reviews-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 100%);
+        position: relative;
+        z-index: 1;
+    }
+
+    .video-reviews-section h2 {
+        color: #0d9488;
+        font-family: 'Poppins', 'Nunito', sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-shadow: 0 2px 8px rgba(23,162,184,0.10);
+        font-size: 2rem;
+    }
+
+    .video-review-card {
+        background: #fff;
+        border-radius: 1.5rem;
+        box-shadow: 0 6px 32px rgba(23, 162, 184, 0.08), 0 1.5px 8px rgba(204, 85, 0, 0.07);
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: 2px solid #f1f5f9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 420px;
+        position: relative;
+    }
+
+    .video-review-card:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 12px 40px rgba(23, 162, 184, 0.13), 0 2px 12px rgba(204, 85, 0, 0.10);
+        border-color: #17a2b8;
+    }
+
+    .video-review-card .ratio {
+        border-radius: 1.2rem;
+        box-shadow: 0 2px 12px rgba(23,162,184,0.10);
+        background: #f8fafc;
+        overflow: hidden;
+    }
+
+    .video-review-card video {
+        width: 100%;
+        height: 100%;
+        border-radius: 1.2rem;
+        object-fit: cover;
+        background: #e9ecef;
+        box-shadow: 0 2px 8px rgba(23,162,184,0.10);
+        transition: box-shadow 0.2s;
+    }
+
+    .video-review-card video:focus {
+        outline: 2px solid #17a2b8;
+        box-shadow: 0 0 0 4px rgba(23,162,184,0.15);
+    }
+
+    .video-review-name {
+        color: #0d9488;
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin-top: 1.2rem;
+        letter-spacing: 0.01em;
+        text-shadow: 0 1px 4px rgba(23,162,184,0.08);
+    }
+
+    @media (max-width: 991px) {
+        .video-review-card { min-height: 340px; }
+        .video-reviews-section h2 { font-size: 1.3rem; }
+    }
+
+    @media (max-width: 600px) {
+        .video-review-card {
+            min-height: 220px;
+            padding: 1.2rem 0.5rem;
+        }
+        .video-reviews-section h2 {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+        }
+        .video-review-name { font-size: 0.98rem; }
+    }
+</style>
+
+
+<!--
+    =========================
+    HERO-БЛОК
+    =========================
+-->
+<div class="about-hero-bg">
+    <div class="container about-hero-content">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-10">
+                <h1 class="about-hero-title mb-4">
+                    В клубе <span>ЮНЫХ ИНЖЕНЕРОВ</span><br>
+                    мы помогаем детям раскрывать потенциал<br class="d-none d-md-block">
+                    и создавать будущее своими руками
+                </h1>
+                <div class="mt-4">
+                    <button type="button"
+                            class="btn about-hero-btn shadow-lg px-5 py-3"
+                            data-bs-toggle="modal"
+                            data-bs-target="#signupModal">
+                        ЗАПИСАТЬСЯ НА БЕСПЛАТНОЕ ПРОБНОЕ ЗАНЯТИЕ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Модальное окно открывается автоматически при успешной отправке формы
+-->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      {% if success %}
+        var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+        signupModal.show();
+      {% endif %}
+    });
+</script>
+
+<!--
+    =========================
+    РАЗДЕЛИТЕЛЬ
+    =========================
+-->
+<hr class="custom-divider">
+
+<!--
+    =========================
+    ПРЕИМУЩЕСТВА КЛУБА
+    =========================
+-->
+<div class="container my-5">
+    <h1 class="mb-5 text-center fw-bold section-title">
+        Почему выбирают клуб "ЮНЫЕ ИНЖЕНЕРЫ"
+    </h1>
+    <div class="title-underline"></div>
+
+    <div class="row g-4 mb-4">
+        <!-- Карточка 1 -->
+        <div class="col-12 col-md-4">
+            <div class="about-feature-card text-center h-100">
+                <i class="bi bi-lightbulb-fill about-feature-icon"></i>
+                <h5 class="about-feature-title">5000+ учеников</h5>
+                <hr class="about-feature-hr">
+                <p class="about-feature-text">
+                    С каждым годом всё больше детей выбирают нас, чтобы освоить технологии будущего.
+                </p>
+            </div>
+        </div>
+        <!-- Карточка 2 -->
+        <div class="col-12 col-md-4">
+            <div class="about-feature-card text-center h-100">
+                <i class="bi bi-gear-fill about-feature-icon"></i>
+                <h5 class="about-feature-title">Современные технологии</h5>
+                <hr class="about-feature-hr">
+                <p class="about-feature-text">
+                    Мы обучаем на практике: робототехника, кодинг, 3D-дизайн и цифровое творчество.
+                </p>
+            </div>
+        </div>
+        <!-- Карточка 3 -->
+        <div class="col-12 col-md-4">
+            <div class="about-feature-card text-center h-100">
+                <i class="bi bi-person-check-fill about-feature-icon"></i>
+                <h5 class="about-feature-title">Опытные педагоги</h5>
+                <hr class="about-feature-hr">
+                <p class="about-feature-text">
+                    Наши наставники — инженеры, программисты и дизайнеры, которые умеют вдохновлять.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row g-4">
+        <!-- Карточка 4 -->
+        <div class="col-12 col-md-4">
+            <div class="about-feature-card text-center h-100">
+                <i class="bi bi-calendar-check-fill about-feature-icon"></i>
+                <h5 class="about-feature-title">Гибкий график</h5>
+                <hr class="about-feature-hr">
+                <p class="about-feature-text">
+                    Занятия проходят в удобное для семьи время — в будни и выходные.
+                </p>
+            </div>
+        </div>
+        <!-- Карточка 5 -->
+        <div class="col-12 col-md-4">
+            <div class="about-feature-card text-center h-100">
+                <i class="bi bi-award-fill about-feature-icon"></i>
+                <h5 class="about-feature-title">Участие в конкурсах</h5>
+                <hr class="about-feature-hr">
+                <p class="about-feature-text">
+                    Наши ученики участвуют в олимпиадах и чемпионатах по ИТ и робототехнике.
+                </p>
+            </div>
+        </div>
+        <!-- Карточка 6 -->
+        <div class="col-12 col-md-4">
+            <div class="about-feature-card text-center h-100">
+                <i class="bi bi-emoji-smile-fill about-feature-icon"></i>
+                <h5 class="about-feature-title">Увлекательно и весело</h5>
+                <hr class="about-feature-hr">
+                <p class="about-feature-text">
+                    Каждый урок — это интересная практика, работа в команде и настоящее удовольствие.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    =========================
+    РАЗДЕЛИТЕЛЬ
+    =========================
+-->
+<hr class="custom-divider">
+
+<!--
+    =========================
+    ФОТОКАРУСЕЛЬ НАШИХ ЗАНЯТИЙ
+    =========================
+-->
+<div class="carousel-wrapper mx-auto">
+    <h1 class="mb-5 text-center fw-bold">Фото наших занятий</h1>
+    <button class="carousel-control carousel-control-left" type="button" aria-label="Назад"
+            onclick="scrollCarousel(-1)">‹
+    </button>
+    <div class="carousel-inner-custom" id="customCarousel">
+        <div class="carousel-track" id="carouselTrack">
+            <!-- Фотографии занятий -->
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/photo_1_2025-03-18_19-28-04.jpg' %}" alt="Фото 5">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/photo_2_2025-03-18_19-28-04.jpg' %}" alt="Фото 4">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/photo_3_2025-03-18_19-28-04.jpg' %}" alt="Фото 3">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/photo_4_2025-03-18_19-28-04.jpg' %}" alt="Фото 2">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/20240217_174745.jpg' %}" alt="Фото 1">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/20240224_164125.jpg' %}" alt="Фото 6">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/20240224_164134.jpg' %}" alt="Фото 7">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/8.jpg' %}" alt="Фото 8">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/9.jpg' %}" alt="Фото 9">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/1.jpg' %}" alt="Фото 5">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/2.jpg' %}" alt="Фото 4">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/3.jpg' %}" alt="Фото 3">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/4.jpg' %}" alt="Фото 2">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/5.jpg' %}" alt="Фото 1">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/6.jpg' %}" alt="Фото 6">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/7.jpg' %}" alt="Фото 7">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/10.jpg' %}" alt="Фото 8">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/11.jpg' %}" alt="Фото 9">
+            </div>
+
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/12.jpg' %}" alt="Фото 5">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/13.jpg' %}" alt="Фото 4">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/14.jpg' %}" alt="Фото 3">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/15.jpg' %}" alt="Фото 2">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/16.jpg' %}" alt="Фото 1">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/17.jpg' %}" alt="Фото 6">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/18.jpg' %}" alt="Фото 7">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/19.jpg' %}" alt="Фото 8">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/20.jpg' %}" alt="Фото 9">
+            </div>
+
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/21.jpg' %}" alt="Фото 5">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/22.jpg' %}" alt="Фото 4">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/23.jpg' %}" alt="Фото 3">
+            </div>
+            <div class="carousel-item-custom">
+                <img src="{% static 'main/img/fotocarusel/24.jpg' %}" alt="Фото 2">
+            </div>
+
+        </div>
+
+
+
+
+
+
+    </div>
+    <button class="carousel-control carousel-control-right" type="button" aria-label="Вперёд"
+            onclick="scrollCarousel(1)">›
+    </button>
+</div>
+<script>
+    // --- Карусель: автоскролл, бесконечный цикл, адаптивность ---
+    document.addEventListener('DOMContentLoaded', function () {
+        const container = document.getElementById('customCarousel');
+        const track = document.getElementById('carouselTrack');
+        const itemCount = track.children.length;
+
+        // Клонируем элементы для бесконечного цикла
+        for (let i = 0; i < itemCount; i++) {
+            const clone = track.children[i].cloneNode(true);
+            track.appendChild(clone);
+        }
+
+        // Получаем ширину одного элемента с учетом gap
+        function getItemWidth() {
+            const style = window.getComputedStyle(track);
+            const gap = parseInt(style.gap) || 16;
+            return track.children[0].offsetWidth + gap;
+        }
+        let itemWidth = getItemWidth();
+        let scrollStep = itemWidth;
+        let totalScrollWidth = itemWidth * itemCount;
+
+        // Обновляем размеры при изменении окна
+        window.addEventListener('resize', () => {
+            itemWidth = getItemWidth();
+            scrollStep = itemWidth;
+            totalScrollWidth = itemWidth * itemCount;
+        });
+
+        // Начальный скролл
+        container.scrollLeft = 0;
+
+        // Автоматический скролл
+        function autoScroll() {
+            if (container.scrollLeft >= totalScrollWidth) {
+                container.scrollLeft = 0;
+            }
+            container.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        }
+
+        let autoScrollInterval = setInterval(autoScroll, 3000);
+
+        // Останавливаем автоскролл при наведении
+        container.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
+        container.addEventListener('mouseleave', () => {
+            autoScrollInterval = setInterval(autoScroll, 3000);
+        });
+
+        // Управление кнопками
+        window.scrollCarousel = function(direction) {
+            container.scrollBy({ left: direction * scrollStep, behavior: 'smooth' });
+            setTimeout(() => {
+                if (container.scrollLeft >= totalScrollWidth) {
+                    container.scrollLeft = 0;
+                } else if (container.scrollLeft <= 0 && direction < 0) {
+                    container.scrollLeft = totalScrollWidth;
+                }
+            }, 400);
+        };
+    });
+</script>
+
+<!--
+    =========================
+    ОТЗЫВЫ РОДИТЕЛЕЙ (ТЕКСТ)
+    =========================
+-->
+<section class="reviews-section py-5">
+    <div class="container">
+        <h1 class="mb-5 text-center fw-bold"
+            style="color: #0d9488; text-shadow: 0 2px 8px rgba(23,162,184,0.08); letter-spacing: 0.01em;">
+            <i class="bi bi-chat-quote-fill me-2" style="color: #ff6a00;"></i>
+            Отзывы наших родителей
+        </h1>
+        <div class="row g-4 justify-content-center">
+            <!-- Каждый отзыв — отдельная карточка -->
+            <div class="col-md-6 col-lg-4 d-flex">
+                <div class="review-card p-4 text-center w-100">
+                    <p class="review-text">
+                        Очень довольны уроками и вообще подходом! Особенно хочу сказать спасибо Андрею Станиславовичу —
+                        он отличный педагог, всегда находит подход к детям и объясняет всё понятно. После первого
+                        занятия ребёнок так загорелся, что вместо одного курса сразу на три записались! Уроки проходят
+                        весело и интересно, всем советую!
+                    </p>
+                    <p class="review-name">— Анна, мама Артёма (7 лет)</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 d-flex">
+                <div class="review-card p-4 text-center w-100">
+                <p class="review-text">
+                    Очень интересный подход к обучению — детям не просто рассказывают теорию, а вовлекают в процесс
+                    через практические задания, эксперименты и проектную деятельность. Педагоги — настоящие
+                    профессионалы, которые умеют найти подход к каждому ребёнку и создать на занятиях дружелюбную,
+                    увлекательную атмосферу. Уроки проходят на ура — ребёнок с радостью бежит на занятия и с ещё большим
+                    воодушевлением рассказывает, что нового узнал!
+                </p>
+                <p class="review-name">— Дмитрий, папа Вани (9 лет)</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex">
+            <div class="review-card p-4 text-center w-100">
+
+                <p class="review-text">
+                    После занятий в вашей школе у сына появилось настоящее увлечение техникой и наукой. Теперь он
+                    всерьёз мечтает стать инженером! Огромное спасибо всей команде за вдохновение, поддержку и ценные
+                    знания, которые вы даёте детям. Вы помогаете раскрыть потенциал и увлечься важными и интересными
+                    вещами — это бесценно!
+                </p>
+                <p class="review-name">— Елена, мама Никиты (11 лет)</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 d-flex">
+            <div class="review-card p-4 text-center w-100">
+
+                <p class="review-text">
+                    Мы переехали жить в Норвегию, и из-за расстояния было невозможно продолжать занятия очно. К счастью,
+                    онлайн-курсы стали отличным решением — занятия проходят качественно, интересно и по делу! Ребёнок не
+                    потерял мотивацию, а знания и навыки продолжают расти, несмотря на перемену страны и обстановки.
+                    Очень рады, что обучение стало доступным и удобным, спасибо!
+                </p>
+                <p class="review-name">— Игорь, отец Алисы (16 лет)</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 d-flex">
+            <div class="review-card p-4 text-center w-100">
+
+                <p class="review-text">
+                    Дочь раньше совсем не интересовалась программированием, но благодаря вашему вдохновляющему и
+                    доступному подходу к обучению она впервые по-настоящему увлеклась этой темой. Занятия идут легко и
+                    интересно, и я вижу, как она с каждым уроком становится всё увереннее. Спасибо вам за такую
+                    поддержку и мотивацию!
+                </p>
+                <p class="review-name">— Татьяна, мама Лизы (8 лет)</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 d-flex">
+            <div class="review-card p-4 text-center w-100">
+
+                <p class="review-text">
+                    Очень здорово, что есть такой клуб, который с самого детства помогает развивать мышление и полезные
+                    навыки у детей. Это не просто занятия, а настоящее воспитание интереса к новым знаниям и умению
+                    думать критически. Спасибо всем педагогам за ваш труд и внимание к детям!
+                </p>
+                <p class="review-name">— Светлана, мама Ивана (6 лет)</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 d-flex">
+            <div class="review-card p-4 text-center w-100">
+
+                <p class="review-text">
+                    София с большим нетерпением ждет каждого нового занятия! Ей очень нравится творческая и дружелюбная
+                    атмосфера, которая царит в группе. Особенно ценно, что к каждому ребенку здесь находят
+                    индивидуальный подход — это помогает ей раскрывать свои способности и чувствовать уверенность в
+                    своих силах. Спасибо педагогам за такую поддержку и вдохновение!
+                </p>
+                <p class="review-name">— Мария, мама Софии (8 лет)</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 d-flex">
+            <div class="review-card p-4 text-center w-100">
+
+                <p class="review-text">
+                    Максим стал намного увереннее в себе, научился работать в команде и теперь самостоятельно собирает
+                    сложные модели. Плюс, дома начал проявлять инициативу — стал помогать нам с уборкой и даже мыть
+                    посуду без напоминаний. Спасибо педагогам за такой вдохновляющий и полезный подход!
+                </p>
+                <p class="review-name">— Алексей, папа Максима (10 лет)</p>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!--
+    =========================
+    ВИДЕООТЗЫВЫ УЧЕНИКОВ
+    =========================
+-->
+<section class="video-reviews-section py-5">
+    <div class="container">
+        <h2 class="mb-5 text-center fw-bold">Видеоотзывы наших учеников</h2>
+        <div class="title-underline" style="width: 100px;"></div>
+        <div class="row g-4">
+            <!-- Видеоотзыв 1 -->
+            <div class="col-md-4 d-flex">
+                <div class="video-review-card p-4 text-center w-100">
+                    <div class="ratio ratio-16x9 mb-3 rounded shadow-sm overflow-hidden">
+                        <video controls poster="{% static 'main/img/video_thumbs/nikita.jpg' %}">
+                            <source src="{% static 'main/video/review_nikita.mp4' %}" type="video/mp4">
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                    </div>
+                    <p class="video-review-name">— Никита (9 лет), занимается робототехникой, программированием, 3D
+                        моделированием</p>
+                </div>
+            </div>
+            <!-- Видеоотзыв 2 -->
+            <div class="col-md-4 d-flex">
+                <div class="video-review-card p-4 text-center w-100">
+                    <div class="ratio ratio-16x9 mb-3 rounded shadow-sm overflow-hidden">
+                        <video controls poster="{% static 'main/img/video_thumbs/makar.jpg' %}">
+                            <source src="{% static 'main/video/review_makar.MOV' %}" type="video/mp4">
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                    </div>
+                    <p class="video-review-name">— Макар (9 лет), занимается робототехникой Mindstorms EV3</p>
+                </div>
+            </div>
+            <!-- Видеоотзыв 3 -->
+            <div class="col-md-4 d-flex">
+                <div class="video-review-card p-4 text-center w-100">
+                    <div class="ratio ratio-16x9 mb-3 rounded shadow-sm overflow-hidden">
+                        <video controls poster="{% static 'main/img/video_thumbs/genia.jpg' %}">
+                            <source src="{% static 'main/video/review_genia.MOV' %}" type="video/mp4">
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                    </div>
+                    <p class="video-review-name">— Евгений (11 лет), занимается робототехникой Mindstorms EV3</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

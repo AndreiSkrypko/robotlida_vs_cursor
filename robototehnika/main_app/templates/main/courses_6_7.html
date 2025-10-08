@@ -1,0 +1,265 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Курсы для 6-7 лет{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'main/css/courses.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container text-center my-5">
+
+    <div class="row align-items-center justify-content-center" style="margin-top: 30px; margin-bottom: 20px;">
+        <h2 class="text-center section-title">
+            КУРСЫ ДЛЯ ДЕТЕЙ 6-7 ЛЕТ
+        </h2>
+    </div>
+    <div class="row align-items-center justify-content-center" style="margin-top: 20px; margin-bottom: 40px;">
+        <p style="text-align: justify; font-size: 1.2rem; font-weight: 350; max-width: 1200px; width: 100%; margin: 0 auto; line-height: 1.5;">
+            Курсы для детей от 6 до 7 лет — это увлекательное путешествие в мир открытий и новых знаний.
+            В тёплой и поддерживающей атмосфере ребята развивают творческое мышление, учатся решать задачи и работать в
+            команде.
+            Через разнообразные игры и увлекательные задания дети укрепляют внимание, воображение, логику и мелкую
+            моторику.
+            Наши занятия помогают детям раскрыть свои способности, обрести уверенность и с радостью познавать окружающий
+            мир.
+            Мы создаём пространство, где каждый ребёнок чувствует себя важным и вдохновлённым учиться.
+        </p>
+    </div>
+
+    <div class="row justify-content-center g-4">
+        <div class="col-md-2 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-person-fill info-icon"></i>
+                <p class="info-text">Возраст:<br><span style="color:#17a2b8; font-weight:600;">от 6 до 7</span>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-clock-fill info-icon"></i>
+                <p class="info-text">Длительность:<br><span style="color:#17a2b8; font-weight:600;">75 минут</span>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-calendar2-check-fill info-icon"></i>
+                <p class="info-text">Абонемент на месяц:<br><span style="color:#17a2b8; font-weight:600;">75 рублей</span>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-cash-stack info-icon"></i>
+                <p class="info-text">Пробное занятие:<br><span style="color:#17a2b8; font-weight:600;">бесплатно</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Блок для 6-7 лет (начальный уровень) -->
+    <div class="row justify-content-center my-5">
+
+        <div class="col-12 col-md-6">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/minecraft.jpeg' %}" alt="Minecraft"
+                     class="img-fluid course-image">
+                <h4>
+                    "Программирование Minecraft"
+                    <span>начальный уровень</span>
+                </h4>
+                <p>
+                    Увлекательное знакомство с программированием через любимую игру Minecraft. Дети учатся создавать
+                    автоматизации и мини-игры, осваивают логику и алгоритмы в игровой форме. Курс развивает
+                    внимательность, креативность и умение решать задачи. Всё обучение проходит в комфортной и
+                    вдохновляющей атмосфере. Отличный старт для будущих IT-талантов.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/young_engineers1.jpg' %}" alt="Юные инженеры"
+                     class="img-fluid course-image">
+                <h4>
+                    "Юные инженеры"
+                    <span>начальный уровень</span>
+                </h4>
+                <p>
+                    Знакомство с инженерией и механикой через конструирование LEGO® Technic. Дети изучают основы работы
+                    механизмов и простых машин. Курс развивает логику, внимательность и творческий подход. Уроки
+                    проходят в формате интересных заданий и экспериментов. Отличный способ открыть инженерный талант с
+                    ранних лет.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 mt-4">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/lego_math.jpeg' %}" alt="Лего с логопедом"
+                     class="img-fluid course-image">
+                <h4>
+                    "Программирование Scratch"
+                    <span>начальный уровень</span>
+                </h4>
+                <p>
+                    Весёлое изучение программирования и развитие речи с помощью LEGO® DUPLO. Через игру и моделирование
+                    дети развивают мышление, мелкую моторику и воображение. Курс помогает укрепить речевые навыки в
+                    естественной форме. Увлекательные занятия делают обучение интересным и эффективным. Отличный старт
+                    для комплексного развития.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 mt-4">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/electronika.jpeg' %}" alt="Электроника и схемотехника"
+                     class="img-fluid course-image">
+                <h4>
+                    "Электроника и схемотехника"
+                    <span>начальный уровень</span>
+                </h4>
+                <p>
+                    Введение в электронику и схемотехнику для юных инженеров. Дети научатся собирать простые
+                    электрические цепи и читать схемы. Курс развивает логику, внимательность и техническое мышление. Все
+                    занятия проходят в форме практических экспериментов и проектов. Отличная база для будущих
+                    технических навыков.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 mt-4">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/chess1.jpeg' %}" alt="Шахматный интеллектуальный клуб"
+                     class="img-fluid course-image">
+                <h4>
+                    "Шахматный интеллектуальный клуб"
+                    <span>начальный уровень</span>
+                </h4>
+                <p>
+                    Развитие логики, концентрации и стратегического мышления через шахматы. Занятия проходят в игровой
+                    форме, подходящей для начинающих. Курс тренирует память, внимание и учит принимать взвешенные
+                    решения. Шахматы — отличный способ развить умственные способности и уверенность. Идеально для
+                    комплексного интеллектуального роста.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 mt-4">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/tinkercad.jpg' %}" alt="Шахматный интеллектуальный клуб"
+                     class="img-fluid course-image">
+                <h4>
+                    "3D моделирование в TinkerCad"
+                    <span>начальный уровень</span>
+                </h4>
+                <p>
+                    Увлекательный курс для первых шагов в мир объёмного моделирования.
+                    Дети создают простые 3D-модели, развивая воображение, логику и пространственное мышление.
+                    Работа в TinkerCad проходит в понятной и интересной форме с заданиями от простого к сложному.
+                    Это отличная база для будущего в инженерии и цифровом дизайне.
+                    Готовые поделки мы распечатываем на 3D-принтере — дети уносят свои творения домой.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 mt-4">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/tinkerc.jpg' %}" alt="компьютерная грамотность"
+                     class="img-fluid course-image">
+                <h4>
+                    "Компьютерная грамотность"
+                    <span>начальный уровень</span>
+                </h4>
+                <p>
+                    Курс «Компьютерная грамотность для самых маленьких, познакомит детей с основами работы на
+                    компьютере в увлекательной игровой форме.
+                    Ребята научатся правильно включать и выключать компьютер, работать с мышкой и клавиатурой, освоят
+                    простейшие программы, такие как Paint и текстовый редактор.
+                    Мы изучим понятия: файл, папка, окно, кнопка — и научимся аккуратно и безопасно использовать
+                    технику.
+                    Дети смогут создавать простые рисунки, выполнять задания с перетаскиванием объектов и играть в
+                    развивающие обучающие игры.
+                    Особое внимание уделяется правилам поведения в цифровом пространстве и за компьютером — безопасность
+                    и здоровье зрения.
+                    Курс помогает развить моторику, внимание, логическое мышление и интерес к технологиям.
+                    Все занятия проходят в формате коротких интерактивных уроков с активным участием ребёнка.
+                    По окончании дети получают базовое представление о том, как устроен компьютер и как им пользоваться
+                    с пользой и удовольствием!
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="custom-divider">
+
+
+    <!-- Заголовок секции -->
+    <div class="row align-items-center justify-content-center my-5">
+        <h2 class="text-center section-title fw-semibold">
+            АБОНЕМЕНТЫ НА ЗАНЯТИЯ
+        </h2>
+    </div>
+
+    <!-- Карточки абонементов -->
+    <div class="row g-4">
+
+        <div class="col-md-3 col-sm-6">
+            <div class="abonement-card text-center">
+                <h4>1 месяц / 84 BYN</h4>
+                <p class="info-text mb-0">1 занятие в абонементе — 21 BYN</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="abonement-card text-center">
+                <h4>3 месяца / 80 BYN</h4>
+                <p class="info-text mb-0">1 занятие в абонементе — 20 BYN</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="abonement-card text-center">
+                <h4>6 месяцев / 76 BYN</h4>
+                <p class="info-text mb-0">1 занятие в абонементе — 19 BYN</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="abonement-card text-center">
+                <h4>9 месяцев / 72 BYN</h4>
+                <p class="info-text mb-0">1 занятие в абонементе — 18 BYN</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Кнопка записи -->
+    <div class="mt-5 text-center">
+        <button type="button"
+                class="btn-signup"
+                data-bs-toggle="modal"
+                data-bs-target="#signupModal">
+            ЗАПИСАТЬСЯ НА БЕСПЛАТНОЕ ПРОБНОЕ ЗАНЯТИЕ
+        </button>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      {% if success %}
+        var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+        signupModal.show();
+      {% endif %}
+    });
+</script>
+
+{% endblock %}

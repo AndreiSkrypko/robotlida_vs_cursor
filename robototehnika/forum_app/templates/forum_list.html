@@ -1,0 +1,157 @@
+{% extends "main/base.html" %}
+{% load custom_filters %}
+
+{% block content %}
+<style>
+  /* Цвета */
+  :root {
+    --orange: #ff6a00;
+    --teal: #0d9488;
+  }
+
+  .forum-container {
+    max-width: 900px;
+    margin: 2rem auto;
+  }
+
+  h1.forum-title {
+    color: var(--orange);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+  }
+
+  .btn-create-post {
+    background-color: var(--teal);
+    border: none;
+  }
+  .btn-create-post:hover {
+    background-color: #0b746e;
+  }
+
+  .card {
+    border: 2px solid var(--teal);
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-header {
+    background-color: var(--teal);
+    color: white;
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+
+  .card-footer {
+    font-size: 0.85rem;
+    color: #555;
+  }
+
+  .reply {
+    background-color: #f0f8f7;
+    border-left: 4px solid var(--orange);
+    padding: 10px 15px;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+    border-radius: 5px;
+  }
+
+  .reply small {
+    color: #666;
+  }
+
+  .btn-reply {
+    background-color: var(--orange);
+    border: none;
+    font-size: 0.9rem;
+  }
+  .btn-reply:hover {
+    background-color: #e05a00;
+  }
+
+  form.reply-form textarea.form-control {
+    font-size: 0.9rem;
+    resize: vertical;
+  }
+
+  @media (max-width: 576px) {
+    h1.forum-title {
+      font-size: 2rem;
+    }
+
+    .card-header {
+      font-size: 1.1rem;
+    }
+
+    .reply {
+      font-size: 0.85rem;
+      padding: 8px 12px;
+    }
+
+    .btn-create-post, .btn-reply {
+      font-size: 0.85rem;
+      padding: 6px 10px;
+    }
+  }
+</style>
+
+<div class="forum-container">
+    <h1 class="forum-title">Форум</h1>
+
+    <div class="d-flex justify-content-end mb-4">
+        <a href="{% url 'create_post' %}" class="btn btn-create-post">Создать пост</a>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if posts %}
+        {% for post in posts %}
+            <div class="card">
+                <div class="card-header">
+                    {{ post.title }}
+                </div>
+                <div class="card-body">
+                    <p>{{ post.content }}</p>
+                </div>
+                <div class="card-footer">
+                    Автор: {{ post.author.username }} | Дата: {{ post.created_at|date:"d.m.Y H:i" }}
+                </div>
+
+                <div class="card-body">
+                    <h6>Ответы:</h6>
+                    {% if post.replies.all %}
+                        {% for reply in post.replies.all %}
+                            <div class="reply">
+                                <p>{{ reply.content }}</p>
+                                <small>Автор: {{ reply.author.username }} | {{ reply.created_at|date:"d.m.Y H:i" }}</small>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>Ответов пока нет.</p>
+                    {% endif %}
+                </div>
+
+                <div class="card-body">
+                    <form method="post" action="{% url 'create_reply' post.id %}" class="reply-form">
+                        {% csrf_token %}
+                        {{ reply_forms|get_item:post.id }}
+                        <button type="submit" class="btn btn-reply mt-2">Добавить ответ</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info text-center">
+            Постов пока нет. <a href="{% url 'create_post' %}">Создайте первый пост!</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

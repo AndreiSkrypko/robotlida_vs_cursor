@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <!-- =======================
+         DJANGO STATIC & WIDGETS
+    ======================== -->
+    {% load static %}
+    {% load widget_tweaks %}
+    
+    
+    <!-- =======================
+         Подключаю фавикон, это иконка в title
+    ======================== -->
+    <link rel="shortcut icon" href="{% static 'main/img/favicon.svg' %}" type="image/x-icon" />
+    
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <!-- =======================
+         МЕТА-ТЕГИ И НАСТРОЙКИ
+    ======================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="Детский центр робототехники и программирования в г. Лида">
+
+
+    <!-- =======================
+         базовые SEO-теги
+    ======================== -->
+    <meta name="description"
+          content="{% block description %}Кружок робототехники в Лиде для детей и подростков.{% endblock %}">
+    <meta name="keywords" content="робототехника, Лида, кружок, занятия, дети, образование">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    
+    
+
+    <!-- =======================
+         ДИНАМИЧЕСКИЙ ЗАГОЛОВОК
+    ======================== -->
+    <title>{% block title %}{% endblock %}</title>
+
+    
+
+   <!-- =======================
+         Для улучшенного отображения в соцсетях
+    ======================== -->
+    <meta property="og:title" content="Робототехника Лида"/>
+    <meta property="og:description" content="Занятия для детей и подростков в Лиде"/>
+    <meta property="og:image" content="{% static 'main/img/og-image.jpg' %}"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="website"/> 
+
+
+    <!-- =======================
+         МОДАЛЬНОЕ ОКНО РЕГИСТРАЦИИ
+    ======================== -->
+    {% include "main/signup_modal.html" %}
+
+    <!-- =======================
+         ВНЕШНИЕ БИБЛИОТЕКИ
+    ======================== -->
+    <!-- Bootstrap 5.1.3 CSS и JS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome 6.5.0 для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts: Poppins для заголовков -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons 1.10.5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts: Nunito для основного текста -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Пользовательские стили -->
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+
+
+    <!-- =======================
+         ВСТРОЕННЫЕ СТИЛИ CSS
+    ======================== -->
+    <style>
+        /* Запрещаем горизонтальную прокрутку */
+body {
+    overflow-x: hidden;
+}
+
+/* Определение кастомных CSS-переменных для основных цветов */
+:root {
+    --main-green: #0d9488;
+    --main-green-dark: #0f766e;
+    --main-green-darker: #134e4a;
+    --main-orange: #CC5500;
+    --main-orange-light: #e67e22;
+    --main-yellow: #ff9500;
+    --main-white: #ffffff;
+    --main-gray: #f8fafc;
+}
+
+/* Стили для шапки сайта */
+.custom-header {
+    background: linear-gradient(135deg, var(--main-green) 0%, var(--main-green-dark) 50%, var(--main-green-darker) 100%) !important;
+    border-bottom: 3px solid var(--main-orange);
+    box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);
+}
+
+/* Плавный переход для ссылки с логотипом */
+.logo-link {
+    transition: all 0.3s ease;
+}
+/* Эффект увеличения при наведении на логотип */
+.logo-link:hover {
+    transform: scale(1.05);
+}
+
+/* Стили для пользовательских навигационных ссылок */
+.nav-link-custom {
+    position: relative;
+    color: var(--main-white) !important;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: 'Nunito', sans-serif;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 8px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+}
+/* Стили при наведении и фокусе на навигационные ссылки */
+.nav-link-custom:hover,
+.nav-link-custom:focus {
+    color: var(--main-white) !important;
+    background: rgba(204, 85, 0, 0.85);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(204, 85, 0, 0.4);
+}
+/* Активное состояние навигационной ссылки */
+.nav-link-custom.active {
+    background: rgba(204, 85, 0, 0.95);
+    color: var(--main-white) !important;
+    box-shadow: 0 4px 12px rgba(204, 85, 0, 0.5);
+}
+
+/* =======================
+   ВЫПАДАЮЩЕЕ МЕНЮ КУРСОВ
+======================= */
+/* Родитель для выпадающего меню */
+.dropdown-hover {
+    position: relative;
+}
+/* Стили для самого выпадающего меню */
+.dropdown-menu-custom {
+    display: none; /* Скрыто по умолчанию */
+    position: absolute;
+    top: 100%; /* Расположение сразу под родителем */
+    left: 0;
+    background: linear-gradient(135deg, var(--main-white) 0%, var(--main-gray) 100%);
+    border: 2px solid var(--main-green);
+    border-radius: 12px;
+    min-width: 250px;
+    z-index: 1000;
+    padding: 8px 0;
+    box-shadow: 0 8px 25px rgba(13, 148, 136, 0.2);
+    backdrop-filter: blur(10px);
+}
+/* Показ меню при наведении и фокусе */
+.dropdown-hover:hover .dropdown-menu-custom,
+.dropdown-hover:focus-within .dropdown-menu-custom {
+    display: block;
+    animation: fadeInDown 0.3s ease;
+}
+/* Анимация появления меню */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Элементы меню */
+.dropdown-item {
+    padding: 12px 20px;
+    color: var(--main-green);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    border-radius: 8px;
+    margin: 2px 8px;
+    background: transparent;
+}
+/* Эффект при наведении на элемент меню */
+.dropdown-item:hover {
+    background: linear-gradient(135deg, var(--main-green) 0%, var(--main-green-dark) 100%);
+    color: var(--main-white);
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+}
+
+/* Обёртка для блока аутентификации (вход/регистрация) */
+.auth-wrapper {
+    text-align: right;
+    margin-right: 20px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+}
+/* Стили для ссылок аутентификации */
+.auth-link {
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+}
+/* Цвет для ссылок с ошибкой или предупреждением */
+.auth-link.text-danger {
+    color: #ff4d4f !important;
+}
+/* Цвет для ссылок успешных действий */
+.auth-link.text-success {
+    color: #22bb33 !important;
+}
+/* Эффект при наведении на ссылки аутентификации */
+.auth-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    background: rgba(204, 85, 0, 0.15);
+}
+
+/* Кнопка с кастомным градиентом и тенью */
+.custom-btn {
+    background: linear-gradient(135deg, var(--main-orange) 0%, var(--main-orange-light) 100%) !important;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(204, 85, 0, 0.3);
+}
+/* Эффект при наведении на кнопку */
+.custom-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(204, 85, 0, 0.4);
+    background: linear-gradient(135deg, var(--main-orange-light) 0%, var(--main-orange) 100%) !important;
+}
+
+/* Стили для подвала сайта */
+.footer {
+    background: linear-gradient(135deg, var(--main-green) 0%, var(--main-green-dark) 50%, var(--main-green-darker) 100%);
+    border-top: 3px solid var(--main-orange);
+}
+/* Стили для ссылок в подвале */
+.footer-link {
+    color: #e0e0e0 !important;
+    transition: all 0.3s ease;
+}
+/* Эффект при наведении на ссылки в подвале */
+.footer-link:hover {
+    color: var(--main-yellow) !important;
+    transform: translateX(5px);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.footer a:hover {
+    color: var(--main-yellow) !important;
+}
+/* Плавный переход для соцсетей */
+.social-link {
+    transition: all 0.3s ease;
+}
+/* Увеличение и осветление иконок соцсетей при наведении */
+.social-link:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+/* =======================
+   АДАПТИВНОСТЬ (Responsive)
+======================= */
+/* Для экранов меньше 992px */
+@media (max-width: 991.98px) {
+    .custom-header .container-fluid {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .logo-link {
+        margin-left: 0 !important;
+    }
+    .custom-btn {
+        margin-right: 0 !important;
+    }
+}
+/* Для экранов меньше 768px */
+@media (max-width: 768px) {
+    /* Навигационные ссылки становятся блочными и растягиваются */
+    .nav-link-custom {
+        font-size: 1rem;
+        padding: 6px 12px;
+        margin: 0 2px;
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+    /* Аутентификация выравнивается слева и уменьшается шрифт */
+    .auth-wrapper {
+        margin-right: 0;
+        font-size: 14px;
+        text-align: left;
+    }
+    /* Контейнер в шапке становится колонкой */
+    .custom-header .container-fluid {
+        flex-direction: column;
+    }
+    /* Выпадающее меню занимает всю ширину */
+    .dropdown-hover {
+        width: 100%;
+    }
+    /* Выпадающее меню перестраивается под мобильный стиль */
+    .dropdown-menu-custom {
+        position: static;
+        min-width: 100%;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+        padding: 0;
+        display: none;
+    }
+    /* Показываем меню при открытии или фокусе */
+    .dropdown-hover.open .dropdown-menu-custom,
+    .dropdown-hover:focus-within .dropdown-menu-custom {
+        display: block;
+        animation: none;
+    }
+    /* Элементы меню без отступов и закруглений */
+    .dropdown-item {
+        margin: 0;
+        padding: 10px 20px;
+        border-radius: 0;
+        background: transparent;
+    }
+}
+/* Для экранов меньше 576px */
+@media (max-width: 576px) {
+    /* Подвал с отступами по бокам */
+    .footer .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    /* Колонки подвала становятся вертикальными и центрируются */
+    .footer .row {
+        flex-direction: column;
+        align-items: center;
+    }
+    /* Отступы для колонок подвала */
+    .footer .col-12 {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Глобальное правило для html и body — запрещаем горизонтальный скролл и задаём ширину 100% */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+    </style>
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+<!-- =======================
+     ШАПКА САЙТА
+======================== -->
+<header class="fixed-top custom-header bg-white shadow-sm">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <!-- Логотип без паддингов -->
+<div class="col-6 col-md-auto">
+  <a href="/" class="logo-link" id="home-link">
+    <svg width="90%" height="80" viewBox="0 0 350 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Определение градиента -->
+      <defs>
+        <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0d9488"/>
+          <stop offset="100%" stop-color="#CC5500"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Лампочка -->
+      <g transform="translate(20, 20)">
+        <path d="M35 5C25 5 17 13 17 23c0 10 8 18 18 18s18-8 18-18C53 13 45 5 35 5z"
+              fill="none" stroke="url(#logo-gradient)" stroke-width="2"/>
+        <circle cx="35" cy="23" r="8" fill="url(#logo-gradient)"/>
+        <polyline points="35 5 35 12" fill="none" stroke="url(#logo-gradient)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="30" y1="7" x2="40" y2="12" stroke="url(#logo-gradient)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="40" y1="7" x2="30" y2="12" stroke="url(#logo-gradient)" stroke-width="2" stroke-linecap="round"/>
+      </g>
+
+      <!-- Текст -->
+      <text x="70" y="50" font-family="'Poppins', sans-serif" font-size="40" font-weight="700" fill="#ffffff">IT</text>
+      <text x="120" y="50" font-family="'Poppins', sans-serif" font-size="40" font-weight="600" fill="#CC5500">Клуб</text>
+      <text x="70" y="85" font-family="'Poppins', sans-serif" font-size="30" font-weight="600" fill="#ffffff">Юные Инженеры</text>
+
+      <!-- Декоративная полоска -->
+      <line x1="70" y1="88" x2="290" y2="88" stroke="url(#logo-gradient)" stroke-width="2" stroke-dasharray="5 2"/>
+    </svg>
+  </a>
+</div>
+
+
+            <!-- Гамбургер-меню (только на мобильных) с паддингами -->
+            <div class="col-6 d-md-none text-end py-3">
+                <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-list fs-2"></i>
+                </button>
+            </div>
+
+            <!-- Навигация с паддингами -->
+            <div class="col-12 col-md collapse d-md-flex justify-content-center py-3" id="navMenu">
+                <nav class="d-md-flex gap-4 align-items-center mt-3 mt-md-0 text-center text-md-start">
+                    <a href="/about" class="nav-link-custom">О КЛУБЕ</a>
+
+                    <!-- КУРСЫ -->
+                    <div class="dropdown-hover position-relative">
+                        <a href="{% url 'index' %}#courses" class="nav-link-custom dropdown-toggle">НАШИ КУРСЫ</a>
+                        <ul class="dropdown-menu-custom">
+                            <li><a class="dropdown-item" href="/courses_2_4">Для детей 2,5-4 года</a></li>
+                            <li><a class="dropdown-item" href="/courses_4_6">Для детей 4-6 лет</a></li>
+                            <li><a class="dropdown-item" href="/courses_6_7">Для детей 6-7 лет</a></li>
+                            <li><a class="dropdown-item" href="/courses_7_9">Для детей 7-9 лет</a></li>
+                            <li><a class="dropdown-item" href="/courses_9_11">Для детей 9-11 лет</a></li>
+                            <li><a class="dropdown-item" href="/courses_11_13">Для детей 11-13 лет</a></li>
+                            <li><a class="dropdown-item" href="/courses_13_16">Для детей 13-16 лет</a></li>
+                        </ul>
+                    </div>
+
+                    <a href="{% url 'index' %}#contacts" class="nav-link-custom">КОНТАКТЫ</a>
+
+                    {% if user.is_authenticated %}
+                    <a href="/forum_list/" class="nav-link-custom">ФОРУМ</a>
+                    {% else %}
+                    <a href="/login/" class="nav-link-custom">ФОРУМ</a>
+                    {% endif %}
+
+                    <!-- Войти/Выйти и Записаться (только на мобилке) -->
+                    <div class="d-md-none mt-3">
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}" class="auth-link text-danger d-block mb-2">
+                            <i class="fas fa-sign-out-alt me-1"></i> Выйти
+                        </a>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="auth-link text-success d-block mb-2">
+                            <i class="fas fa-sign-in-alt me-1"></i> Войти
+                        </a>
+                        {% endif %}
+                        <button type="button" class="btn custom-btn text-white w-100" data-bs-toggle="modal"
+                                data-bs-target="#signupModal">
+                            <i class="bi bi-pencil-square me-1"></i> Записаться
+                        </button>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Войти / Записаться (только на десктопе) с паддингами -->
+            <div class="col-auto d-none d-md-flex align-items-center py-3">
+                <div class="auth-wrapper me-3">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="auth-link text-danger">
+                        <i class="fas fa-sign-out-alt me-1"></i> Выйти
+                    </a>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="auth-link text-success">
+                        <i class="fas fa-sign-in-alt me-1"></i> Войти
+                    </a>
+                    {% endif %}
+                </div>
+                <button type="button" class="btn custom-btn text-white me-3" data-bs-toggle="modal"
+                        data-bs-target="#signupModal">
+                    <i class="bi bi-pencil-square me-1"></i> Записаться
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!-- =======================
+     ОТСТУП ДЛЯ ФИКСИРОВАННОЙ ШАПКИ
+======================== -->
+<div style="height: 70px;"></div>
+
+<!-- =======================
+     СКРИПТ: АКТИВНАЯ ССЫЛКА В МЕНЮ
+======================== -->
+<script>
+    // Подсвечиваем активную ссылку в меню при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function () {
+        const links = document.querySelectorAll('.nav-link-custom');
+        links.forEach(link => {
+            if (link.href === window.location.href || window.location.href.includes(link.getAttribute("href"))) {
+                link.classList.add('active');
+            }
+        });
+
+        // Мобильное раскрытие dropdown по клику
+        function isMobile() {
+            return window.innerWidth < 992;
+        }
+        const dropdowns = document.querySelectorAll('.dropdown-hover');
+        dropdowns.forEach(function(dropdown) {
+            const trigger = dropdown.querySelector('.nav-link-custom');
+            if (trigger) {
+                trigger.addEventListener('click', function(e) {
+                    if (isMobile()) {
+                        e.preventDefault();
+                        // Закрыть другие открытые
+                        dropdowns.forEach(function(dd) {
+                            if (dd !== dropdown) dd.classList.remove('open');
+                        });
+                        dropdown.classList.toggle('open');
+                    }
+                });
+            }
+        });
+
+        // Закрытие dropdown при клике вне
+        document.addEventListener('click', function(e) {
+            if (isMobile()) {
+                dropdowns.forEach(function(dropdown) {
+                    if (!dropdown.contains(e.target)) {
+                        dropdown.classList.remove('open');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<!-- =======================
+     ОСНОВНОЙ КОНТЕНТ
+======================== -->
+{% block content %}{% endblock %}
+
+<!-- =======================
+     ФУТЕР САЙТА
+======================== -->
+<footer class="footer mt-5 py-5 text-white">
+    <div class="container" id="contacts">
+        <div class="row justify-content-center text-center text-md-start">
+            <!-- ЛОГО И ОПИСАНИЕ -->
+            <div class="col-12 col-md-4 mb-4 mb-md-0 d-flex flex-column align-items-center align-items-md-start">
+                <a href="/" class="text-decoration-none">
+                    <svg width="90%" height="80" viewBox="0 0 350 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Определение градиента -->
+      <defs>
+        <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0d9488"/>
+          <stop offset="100%" stop-color="#CC5500"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Лампочка -->
+      <g transform="translate(20, 20)">
+        <path d="M35 5C25 5 17 13 17 23c0 10 8 18 18 18s18-8 18-18C53 13 45 5 35 5z"
+              fill="none" stroke="url(#logo-gradient)" stroke-width="2"/>
+        <circle cx="35" cy="23" r="8" fill="url(#logo-gradient)"/>
+        <polyline points="35 5 35 12" fill="none" stroke="url(#logo-gradient)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="30" y1="7" x2="40" y2="12" stroke="url(#logo-gradient)" stroke-width="2" stroke-linecap="round"/>
+        <line x1="40" y1="7" x2="30" y2="12" stroke="url(#logo-gradient)" stroke-width="2" stroke-linecap="round"/>
+      </g>
+
+      <!-- Текст -->
+      <text x="70" y="50" font-family="'Poppins', sans-serif" font-size="40" font-weight="700" fill="#ffffff">IT</text>
+      <text x="120" y="50" font-family="'Poppins', sans-serif" font-size="40" font-weight="600" fill="#CC5500">Клуб</text>
+      <text x="70" y="85" font-family="'Poppins', sans-serif" font-size="30" font-weight="600" fill="#ffffff">Юные Инженеры</text>
+
+      <!-- Декоративная полоска -->
+      <line x1="70" y1="88" x2="290" y2="88" stroke="url(#logo-gradient)" stroke-width="2" stroke-dasharray="5 2"/>
+    </svg>
+                </a>
+                <p class="text-white-50 fw-light" style="font-size: 0.95rem;">
+                    Детский центр робототехники и программирования <br> г. Лида
+                </p>
+            </div>
+            <!-- НАВИГАЦИЯ -->
+            <div class="col-12 col-md-4 mb-4 mb-md-0">
+                <h6 class="text-white fw-bold mb-4" style="font-size: 1.1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+                    <i class="bi bi-compass me-2"></i>Навигация
+                </h6>
+                <ul class="list-unstyled d-flex flex-column align-items-center align-items-md-start">
+                    <li class="mb-2">
+                        <a href="/about" class="text-white-50 text-decoration-none fw-light footer-link">
+                            <i class="bi bi-info-circle me-2" style="color: var(--main-orange);"></i>Об IT клубе
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{% url 'index' %}#courses"
+                           class="text-white-50 text-decoration-none fw-light footer-link">
+                            <i class="bi bi-journal-code me-2" style="color: var(--main-orange);"></i>Наши курсы
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/" class="text-white-50 text-decoration-none fw-light footer-link">
+                            <i class="bi bi-laptop me-2" style="color: var(--main-orange);"></i>Курсы онлайн
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/" class="text-white-50 text-decoration-none fw-light footer-link">
+                            <i class="bi bi-lightbulb me-2" style="color: var(--main-orange);"></i>Мастер-классы
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/" class="text-white-50 text-decoration-none fw-light footer-link">
+                            <i class="bi bi-file-earmark-text me-2" style="color: var(--main-orange);"></i>Договор
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{% static 'main/pdf/pravila-bezopasnosti.pdf' %}"
+                           class="text-white-50 text-decoration-none fw-light footer-link" target="_blank">
+                            <i class="bi bi-shield-lock me-2" style="color: var(--main-orange);"></i>Правила
+                            безопасности
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/" class="text-white-50 text-decoration-none fw-light footer-link">
+                            <i class="bi bi-lock me-2" style="color: var(--main-orange);"></i>Политика
+                            конфиденциальности
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- КОНТАКТЫ И СОЦСЕТИ -->
+            <div class="col-12 col-md-4 d-flex flex-column align-items-center align-items-md-start">
+                <h6 class="text-white fw-bold mb-4" style="font-size: 1.1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+                    <i class="bi bi-envelope me-2"></i>Контакты
+                </h6>
+                <p class="text-white-50 fw-light mb-3" style="font-size: 0.9rem;">&copy; 2025 Робототехника. Все права
+                    защищены.</p>
+                <div class="contact-info mb-4">
+                    <p class="text-white-50 fw-light mb-2" style="font-size: 0.9rem;">
+                        <i class="bi bi-envelope me-2" style="color: var(--main-orange);"></i>
+                        <a href="mailto:skrip8078@gmail.com" class="text-decoration-none text-white-50">robotlidasite@gmail.com</a>
+                    </p>
+                    <p class="text-white-50 fw-light mb-2" style="font-size: 0.9rem;">
+                        <i class="bi bi-telephone me-2" style="color: var(--main-orange);"></i>
+                        <a href="tel:+375291210908" class="text-decoration-none text-white-50">+375 (29) 121-09-08</a>
+                    </p>
+                    <p class="text-white-50 fw-light mb-3" style="font-size: 0.9rem;">
+                        <i class="bi bi-geo-alt me-2" style="color: var(--main-orange);"></i>Беларусь, г. Лида, ул.
+                        Замковая, д. 4
+                    </p>
+                </div>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/robotlida/" target="_blank"
+                       class="text-decoration-none me-3 social-link" title="Instagram">
+                        <i class="bi bi-instagram"
+                           style="font-size: 32px; color: var(--main-orange); text-shadow: 0 2px 4px rgba(0,0,0,0.3);"></i>
+                    </a>
+                    <a href="tg://msg?to=%2B375291210908" class="text-decoration-none social-link" title="Telegram">
+                        <i class="bi bi-telegram"
+                           style="font-size: 32px; color: var(--main-orange); text-shadow: 0 2px 4px rgba(0,0,0,0.3);"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- =======================
+     СКРИПТ: АКТИВНОЕ СОСТОЯНИЕ МЕНЮ
+======================== -->
+<script>
+    // Управление активным состоянием навигационных ссылок при клике
+    document.addEventListener('DOMContentLoaded', function () {
+        const navLinks = document.querySelectorAll('.nav-link-custom');
+        const homeLink = document.getElementById('home-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        if (homeLink) {
+            homeLink.addEventListener('click', function () {
+                navLinks.forEach(l => l.classList.remove('active'));
+            });
+        }
+    });
+</script>
+</body>
+</html>

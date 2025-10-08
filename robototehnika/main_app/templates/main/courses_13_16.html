@@ -1,0 +1,254 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Курсы для 13-16 лет{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'main/css/courses.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container text-center my-5">
+
+
+    <div class="row align-items-center justify-content-center" style="margin-top: 30px; margin-bottom: 20px;">
+        <h2 class="text-center section-title"
+            style="font-weight: 600; font-size: 2.2rem; width: 100%; max-width: 900px; margin: 0 auto;">
+            КУРСЫ ДЛЯ ДЕТЕЙ 13-16 ЛЕТ
+        </h2>
+    </div>
+    <div class="row align-items-center justify-content-center" style="margin-top: 20px; margin-bottom: 40px;">
+        <p style="text-align: justify; font-size: 1.2rem; font-weight: 350; max-width: 1200px; width: 100%; margin: 0 auto; line-height: 1.5;">
+            Курсы для подростков 13–16 лет — это старт для серьёзного погружения в мир технологий.
+            На занятиях ребята осваивают робототехнику, программирование и 3D-моделирование, учатся самостоятельно
+            ставить цели, планировать работу и находить нестандартные решения.
+
+            Мы развиваем инженерное мышление, креативность, усидчивость и командное взаимодействие.
+            Каждое задание — это практический вызов, приближённый к реальным задачам из мира науки и современных
+            технологий.
+
+            Под руководством опытных наставников подростки не просто изучают теорию, а реализуют собственные проекты —
+            от идеи до результата.
+            Это обучение, которое вдохновляет, мотивирует и готовит к будущему в высокотехнологичном мире.
+
+
+        </p>
+    </div>
+
+
+    <div class="row justify-content-center g-4">
+        <div class="col-md-2 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-person-fill info-icon"></i>
+                <p class="info-text">Возраст:<br><span style="color:#17a2b8; font-weight:600;">от 13 до 16</span>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-clock-fill info-icon"></i>
+                <p class="info-text">Длительность:<br><span style="color:#17a2b8; font-weight:600;">75 минут</span>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-calendar2-check-fill info-icon"></i>
+                <p class="info-text">Абонемент на месяц:<br><span style="color:#17a2b8; font-weight:600;">75 рублей</span>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-cash-stack info-icon"></i>
+                <p class="info-text">Пробное занятие:<br><span style="color:#17a2b8; font-weight:600;">бесплатно</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Блок для 13-16 лет (продвинутый уровень) -->
+    <div class="row justify-content-center my-5">
+
+        <!-- Карточка для продвинутого курса EV3 -->
+        <div class="col-12 col-md-6">
+
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/EV.jpg' %}" alt="EV3-pro Pro"
+                     class="img-fluid course-image">
+                <h4>
+                    "Робототехника EV3 Mindstorms"
+                    <span>продвинутый уровень</span>
+                </h4>
+                <p>
+                    Интерактивный курс по робототехнике на базе LEGO EV3 Mindstorms для продвинутого уровня.
+                    Учащиеся углубляются в основы механики, электроники и логики управления сложными устройствами.
+                    Они осваивают продвинутые принципы программирования, включая использование циклов, условий и
+                    обработки данных с датчиков.
+                    Курс направлен на развитие инженерного мышления, системного подхода и способности находить
+                    эффективные технические решения.
+                    Задания предполагают конструирование автономных роботов и выполнение многоэтапных задач в команде.
+                    Преподаватели создают среду, в которой дети учатся решать реальные инженерные вызовы с увлечением и
+                    уверенностью.
+                </p>
+            </div>
+        </div>
+
+        <!-- Карточка для базового Python -->
+        <div class="col-12 col-md-6">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/ardui.jpeg' %}" alt="Python база"
+                     class="img-fluid course-image">
+                <h4>
+                    "Программирование в Python"
+                    <span>начальный уровень</span>
+                </h4>
+                <p>
+                    Базовый курс по программированию на языке Python, разработанный специально для подростков.
+                    Участники знакомятся с основами синтаксиса, переменными, циклами, условиями и функциями — всё через
+                    практику.
+                    Курс помогает развить логическое и структурное мышление, учит формулировать задачи и находить
+                    эффективные решения.
+                    Ребята создают собственные мини-проекты и получают первые навыки написания настоящего кода.
+                    Уверенное владение основами Python открывает путь к более сложным IT-направлениям и проектной
+                    работе.
+                    Занятия проходят в дружелюбной и поддерживающей среде, где каждый ребёнок чувствует прогресс и
+                    интерес к обучению.
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center my-5">
+
+
+        <!-- Карточка для для продвинутого курса по веб разработке -->
+        <div class="col-12 col-md-6 mt-4">
+
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/roblo.jpg' %}" alt="Разработка веб приложений"
+                     class="img-fluid course-image">
+                <h4>
+                    "Разработка веб приложений"
+                    <span>продвинутый уровень</span>
+                </h4>
+                <p>
+                    Продвинутый курс по веб-разработке для подростков, желающих углубиться в мир современных
+                    веб-технологий.
+                    Мы изучим не только HTML и CSS, но также освоим Python-фреймворки Django и Flask для создания
+                    серверной логики.
+                    Участники научатся работать с шаблонами, маршрутами, базами данных и формами — всё на реальных
+                    примерах.
+                    Курс развивает уверенное владение стеком технологий, понимание архитектуры веб-приложений и
+                    навыки
+                    командной работы.
+                    Финальным проектом станет создание собственного полнофункционального веб-приложения — от идеи до
+                    рабочего прототипа.
+                    Это обучение готовит к следующему шагу в программировании и даёт фундамент для будущей
+                    IT-карьеры.
+                </p>
+            </div>
+        </div>
+
+        <!-- Карточка для для продвинутого курса по blender -->
+        <div class="col-12 col-md-6 mt-4">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/blenr.jpg' %}" alt="3д моделирование blender"
+                     class="img-fluid course-image">
+                <h4>
+                    "3D моделирование в Blender"
+                    <span>продвинутый уровень</span>
+                </h4>
+                <p>
+                    Продвинутый курс по Blender — это следующий шаг для подростков, желающих углубиться в
+                    профессиональное 3D-моделирование и анимацию.
+                    Участники изучат продвинутые техники работы с геометрией, модификаторами и узловыми системами, а
+                    также научатся создавать сложные сцены с реалистичными материалами и освещением.
+                    Особое внимание уделяется анимации, ключевым кадрам, риггингу персонажей и эффектам, что
+                    позволяет
+                    оживить модели и превратить их в полноценные сцены.
+                    Практические задания включают моделирование объектов, создание анимаций и визуальных эффектов
+                    для
+                    финального проекта.
+                    Курс формирует уверенные навыки работы в Blender, развивает креативность, внимание к деталям и
+                    логическое мышление.
+                    В результате ученики создадут собственный 3D-проект — от модели до рендера — и получат опыт,
+                    близкий
+                    к работе настоящего 3D-дизайнера.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<hr class="custom-divider">
+<!-- Заголовок секции -->
+<div class="row align-items-center justify-content-center my-5">
+    <h2 class="text-center section-title fw-semibold">
+        АБОНЕМЕНТЫ НА ЗАНЯТИЯ
+    </h2>
+</div>
+
+<!-- Карточки абонементов -->
+<div class="row g-4">
+
+    <div class="col-md-3 col-sm-6">
+        <div class="border rounded-4 p-4 h-100 shadow-sm text-center" style="border: 2px solid #17a2b8;">
+            <h4 class="fw-bold mb-2">1 месяц / 84 BYN</h4>
+            <p class="info-text mb-0">1 занятие в абонементе — 21 BYN</p>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <div class="border rounded-4 p-4 h-100 shadow-sm text-center" style="border: 2px solid #17a2b8;">
+            <h4 class="fw-bold mb-2">3 месяца / 80 BYN</h4>
+            <p class="info-text mb-0">1 занятие в абонементе — 20 BYN</p>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <div class="border rounded-4 p-4 h-100 shadow-sm text-center" style="border: 2px solid #17a2b8;">
+            <h4 class="fw-bold mb-2">6 месяцев / 76 BYN</h4>
+            <p class="info-text mb-0">1 занятие в абонементе — 19 BYN</p>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+        <div class="border rounded-4 p-4 h-100 shadow-sm text-center" style="border: 2px solid #17a2b8;">
+            <h4 class="fw-bold mb-2">9 месяцев / 72 BYN</h4>
+            <p class="info-text mb-0">1 занятие в абонементе — 18 BYN</p>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Кнопка записи -->
+<div class="mt-5 text-center">
+    <button type="button"
+            class="btn-signup"
+            data-bs-toggle="modal"
+            data-bs-target="#signupModal">
+        ЗАПИСАТЬСЯ НА БЕСПЛАТНОЕ ПРОБНОЕ ЗАНЯТИЕ
+    </button>
+</div>
+
+<!-- Скрипт JS для перезагрузки страницы при успешной записи с перезаписанным success -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      {% if success %}
+        var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+        signupModal.show();
+      {% endif %}
+    });
+</script>
+
+{% endblock %}

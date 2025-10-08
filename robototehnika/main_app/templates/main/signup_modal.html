@@ -1,0 +1,133 @@
+<!-- Бирюзово-оранжевое модальное окно для записи на пробное занятие -->
+<style>
+    /* Бирюзово-оранжевый градиент для заголовка */
+    .modal-header.bg-turquoise-orange {
+        background: linear-gradient(90deg, #17a2b8 0%, #CC5500 100%);
+        color: #fff;
+        border-top-left-radius: 1.5rem !important;
+        border-top-right-radius: 1.5rem !important;
+        border-bottom: none;
+        box-shadow: 0 2px 8px rgba(23,162,184,0.08);
+    }
+    .modal-content.turquoise-orange-style {
+        border-radius: 1.5rem;
+        border: 2px solid #17a2b8;
+        background: #f8fafc;
+        box-shadow: 0 8px 32px 0 rgba(23,162,184,0.10), 0 1.5px 0 #CC5500 inset;
+    }
+    .modal-title.turquoise-orange-title {
+        font-family: 'Poppins', 'Nunito', sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        color: #fff;
+        text-shadow: 0 2px 8px rgba(204,85,0,0.10);
+    }
+    .modal-body .form-control,
+    .modal-body select,
+    .modal-body textarea {
+        border: 2px solid #e9ecef;
+        border-radius: 0.75rem;
+        transition: border-color 0.2s;
+        font-size: 1.05rem;
+    }
+    .modal-body .form-control:focus,
+    .modal-body select:focus,
+    .modal-body textarea:focus {
+        border-color: #17a2b8;
+        box-shadow: 0 0 0 0.15rem rgba(23,162,184,0.15);
+    }
+    .modal-body label {
+        color: #0d9488;
+        font-weight: 600;
+    }
+    .btn-turquoise-orange {
+        background: linear-gradient(90deg, #17a2b8 0%, #CC5500 100%);
+        color: #fff !important;
+        font-weight: 700;
+        border: none;
+        border-radius: 2rem;
+        box-shadow: 0 2px 8px rgba(23,162,184,0.10);
+        transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn-turquoise-orange:hover, .btn-turquoise-orange:focus {
+        background: linear-gradient(90deg, #CC5500 0%, #17a2b8 100%);
+        color: #fff !important;
+        box-shadow: 0 4px 16px rgba(204,85,0,0.12);
+    }
+    .modal-body .alert-success {
+        background: linear-gradient(90deg, #17a2b8 0%, #CC5500 100%);
+        color: #fff;
+        border: none;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(23,162,184,0.10);
+    }
+    .modal-body a.text-turquoise-orange {
+        color: #17a2b8;
+        text-decoration: underline;
+        transition: color 0.2s;
+    }
+    .modal-body a.text-turquoise-orange:hover {
+        color: #CC5500;
+    }
+</style>
+
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content turquoise-orange-style">
+
+            <!-- Заголовок модального окна -->
+            <div class="modal-header bg-turquoise-orange">
+                <h5 class="modal-title turquoise-orange-title" id="signupModalLabel">
+                    {% if success %} 
+                        <i class="bi bi-check-circle-fill me-2" style="color: #fff;"></i>Вы записаны! 
+                    {% else %} 
+                        <i class="bi bi-pencil-square me-2" style="color: #fff;"></i>Запись на пробное занятие 
+                    {% endif %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Закрыть"></button>
+            </div>
+
+            <!-- Тело модального окна -->
+            <div class="modal-body p-4">
+                {% if success %}
+                <div class="alert alert-success text-center fs-5 rounded-3 py-3 mb-0">
+                    Спасибо за обращение!<br>
+                    Мы с вами свяжемся в ближайшее время.
+                </div>
+                {% else %}
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+
+                    <div class="mb-3">
+                        {{ form.name }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.phone }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.course }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.comment }}
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-turquoise-orange w-100 py-3 fw-semibold rounded-pill">
+                        ОСТАВИТЬ ЗАЯВКУ
+                    </button>
+
+                    <p class="text-muted text-center mt-3 mb-0" style="font-size: 0.9rem;">
+                        Нажимая на кнопку, вы соглашаетесь с
+                        <a href="{% url 'about_cookies' %}" target="_blank" class="text-turquoise-orange">
+                            условиями соглашения*
+                        </a>
+                    </p>
+                </form>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>

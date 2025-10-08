@@ -1,0 +1,135 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Курсы для 2-4 лет{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'main/css/courses.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container my-5">
+
+    <div class="row align-items-center justify-content-center" style="margin-top: 30px; margin-bottom: 20px;">
+        <h2 class="text-center section-title"
+            style="font-weight: 600; font-size: 2.2rem; width: 100%; max-width: 900px; margin: 0 auto;">
+            КУРСЫ ДЛЯ ДЕТЕЙ 2,5-4 ГОДА
+        </h2>
+    </div>
+    <div class="row align-items-center justify-content-center" style="margin-top: 20px; margin-bottom: 40px;">
+        <p style="text-align: justify; font-size: 1.2rem; font-weight: 350; max-width: 1200px; width: 100%; margin: 0 auto; line-height: 1.5;">
+            Курсы для детей от 2,5 до 4 лет — это лёгкий старт в мир общения, знаний и открытий.
+            В тёплой, дружелюбной атмосфере малыши играют, учатся взаимодействовать друг с другом и с радостью познают
+            окружающий мир.
+            Через простые задания, яркие материалы и творчество дети развивают речь, внимание, мышление, воображение и
+            моторику.
+            Занятия проходят в игровой форме, чтобы обучение было лёгким, естественным и радостным.
+            Мы помогаем ребёнку раскрыться, почувствовать уверенность и полюбить учиться с самого начала.
+        </p>
+    </div>
+
+    <div class="row justify-content-center g-4">
+        <div class="col-md-2 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-person-fill info-icon"></i>
+                <p class="info-text">Возраст:<br><span style="color:#17a2b8; font-weight:600;">от 2,5 до 4</span></p>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-clock-fill info-icon"></i>
+                <p class="info-text">Длительность:<br><span style="color:#17a2b8; font-weight:600;">60 минут</span></p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-calendar2-check-fill info-icon"></i>
+                <p class="info-text">Абонемент на месяц:<br><span
+                        style="color:#17a2b8; font-weight:600;">48 рублей</span></p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-cash-stack info-icon"></i>
+                <p class="info-text">Пробное занятие:<br><span style="color:#17a2b8; font-weight:600;">бесплатно</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Презентация и описание курсов для возраста 2,5–4 года -->
+    <div class="row justify-content-center my-5">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="course-card">
+                <img src="{% static 'main/img/courses/lego_razv.jpeg' %}" alt="Лего-развивайка"
+                     class="img-fluid course-image">
+                <h4 class="fw-bold text-turquoise mb-3" style="text-align: center;">«Лего-развивайка»</h4>
+                <p style="text-align: justify; margin-bottom: 0; font-size: 1.08rem;">
+                    Весёлая и полезная программа раннего развития с LEGO® DUPLO, которая помогает малышам раскрыть
+                    потенциал. Через игру и простое моделирование развиваются речь, воображение, мышление и мелкая
+                    моторика. Занятия в мини-группах проходят в уютной атмосфере с творческими сюжетами, что делает
+                    обучение интересным и эффективным. Такой подход идеально подходит для первых важных шагов ребёнка в
+                    обучении и социализации.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <hr class="custom-divider">
+
+    <div class="row align-items-center justify-content-center my-5">
+        <h2 class="text-center section-title fw-semibold">
+            АБОНЕМЕНТЫ НА ЗАНЯТИЯ
+        </h2>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-3 col-sm-6">
+            <div class="abonement-card text-center h-100">
+                <h4>1 месяц / 60 BYN</h4>
+                <p class="info-text mb-0">1 занятие в абонементе — 15 BYN</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="abonement-card text-center h-100">
+                <h4>3 месяца / 56 BYN</h4>
+                <p class="info-text mb-0">1 занятие в абонементе — 14 BYN</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="abonement-card text-center h-100">
+                <h4>6 месяцев / 52 BYN</h4>
+                <p class="info-text mb-0">1 занятие в абонементе — 13 BYN</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="abonement-card text-center h-100">
+                <h4>9 месяцев / 48 BYN</h4>
+                <p class="info-text mb-0">1 занятие в абонементе — 12 BYN</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 text-center">
+        <button type="button"
+                class="btn-signup"
+                data-bs-toggle="modal"
+                data-bs-target="#signupModal">
+            ЗАПИСАТЬСЯ НА БЕСПЛАТНОЕ ПРОБНОЕ ЗАНЯТИЕ
+        </button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      {% if success %}
+        var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+        signupModal.show();
+      {% endif %}
+    });
+</script>
+
+{% endblock %}

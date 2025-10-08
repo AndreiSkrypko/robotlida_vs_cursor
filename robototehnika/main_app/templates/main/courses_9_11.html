@@ -1,0 +1,252 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Курсы для 9-11 лет{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'main/css/courses.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container text-center my-5">
+
+
+    <div class="row align-items-center justify-content-center" style="margin-top: 30px; margin-bottom: 20px;">
+        <h2 class="text-center section-title"
+            style="font-weight: 600; font-size: 2.2rem; width: 100%; max-width: 900px; margin: 0 auto;">
+            КУРСЫ ДЛЯ ДЕТЕЙ 9-11 ЛЕТ
+        </h2>
+    </div>
+    <div class="row align-items-center justify-content-center" style="margin-top: 20px; margin-bottom: 40px;">
+        <p style="text-align: justify; font-size: 1.2rem; font-weight: 350; max-width: 1200px; width: 100%; margin: 0 auto; line-height: 1.5;">
+            Курсы для детей от 9 до 11 лет — это важный этап для развития самостоятельности и глубокого понимания.
+            В атмосфере поддержки и вдохновения ребята развивают критическое мышление, концентрацию и навыки
+            планирования.
+            Мы предлагаем сложные и интересные задачи, которые требуют творческого подхода и системного анализа.
+            Занятия помогают укрепить уверенность в своих силах, учат аргументировать мысли и эффективно работать в
+            команде.
+            Наши преподаватели создают комфортную среду, где каждый ребёнок раскрывает свой потенциал и стремится к
+            новым знаниям.
+        </p>
+    </div>
+
+
+    <div class="row justify-content-center g-4">
+        <div class="col-md-2 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-person-fill info-icon"></i>
+                <p class="info-text">Возраст:<br><span style="color:#17a2b8; font-weight:600;">от 9 до 11</span>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-clock-fill info-icon"></i>
+                <p class="info-text">Длительность:<br><span style="color:#17a2b8; font-weight:600;">75 минут</span>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-calendar2-check-fill info-icon"></i>
+                <p class="info-text">Абонемент на месяц:<br><span style="color:#17a2b8; font-weight:600;">75 рублей</span>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card">
+                <i class="bi bi-cash-stack info-icon"></i>
+                <p class="info-text">Пробное занятие:<br><span style="color:#17a2b8; font-weight:600;">бесплатно</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Блок для 7-9 лет (продвинутый уровень) -->
+    <div class="row justify-content-center my-5">
+
+        <div class="col-12 col-md-6">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/EV3.jpg' %}" alt="Minecraft Pro"
+                     class="img-fluid course-image">
+                <h4>
+                    "Робототехника EV3 Mindstorms"
+                    <span>начальный уровень</span>
+                </h4>
+                <p>
+                    Интерактивный курс по созданию и программированию роботов на базе платформы LEGO EV3 Mindstorms.
+                    Дети познакомятся с основами механики, электроники и программирования роботов, научатся
+                    проектировать
+                    и управлять роботизированными системами. Курс развивает логическое мышление, навыки программирования
+                    на визуальном языке и решение технических задач в игровой и практической форме.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-md-6">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/arduino.jpeg' %}" alt="Электроника продвинутый"
+                     class="img-fluid course-image">
+                <h4>
+                    "Электроника Arduino"
+                    <span>продвинутый+ уровень</span>
+                </h4>
+                <p>
+                    Углубленное изучение электроники и программирования на платформе Arduino. Участники учатся создавать
+                    сложные электронные схемы, программировать микроконтроллеры и управлять различными устройствами и
+                    датчиками.
+                    Курс развивает инженерное мышление, навыки проектирования и программирования, а также творческий
+                    подход к решению задач.
+                    Практические проекты помогают применять теорию на практике и готовят к реальным инженерным вызовам.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-md-6 mt-4">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/roblox2.jpg' %}" alt="Шахматный клуб продвинутый"
+                     class="img-fluid course-image">
+                <h4>
+                    "Программирование в Roblox"
+                    <span>продвинутый уровень</span>
+                </h4>
+                <p>
+                    Интересный курс для детей 9-11 лет, где ребята учатся создавать свои мини-игры в Roblox Studio с
+                    использованием
+                    более сложных инструментов и сценариев. Осваивают продвинутые принципы программирования: условия,
+                    циклы, переменные и события.
+                    Курс помогает развить логику, творческое мышление и уверенность в работе с кодом, готовя детей к
+                    новым игровым проектам и вызовам.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-md-6 mt-4">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/blender.jpg' %}" alt="Шахматный интеллектуальный клуб"
+                     class="img-fluid course-image">
+                <h4>
+                    "3D моделирование в Blender"
+                    <span>начальный уровень</span>
+                </h4>
+                <p>
+                    Этот курс познакомит детей с базовыми инструментами Blender и основами 3D моделирования. Ребята
+                    научатся создавать объёмные объекты, работать с цветом и текстурами, развивая при этом
+                    пространственное мышление. Практические задания стимулируют творческий подход и помогают воплотить
+                    собственные идеи в трехмерном формате. Курс развивает внимание к деталям и аккуратность в работе с
+                    цифровыми моделями. Отличная основа для дальнейшего изучения дизайна и анимации.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-md-6 mt-4">
+            <div class="course-card course-wrapper">
+                <img src="{% static 'main/img/courses/tinkerc.jpg' %}" alt="компьютерная грамотность"
+                     class="img-fluid course-image">
+                <h4>
+                    "Компьютерная грамотность"
+                    <span>продвинутый уровень+</span>
+                </h4>
+                <p>
+                    Курс «Продвинутая компьютерная грамотность + Искусственный интеллект » создан для детей, которые уже
+                    уверенно владеют базовыми навыками работы на компьютере и хотят выйти на новый уровень.
+                    Ребята погрузятся в мир современных технологий, узнают, как устроены искусственный интеллект и
+                    машинное обучение, и научатся применять эти знания на практике в игровой и понятной форме.
+                    Мы будем работать с графическими и текстовыми редакторами, создавать мультимедийные презентации,
+                    освоим облачные сервисы для хранения данных и совместной работы.
+                    Дети научатся не просто использовать программы, но и понимать логику их работы, а также
+                    взаимодействовать с простыми ИИ-инструментами, такими как чат-боты, системы распознавания
+                    изображений и голосовых команд.
+                    Особое внимание уделяется цифровой культуре: безопасному поведению в интернете, этикету
+                    онлайн-общения, защите личных данных и критическому мышлению при работе с информацией.
+                    Занятия проходят в формате мини-проектов, где каждый ребёнок может попробовать себя в роли
+                    программиста, исследователя или дизайнера.
+                    Каждое занятие — это шаг к пониманию того, как технологии влияют на нашу жизнь и как ими можно
+                    управлять.
+                    По окончании курса дети не только уверенно чувствуют себя за компьютером, но и имеют первые навыки
+                    работы с ИИ-инструментами, умеют анализировать информацию и применять технологии в учёбе и
+                    творчестве.
+
+
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <hr class="custom-divider">
+
+    <!-- Заголовок секции -->
+    <div class="row align-items-center justify-content-center my-5">
+        <h2 class="text-center section-title fw-semibold">
+            АБОНЕМЕНТЫ НА ЗАНЯТИЯ
+        </h2>
+    </div>
+
+    <!-- Карточки абонементов -->
+    <div class="row g-4">
+
+        <div class="col-md-3 col-sm-6">
+            <div class="border rounded-4 p-4 h-100 shadow-sm text-center" style="border: 2px solid #17a2b8;">
+                <h4 class="fw-bold mb-2">1 месяц / 84 BYN</h4>
+                <p class="info-text mb-0">1 занятие в абонементе — 21 BYN</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="border rounded-4 p-4 h-100 shadow-sm text-center" style="border: 2px solid #17a2b8;">
+                <h4 class="fw-bold mb-2">3 месяца / 80 BYN</h4>
+                <p class="info-text mb-0">1 занятие в абонементе — 20 BYN</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="border rounded-4 p-4 h-100 shadow-sm text-center" style="border: 2px solid #17a2b8;">
+                <h4 class="fw-bold mb-2">6 месяцев / 76 BYN</h4>
+                <p class="info-text mb-0">1 занятие в абонементе — 19 BYN</p>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+            <div class="border rounded-4 p-4 h-100 shadow-sm text-center" style="border: 2px solid #17a2b8;">
+                <h4 class="fw-bold mb-2">9 месяцев / 72 BYN</h4>
+                <p class="info-text mb-0">1 занятие в абонементе — 18 BYN</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Кнопка записи -->
+    <div class="mt-5 text-center">
+        <button type="button"
+                class="btn-signup"
+                data-bs-toggle="modal"
+                data-bs-target="#signupModal">
+            ЗАПИСАТЬСЯ НА БЕСПЛАТНОЕ ПРОБНОЕ ЗАНЯТИЕ
+        </button>
+    </div>
+
+</div>
+
+<!-- Скрипт JS для перезагрузки страницы при успешной записи с перезаписанным success -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      {% if success %}
+        var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+        signupModal.show();
+      {% endif %}
+    });
+</script>
+
+{% endblock %}
