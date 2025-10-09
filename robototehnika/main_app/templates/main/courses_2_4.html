@@ -74,7 +74,7 @@
     /* === HERO СЕКЦИЯ === */
     .hero-section {
         background: linear-gradient(135deg, #f8fafc 0%, #e9ecef 50%, #ffffff 100%);
-        padding: 60px 0;
+        padding: 40px 0 50px;
         margin-top: -20px;
         position: relative;
         overflow: hidden;
@@ -99,24 +99,40 @@
     }
 
     .section-title {
-        color: #0d9488;
         font-size: 2.5rem;
-        font-weight: 800;
+        font-weight: 900;
         font-family: 'Poppins', sans-serif;
-        letter-spacing: 0.5px;
-        text-shadow: 0 4px 12px rgba(13, 148, 136, 0.15);
+        letter-spacing: 1.5px;
         opacity: 1;
         position: relative;
         display: inline-block;
         transition: transform 0.05s ease-out;
+        background: linear-gradient(135deg, #0d9488 0%, #17a2b8 25%, #14b8a6 50%, #CC5500 75%, #ff9500 100%);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 4px 12px rgba(13, 148, 136, 0.4)) drop-shadow(0 2px 6px rgba(204, 85, 0, 0.3));
+        text-transform: uppercase;
+        animation: gradientShift 3s ease-in-out infinite;
     }
 
-    /* Мигающий курсор */
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    /* Мигающий курсор с градиентом */
     .section-title::after {
         content: '|';
-        color: #CC5500;
+        background: linear-gradient(180deg, #CC5500, #ff9500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         animation: blink 0.7s infinite;
-        margin-left: 5px;
+        margin-left: 8px;
+        font-weight: 900;
+        filter: drop-shadow(0 0 8px rgba(204, 85, 0, 0.6));
     }
 
     .section-title.typing-complete::after {
@@ -124,41 +140,64 @@
     }
 
     @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0; }
-    }
-
-    .title-underline {
-        width: 0;
-        height: 5px;
-        background: linear-gradient(90deg, #0d9488, #CC5500, #ff9500);
-        margin: 1.5rem auto 3rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(204, 85, 0, 0.3);
-        opacity: 0;
-        transition: all 0.4s ease-out;
-    }
-
-    @keyframes expandLine {
-        from {
-            opacity: 0;
-            width: 0;
-        }
-        to {
+        0%, 100% { 
             opacity: 1;
-            width: 140px;
+            filter: drop-shadow(0 0 8px rgba(204, 85, 0, 0.8));
+        }
+        50% { 
+            opacity: 0;
+            filter: drop-shadow(0 0 0px rgba(204, 85, 0, 0));
         }
     }
+
 
     .description-text {
-        text-align: justify;
-        font-size: 1.15rem;
-        line-height: 1.8;
-        color: #475569;
-        max-width: 1200px;
+        text-align: center;
+        font-size: 1.25rem;
+        line-height: 1.9;
+        color: #334155;
+        max-width: 950px;
         margin: 0 auto;
         opacity: 0;
         animation: fadeInUp 1s ease-out 0.4s forwards;
+        font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+        letter-spacing: 0.4px;
+        padding: 0 2rem;
+        font-weight: 500;
+    }
+    
+    .description-text p {
+        margin-bottom: 1.8rem;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .description-text p:nth-child(1) {
+        animation-delay: 0.5s;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #1e293b;
+        line-height: 1.7;
+    }
+    
+    .description-text p:nth-child(2) {
+        animation-delay: 0.7s;
+    }
+    
+    .description-text p:nth-child(3) {
+        animation-delay: 0.9s;
+        margin-bottom: 0;
+    }
+    
+    .description-text .highlight {
+        color: #0d9488;
+        font-weight: 700;
+    }
+    
+    .description-text .highlight-orange {
+        color: #CC5500;
+        font-weight: 800;
+        font-size: 1.15em;
     }
 
     /* === INFO КАРТОЧКИ === */
@@ -239,10 +278,11 @@
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         opacity: 0;
         animation: fadeInScale 1s ease-out 1s forwards;
+        margin-bottom: 3rem;
     }
 
     .course-card:hover {
-        transform: translateY(-12px);
+        transform: translateY(-12px) scale(1.02);
         box-shadow: 0 24px 60px rgba(13, 148, 136, 0.25);
     }
 
@@ -254,13 +294,49 @@
     }
 
     .course-image:hover {
-        transform: scale(1.05);
+        transform: scale(1.05) rotate(1deg);
     }
 
     .text-turquoise {
         color: #0d9488 !important;
         font-size: 1.8rem;
         font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Отключаем прозрачность заголовка при hover из courses.css */
+    .course-card:hover h4 {
+        -webkit-text-fill-color: inherit !important;
+        background: none !important;
+        background-clip: unset !important;
+        -webkit-background-clip: unset !important;
+    }
+
+    /* === СТИЛЬ ДЛЯ БЕЙДЖА УРОВНЯ === */
+    .course-card h4 span {
+        display: inline-block !important;
+        font-size: 0.9rem !important;
+        color: white !important;
+        font-weight: 700 !important;
+        margin-top: 1rem !important;
+        background: linear-gradient(135deg, #CC5500, #ff9500) !important;
+        padding: 8px 20px !important;
+        border-radius: 50px !important;
+        box-shadow: 0 4px 16px rgba(204, 85, 0, 0.3) !important;
+        letter-spacing: 0.8px !important;
+        text-transform: uppercase !important;
+        position: relative;
+        overflow: hidden;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    /* Гарантируем видимость при любых состояниях */
+    .course-card:hover h4 span,
+    .course-card h4 span:hover {
+        display: inline-block !important;
+        color: white !important;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 
     /* === ABONEMENT CARDS === */
@@ -384,18 +460,23 @@
     @media (max-width: 767.98px) {
         .section-title {
             font-size: 1.5rem !important;
+            letter-spacing: 1px !important;
+            filter: drop-shadow(0 3px 8px rgba(13, 148, 136, 0.4)) drop-shadow(0 1px 4px rgba(204, 85, 0, 0.3)) !important;
         }
         
         .section-title::after {
             font-size: 1.5rem;
-        }
-        
-        .title-underline {
-            width: 100px !important;
+            margin-left: 5px;
         }
         
         .description-text {
-            font-size: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            padding: 0 1.5rem;
+        }
+        
+        .description-text p:nth-child(1) {
+            font-size: 1.2rem;
         }
         
         .info-card {
@@ -419,10 +500,13 @@
     @media (max-width: 575.98px) {
         .section-title {
             font-size: 1.2rem !important;
+            letter-spacing: 0.8px !important;
+            filter: drop-shadow(0 2px 6px rgba(13, 148, 136, 0.4)) drop-shadow(0 1px 3px rgba(204, 85, 0, 0.3)) !important;
         }
         
-        .title-underline {
-            width: 80px !important;
+        .section-title::after {
+            font-size: 1.2rem;
+            margin-left: 4px;
         }
         
         .btn-signup {
@@ -437,22 +521,23 @@
 
 <!-- HERO СЕКЦИЯ -->
 <div class="hero-section">
-    <div class="container my-5">
-        <div class="row align-items-center justify-content-center" style="margin-top: 30px; margin-bottom: 20px;">
+    <div class="container my-3">
+        <div class="row align-items-center justify-content-center" style="margin-top: 20px; margin-bottom: 10px;">
             <h2 class="text-center section-title" id="typingTitle" data-text="КУРСЫ ДЛЯ ДЕТЕЙ 2,5-4 ГОДА"></h2>
-            <div class="title-underline"></div>
         </div>
         
         <div class="row align-items-center justify-content-center" style="margin-bottom: 40px;">
-            <p class="description-text">
-                Курсы для детей от 2,5 до 4 лет — это лёгкий старт в мир общения, знаний и открытий.
-                В тёплой, дружелюбной атмосфере малыши играют, учатся взаимодействовать друг с другом и с радостью познают
-                окружающий мир.
-                Через простые задания, яркие материалы и творчество дети развивают речь, внимание, мышление, воображение и
-                моторику.
-                Занятия проходят в игровой форме, чтобы обучение было лёгким, естественным и радостным.
-                Мы помогаем ребёнку раскрыться, почувствовать уверенность и полюбить учиться с самого начала.
-            </p>
+            <div class="description-text">
+                <p>
+                    Подарите вашему малышу <span class="highlight">идеальный старт в мир знаний</span> — курсы для детей 2,5-4 лет, где обучение становится любимой игрой!
+                </p>
+                <p>
+                    В тёплой атмосфере развиваем речь, мышление и моторику через игры с LEGO® DUPLO. Малыши учатся общаться, дружить и с радостью открывают новое каждый день.
+                </p>
+                <p>
+                    ✨ Первое занятие <span class="highlight-orange">БЕСПЛАТНО</span> — приходите и увидите, как ваш ребёнок полюбит учиться!
+                </p>
+            </div>
         </div>
 
         <div class="row justify-content-center g-4">
@@ -486,11 +571,13 @@
 
 <!-- ПРЕЗЕНТАЦИЯ КУРСА -->
 <div class="container">
-    <div class="row justify-content-center my-5">
+    <div class="row justify-content-center my-5" style="row-gap: 3rem;">
         <div class="col-12 col-md-10 col-lg-8">
             <div class="course-card">
                 <img src="{% static 'main/img/courses/lego_razv.jpeg' %}" alt="Лего-развивайка" class="img-fluid course-image">
-                <h4 class="fw-bold text-turquoise mb-3 text-center">«Лего-развивайка»</h4>
+                <h4 class="fw-bold text-turquoise mb-3 text-center">
+                    «Лего-развивайка»
+                </h4>
                 <p style="text-align: justify; margin-bottom: 0; font-size: 1.08rem; line-height: 1.7; color: #475569;">
                     Весёлая и полезная программа раннего развития с LEGO® DUPLO, которая помогает малышам раскрыть
                     потенциал. Через игру и простое моделирование развиваются речь, воображение, мышление и мелкая
@@ -507,7 +594,6 @@
     <!-- АБОНЕМЕНТЫ -->
     <div class="row align-items-center justify-content-center my-5">
         <h2 class="text-center section-title" id="typingTitle2" data-text="АБОНЕМЕНТЫ НА ЗАНЯТИЯ"></h2>
-        <div class="title-underline" id="underline2"></div>
     </div>
 
     <div class="row g-4 mb-5">
@@ -563,30 +649,24 @@ document.addEventListener('DOMContentLoaded', function() {
         if (charIndex < text.length) {
             typingElement.textContent += text.charAt(charIndex);
             
-            // Легкая встряска текста при печати
-            typingElement.style.transform = 'scale(1.01)';
+            // Легкая встряска и свечение при печати
+            typingElement.style.transform = 'scale(1.02)';
+            typingElement.style.filter = 'drop-shadow(0 4px 16px rgba(13, 148, 136, 0.6)) drop-shadow(0 2px 8px rgba(204, 85, 0, 0.5)) drop-shadow(0 0 20px rgba(255, 149, 0, 0.4))';
+            
             setTimeout(() => {
                 typingElement.style.transform = 'scale(1)';
-            }, 50);
+                typingElement.style.filter = 'drop-shadow(0 4px 12px rgba(13, 148, 136, 0.4)) drop-shadow(0 2px 6px rgba(204, 85, 0, 0.3))';
+            }, 100);
             
             charIndex++;
             
-            // Случайная скорость для реалистичности (80-120мс)
-            const randomSpeed = Math.random() * 40 + 80;
+            // Случайная скорость для реалистичности (70-110мс)
+            const randomSpeed = Math.random() * 40 + 70;
             setTimeout(typeWriter, randomSpeed);
         } else {
             // Убираем мигающий курсор после завершения
             setTimeout(() => {
                 typingElement.classList.add('typing-complete');
-                
-                // Показываем подчеркивание с адаптивной шириной
-                const underline = document.querySelector('.title-underline');
-                if (underline) {
-                    const targetWidth = window.innerWidth <= 576 ? '80px' : 
-                                       window.innerWidth <= 768 ? '100px' : '140px';
-                    underline.style.width = targetWidth;
-                    underline.style.opacity = '1';
-                }
             }, 500);
         }
     }
@@ -639,27 +719,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (charIndex2 < text2.length) {
                         typingElement2.textContent += text2.charAt(charIndex2);
                         
-                        // Легкая встряска
-                        typingElement2.style.transform = 'scale(1.01)';
+                        // Легкая встряска и свечение при печати
+                        typingElement2.style.transform = 'scale(1.02)';
+                        typingElement2.style.filter = 'drop-shadow(0 4px 16px rgba(13, 148, 136, 0.6)) drop-shadow(0 2px 8px rgba(204, 85, 0, 0.5)) drop-shadow(0 0 20px rgba(255, 149, 0, 0.4))';
+                        
                         setTimeout(() => {
                             typingElement2.style.transform = 'scale(1)';
-                        }, 50);
+                            typingElement2.style.filter = 'drop-shadow(0 4px 12px rgba(13, 148, 136, 0.4)) drop-shadow(0 2px 6px rgba(204, 85, 0, 0.3))';
+                        }, 100);
                         
                         charIndex2++;
-                        const randomSpeed = Math.random() * 40 + 80;
+                        const randomSpeed = Math.random() * 40 + 70;
                         setTimeout(typeWriter2, randomSpeed);
                     } else {
-                        // Убираем курсор и показываем подчеркивание
+                        // Убираем курсор
                         setTimeout(() => {
                             typingElement2.classList.add('typing-complete');
-                            
-                            const underline2 = document.getElementById('underline2');
-                            if (underline2) {
-                                const targetWidth = window.innerWidth <= 576 ? '80px' : 
-                                                   window.innerWidth <= 768 ? '100px' : '140px';
-                                underline2.style.width = targetWidth;
-                                underline2.style.opacity = '1';
-                            }
                             
                             // Запускаем анимацию карточек абонементов
                             const abonementCards = document.querySelectorAll('.abonement-card');
@@ -733,16 +808,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Запускаем анимацию чисел через 1.5 секунды после загрузки
     setTimeout(animateNumbers, 1500);
     
-    // === HOVER ЗВУК (опционально) ===
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px) scale(1.03) rotate(1deg)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = '';
-        });
-    });
+    // === HOVER ЭФФЕКТЫ ОТКЛЮЧЕНЫ ===
+    // cards.forEach(card => {
+    //     card.addEventListener('mouseenter', function() {
+    //         this.style.transform = 'translateY(-8px) scale(1.03) rotate(1deg)';
+    //     });
+    //     
+    //     card.addEventListener('mouseleave', function() {
+    //         this.style.transform = '';
+    //     });
+    // });
     
     console.log('✨ Премиум страница курса загружена!');
 });

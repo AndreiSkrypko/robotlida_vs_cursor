@@ -7,6 +7,524 @@
 
 <link rel="stylesheet" href="{% static 'main/css/courses.css' %}">
 
+<style>
+    /* === ГЛОБАЛЬНЫЕ АНИМАЦИИ === */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes bounceIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        70% {
+            opacity: 1;
+            transform: scale(0.9);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* === ПЕЧАТАЮЩИЙСЯ ЗАГОЛОВОК === */
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 900;
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: 1.5px;
+        opacity: 1;
+        position: relative;
+        display: inline-block;
+        transition: transform 0.05s ease-out;
+        background: linear-gradient(135deg, #0d9488 0%, #17a2b8 25%, #14b8a6 50%, #CC5500 75%, #ff9500 100%);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 4px 12px rgba(13, 148, 136, 0.4)) drop-shadow(0 2px 6px rgba(204, 85, 0, 0.3));
+        text-transform: uppercase;
+        animation: gradientShift 3s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    /* Мигающий курсор с градиентом */
+    .section-title::after {
+        content: '|';
+        background: linear-gradient(180deg, #CC5500, #ff9500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: blink 0.7s infinite;
+        margin-left: 8px;
+        font-weight: 900;
+        filter: drop-shadow(0 0 8px rgba(204, 85, 0, 0.6));
+    }
+
+    .section-title.typing-complete::after {
+        display: none;
+    }
+
+    @keyframes blink {
+        0%, 100% { 
+            opacity: 1;
+            filter: drop-shadow(0 0 8px rgba(204, 85, 0, 0.8));
+        }
+        50% { 
+            opacity: 0;
+            filter: drop-shadow(0 0 0px rgba(204, 85, 0, 0));
+        }
+    }
+    
+    .title-underline {
+        width: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #0d9488, #CC5500, #ff9500);
+        margin: 1.5rem auto 3rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(204, 85, 0, 0.3);
+        opacity: 0;
+        transition: all 0.4s ease-out;
+    }
+
+    /* === СТИЛИ И АНИМАЦИИ КАРТОЧЕК КУРСОВ === */
+    .course-card {
+        background: linear-gradient(145deg, #ffffff, #f8fafc);
+        border-radius: 24px;
+        padding: 2.5rem;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+        border: 2px solid rgba(13, 148, 136, 0.15);
+        opacity: 0;
+        margin-bottom: 3rem;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .course-card:last-child {
+        margin-bottom: 2rem;
+    }
+
+    /* Анимированная градиентная рамка */
+    .course-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 24px;
+        padding: 2px;
+        background: linear-gradient(135deg, #0d9488, #17a2b8, #CC5500, #ff9500);
+        background-size: 300% 300%;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        animation: gradientRotate 4s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes gradientRotate {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .course-card:hover::before {
+        opacity: 1;
+    }
+
+    /* Разные анимации для карточек */
+    .course-card:nth-of-type(1) { animation: slideInLeft 1s ease-out 1s forwards; }
+    .course-card:nth-of-type(2) { animation: slideInRight 1s ease-out 1.1s forwards; }
+    .course-card:nth-of-type(3) { animation: slideInLeft 1s ease-out 1.2s forwards; }
+    .course-card:nth-of-type(4) { animation: slideInRight 1s ease-out 1.3s forwards; }
+
+    .course-card:hover {
+        transform: translateY(-12px) scale(1.03);
+        box-shadow: 
+            0 20px 60px rgba(13, 148, 136, 0.2),
+            0 10px 30px rgba(204, 85, 0, 0.15);
+        border-color: rgba(13, 148, 136, 0.3);
+    }
+
+    .course-image {
+        transition: all 0.5s ease;
+    }
+
+    .course-card:hover .course-image {
+        transform: scale(1.05) rotate(1deg);
+        box-shadow: 0 12px 32px rgba(13, 148, 136, 0.25);
+    }
+
+    /* Отключаем прозрачность заголовка при hover из courses.css */
+    .course-card:hover h4 {
+        -webkit-text-fill-color: inherit !important;
+        background: none !important;
+        background-clip: unset !important;
+        -webkit-background-clip: unset !important;
+    }
+
+    /* Гарантируем видимость надписи уровня */
+    .course-card h4 span {
+        opacity: 1 !important;
+        visibility: visible !important;
+        color: #fff !important;
+    }
+    
+    .course-card:hover h4 span,
+    .course-card h4 span:hover {
+        opacity: 1 !important;
+        visibility: visible !important;
+        color: #fff !important;
+    }
+    
+    /* === АНИМАЦИИ INFO КАРТОЧЕК === */
+    .info-card {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .info-card:nth-child(1) { animation: fadeInUp 0.8s ease-out 0.6s forwards; }
+    .info-card:nth-child(2) { animation: fadeInUp 0.8s ease-out 0.7s forwards; }
+    .info-card:nth-child(3) { animation: fadeInUp 0.8s ease-out 0.8s forwards; }
+    .info-card:nth-child(4) { animation: fadeInUp 0.8s ease-out 0.9s forwards; }
+    
+    /* === ABONEMENT CARDS === */
+    .abonement-card {
+        background: linear-gradient(135deg, #0d9488, #14b8a6);
+        color: white;
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 12px 32px rgba(13, 148, 136, 0.3);
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .col-md-3:nth-child(1) .abonement-card { 
+        opacity: 0;
+    }
+    .col-md-3:nth-child(2) .abonement-card { 
+        opacity: 0;
+    }
+    .col-md-3:nth-child(3) .abonement-card { 
+        opacity: 0;
+    }
+    .col-md-3:nth-child(4) .abonement-card { 
+        opacity: 0;
+    }
+
+    .abonement-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transform: rotate(45deg);
+        transition: all 0.6s;
+    }
+
+    .abonement-card:hover::before {
+        left: 100%;
+    }
+
+    .abonement-card:hover {
+        transform: translateY(-12px) scale(1.05);
+        box-shadow: 0 20px 50px rgba(13, 148, 136, 0.5);
+        background: linear-gradient(135deg, #CC5500, #ff9500);
+    }
+
+    .abonement-card h4 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+    }
+    
+    /* Стили для продающего текста */
+    .description-text {
+        text-align: center;
+        font-size: 1.25rem;
+        line-height: 1.9;
+        color: #334155;
+        max-width: 950px;
+        margin: 0 auto;
+        font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+        letter-spacing: 0.4px;
+        padding: 0 2rem;
+        font-weight: 500;
+    }
+    
+    .description-text p {
+        margin-bottom: 1.8rem;
+    }
+    
+    .description-text p:first-child {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #1e293b;
+        line-height: 1.7;
+    }
+    
+    .description-text p:last-child {
+        margin-bottom: 0;
+    }
+    
+    .description-text .highlight {
+        color: #0d9488;
+        font-weight: 700;
+    }
+    
+    .description-text .highlight-orange {
+        color: #CC5500;
+        font-weight: 800;
+        font-size: 1.15em;
+    }
+
+    /* === INFO КАРТОЧКИ === */
+    .info-card {
+        background: linear-gradient(145deg, #ffffff, #f8fafc);
+        border-radius: 20px;
+        padding: 2rem 1.5rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        border: 2px solid rgba(13, 148, 136, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        min-height: 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .info-card:nth-child(1) { animation: fadeInUp 0.8s ease-out 0.6s forwards; }
+    .info-card:nth-child(2) { animation: fadeInUp 0.8s ease-out 0.7s forwards; }
+    .info-card:nth-child(3) { animation: fadeInUp 0.8s ease-out 0.8s forwards; }
+    .info-card:nth-child(4) { animation: fadeInUp 0.8s ease-out 0.9s forwards; }
+
+    .info-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        padding: 2px;
+        background: linear-gradient(135deg, #0d9488, #17a2b8, #CC5500);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s;
+    }
+
+    .info-card:hover::before {
+        opacity: 1;
+    }
+
+    .info-card:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 16px 40px rgba(13, 148, 136, 0.2);
+    }
+
+    .info-icon {
+        font-size: 3rem;
+        color: #0d9488;
+        margin-bottom: 1rem;
+        transition: all 0.4s;
+    }
+
+    .info-card:hover .info-icon {
+        transform: scale(1.2) rotate(360deg);
+        color: #CC5500;
+    }
+
+    .info-text {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1e293b;
+        text-align: center;
+        margin: 0;
+    }
+
+    /* === КНОПКА ЗАПИСИ === */
+    .btn-signup {
+        background: linear-gradient(145deg, #CC5500, #ff9500);
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 800;
+        font-family: 'Poppins', sans-serif;
+        padding: 18px 40px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50px;
+        box-shadow: 0 12px 32px rgba(204, 85, 0, 0.4);
+        transition: all 0.4s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        opacity: 0;
+        animation: fadeInUp 1s ease-out 1.8s forwards, btnPulse 2s ease-in-out 2.8s infinite;
+    }
+
+    @keyframes btnPulse {
+        0%, 100% {
+            box-shadow: 0 12px 32px rgba(204, 85, 0, 0.4), 0 0 0 0 rgba(204, 85, 0, 0.4);
+        }
+        50% {
+            box-shadow: 0 12px 32px rgba(204, 85, 0, 0.4), 0 0 0 20px rgba(204, 85, 0, 0);
+        }
+    }
+
+    .btn-signup:hover {
+        transform: translateY(-5px) scale(1.08);
+        box-shadow: 0 20px 50px rgba(204, 85, 0, 0.6);
+        background: linear-gradient(145deg, #ff9500, #CC5500);
+    }
+
+    /* === DIVIDER === */
+    .custom-divider {
+        border: none;
+        height: 4px;
+        background: linear-gradient(90deg, transparent 0%, rgba(13, 148, 136, 0.3) 15%, #CC5500 50%, rgba(13, 148, 136, 0.3) 85%, transparent 100%);
+        margin: 60px auto;
+        width: 70%;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(204, 85, 0, 0.25);
+        opacity: 0;
+        animation: fadeInScale 0.8s ease-out 1.7s forwards;
+    }
+
+    /* === RIPPLE ЭФФЕКТ === */
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: ripple-animation 0.6s ease-out;
+        pointer-events: none;
+    }
+
+    @keyframes ripple-animation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+    
+    @media (max-width: 767.98px) {
+        .section-title {
+            font-size: 1.5rem !important;
+            letter-spacing: 1px !important;
+            filter: drop-shadow(0 3px 8px rgba(13, 148, 136, 0.4)) drop-shadow(0 1px 4px rgba(204, 85, 0, 0.3)) !important;
+        }
+        
+        .section-title::after {
+            font-size: 1.5rem;
+            margin-left: 5px;
+        }
+        
+        .description-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            padding: 0 1.5rem;
+        }
+        
+        .description-text p:first-child {
+            font-size: 1.2rem;
+        }
+        
+        .info-card {
+            min-height: 150px;
+        }
+        
+        .btn-signup {
+            font-size: 0.95rem;
+            padding: 14px 28px;
+        }
+        
+        .abonement-card {
+            padding: 2rem 1.5rem;
+        }
+        
+        .abonement-card h4 {
+            font-size: 1.3rem;
+        }
+        
+        .course-card h4 {
+            font-size: 1.5rem;
+        }
+    }
+    
+    @media (max-width: 575.98px) {
+        .description-text {
+            font-size: 1rem;
+            line-height: 1.75;
+            padding: 0 1rem;
+        }
+        
+        .description-text p:first-child {
+            font-size: 1.15rem;
+        }
+        
+        .description-text p {
+            margin-bottom: 1.3rem;
+        }
+    }
+</style>
+
 {% endblock %}
 
 
@@ -15,65 +533,54 @@
 <div class="container text-center my-5">
 
 
-    <div class="row align-items-center justify-content-center" style="margin-top: 30px; margin-bottom: 20px;">
-        <h2 class="text-center section-title"
-            style="font-weight: 600; font-size: 2.2rem; width: 100%; max-width: 900px; margin: 0 auto;">
-            КУРСЫ ДЛЯ ДЕТЕЙ 13-16 ЛЕТ
-        </h2>
+    <div class="row align-items-center justify-content-center" style="margin-top: 20px; margin-bottom: 10px;">
+        <h2 class="text-center section-title" id="typingTitle" data-text="КУРСЫ ДЛЯ ДЕТЕЙ 13-16 ЛЕТ"></h2>
     </div>
-    <div class="row align-items-center justify-content-center" style="margin-top: 20px; margin-bottom: 40px;">
-        <p style="text-align: justify; font-size: 1.2rem; font-weight: 350; max-width: 1200px; width: 100%; margin: 0 auto; line-height: 1.5;">
-            Курсы для подростков 13–16 лет — это старт для серьёзного погружения в мир технологий.
-            На занятиях ребята осваивают робототехнику, программирование и 3D-моделирование, учатся самостоятельно
-            ставить цели, планировать работу и находить нестандартные решения.
-
-            Мы развиваем инженерное мышление, креативность, усидчивость и командное взаимодействие.
-            Каждое задание — это практический вызов, приближённый к реальным задачам из мира науки и современных
-            технологий.
-
-            Под руководством опытных наставников подростки не просто изучают теорию, а реализуют собственные проекты —
-            от идеи до результата.
-            Это обучение, которое вдохновляет, мотивирует и готовит к будущему в высокотехнологичном мире.
-
-
-        </p>
+    <div class="row align-items-center justify-content-center" style="margin-top: 10px; margin-bottom: 40px;">
+        <div class="description-text">
+            <p>
+                Откройте двери в <span class="highlight">мир профессиональных технологий</span> — продвинутые курсы для подростков 13-16 лет с реальными проектами!
+            </p>
+            <p>
+                Углублённое программирование на Python, продвинутая робототехника EV3, веб-разработка и 3D-моделирование в Blender. От идеи до готового проекта — готовим будущих IT-специалистов.
+            </p>
+            <p>
+                ✨ Первое занятие <span class="highlight-orange">БЕСПЛАТНО</span> — инвестируйте в технологичное будущее вашего ребёнка!
+            </p>
+        </div>
     </div>
 
 
     <div class="row justify-content-center g-4">
-        <div class="col-md-2 col-sm-6">
-            <div class="info-card">
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card" data-card>
                 <i class="bi bi-person-fill info-icon"></i>
-                <p class="info-text">Возраст:<br><span style="color:#17a2b8; font-weight:600;">от 13 до 16</span>
-                </p>
+                <p class="info-text">Возраст:<br><span style="color:#17a2b8; font-weight:700;">от 13 до 16 лет</span></p>
             </div>
         </div>
-        <div class="col-md-2 col-sm-6">
-            <div class="info-card">
+        <div class="col-md-3 col-sm-6">
+            <div class="info-card" data-card>
                 <i class="bi bi-clock-fill info-icon"></i>
-                <p class="info-text">Длительность:<br><span style="color:#17a2b8; font-weight:600;">75 минут</span>
-                </p>
+                <p class="info-text">Длительность:<br><span style="color:#17a2b8; font-weight:700;">75 минут</span></p>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
-            <div class="info-card">
+            <div class="info-card" data-card>
                 <i class="bi bi-calendar2-check-fill info-icon"></i>
-                <p class="info-text">Абонемент на месяц:<br><span style="color:#17a2b8; font-weight:600;">75 рублей</span>
-                </p>
+                <p class="info-text">Абонемент на месяц:<br><span style="color:#17a2b8; font-weight:700;">75 рублей</span></p>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
-            <div class="info-card">
+            <div class="info-card" data-card>
                 <i class="bi bi-cash-stack info-icon"></i>
-                <p class="info-text">Пробное занятие:<br><span style="color:#17a2b8; font-weight:600;">бесплатно</span>
-                </p>
+                <p class="info-text">Пробное занятие:<br><span style="color:#17a2b8; font-weight:700;">БЕСПЛАТНО</span></p>
             </div>
         </div>
     </div>
 
 
     <!-- Блок для 13-16 лет (продвинутый уровень) -->
-    <div class="row justify-content-center my-5">
+    <div class="row justify-content-center my-5" style="row-gap: 3rem;">
 
         <!-- Карточка для продвинутого курса EV3 -->
         <div class="col-12 col-md-6">
@@ -125,7 +632,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-center my-5">
+    <div class="row justify-content-center my-5" style="row-gap: 3rem;">
 
 
         <!-- Карточка для для продвинутого курса по веб разработке -->
@@ -192,9 +699,7 @@
 <hr class="custom-divider">
 <!-- Заголовок секции -->
 <div class="row align-items-center justify-content-center my-5">
-    <h2 class="text-center section-title fw-semibold">
-        АБОНЕМЕНТЫ НА ЗАНЯТИЯ
-    </h2>
+    <h2 class="text-center section-title" id="typingTitle2" data-text="АБОНЕМЕНТЫ НА ЗАНЯТИЯ"></h2>
 </div>
 
 <!-- Карточки абонементов -->
@@ -243,12 +748,180 @@
 
 <!-- Скрипт JS для перезагрузки страницы при успешной записи с перезаписанным success -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      {% if success %}
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // === ЭФФЕКТ ПЕЧАТАЮЩЕГОСЯ ТЕКСТА ===
+    const typingElement = document.getElementById('typingTitle');
+    const text = typingElement.getAttribute('data-text');
+    typingElement.textContent = '';
+    
+    let charIndex = 0;
+    
+    function typeWriter() {
+        if (charIndex < text.length) {
+            typingElement.textContent += text.charAt(charIndex);
+            
+            // Легкая встряска и свечение при печати
+            typingElement.style.transform = 'scale(1.02)';
+            typingElement.style.filter = 'drop-shadow(0 4px 16px rgba(13, 148, 136, 0.6)) drop-shadow(0 2px 8px rgba(204, 85, 0, 0.5)) drop-shadow(0 0 20px rgba(255, 149, 0, 0.4))';
+            
+            setTimeout(() => {
+                typingElement.style.transform = 'scale(1)';
+                typingElement.style.filter = 'drop-shadow(0 4px 12px rgba(13, 148, 136, 0.4)) drop-shadow(0 2px 6px rgba(204, 85, 0, 0.3))';
+            }, 100);
+            
+            charIndex++;
+            
+            // Случайная скорость для реалистичности (70-110мс)
+            const randomSpeed = Math.random() * 40 + 70;
+            setTimeout(typeWriter, randomSpeed);
+        } else {
+            // Убираем мигающий курсор после завершения
+            setTimeout(() => {
+                typingElement.classList.add('typing-complete');
+            }, 500);
+        }
+    }
+    
+    // Начинаем печатать через 400мс после загрузки
+    setTimeout(typeWriter, 400);
+    
+    // === ОТКРЫТИЕ МОДАЛЬНОГО ОКНА ПРИ УСПЕШНОЙ ОТПРАВКЕ ===
+    {% if success %}
         var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
         signupModal.show();
-      {% endif %}
+    {% endif %}
+    
+    // === RIPPLE ЭФФЕКТ ДЛЯ КАРТОЧЕК ===
+    const cards = document.querySelectorAll('[data-card]');
+    
+    cards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            
+            const rect = card.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            card.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
     });
+    
+    // === ЭФФЕКТ ПЕЧАТИ ДЛЯ ВТОРОГО ЗАГОЛОВКА ПРИ СКРОЛЛЕ ===
+    const typingElement2 = document.getElementById('typingTitle2');
+    const text2 = typingElement2.getAttribute('data-text');
+    typingElement2.textContent = '';
+    let typed2 = false;
+    
+    const titleObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !typed2) {
+                typed2 = true;
+                let charIndex2 = 0;
+                
+                function typeWriter2() {
+                    if (charIndex2 < text2.length) {
+                        typingElement2.textContent += text2.charAt(charIndex2);
+                        
+                        // Легкая встряска и свечение при печати
+                        typingElement2.style.transform = 'scale(1.02)';
+                        typingElement2.style.filter = 'drop-shadow(0 4px 16px rgba(13, 148, 136, 0.6)) drop-shadow(0 2px 8px rgba(204, 85, 0, 0.5)) drop-shadow(0 0 20px rgba(255, 149, 0, 0.4))';
+                        
+                        setTimeout(() => {
+                            typingElement2.style.transform = 'scale(1)';
+                            typingElement2.style.filter = 'drop-shadow(0 4px 12px rgba(13, 148, 136, 0.4)) drop-shadow(0 2px 6px rgba(204, 85, 0, 0.3))';
+                        }, 100);
+                        
+                        charIndex2++;
+                        const randomSpeed = Math.random() * 40 + 70;
+                        setTimeout(typeWriter2, randomSpeed);
+                    } else {
+                        // Убираем курсор
+                        setTimeout(() => {
+                            typingElement2.classList.add('typing-complete');
+                            
+                            // Запускаем анимацию карточек абонементов
+                            const abonementCards = document.querySelectorAll('.abonement-card');
+                            abonementCards.forEach((card, index) => {
+                                setTimeout(() => {
+                                    card.style.animation = 'bounceIn 0.6s ease-out forwards';
+                                }, index * 100);
+                            });
+                        }, 500);
+                    }
+                }
+                
+                typeWriter2();
+            }
+        });
+    }, {
+        threshold: 0.3,
+        rootMargin: '0px'
+    });
+    
+    titleObserver.observe(typingElement2);
+    
+    // === ПЛАВНОЕ ПОЯВЛЕНИЕ ЭЛЕМЕНТОВ ПРИ СКРОЛЛЕ ===
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    // Наблюдаем за всеми анимируемыми элементами
+    document.querySelectorAll('.info-card, .abonement-card, .course-card').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // === ПАРАЛЛАКС ЭФФЕКТ ДЛЯ HERO СЕКЦИИ ===
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            heroSection.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+    }
+    
+    // === АНИМАЦИЯ ЧИСЕЛ В КАРТОЧКАХ АБОНЕМЕНТОВ ===
+    const animateNumbers = () => {
+        const numberElements = document.querySelectorAll('.abonement-card p[style*="font-size: 2rem"]');
+        
+        numberElements.forEach(el => {
+            const finalNumber = parseInt(el.textContent);
+            if (isNaN(finalNumber)) return;
+            
+            let currentNumber = 0;
+            const increment = finalNumber / 30;
+            const timer = setInterval(() => {
+                currentNumber += increment;
+                if (currentNumber >= finalNumber) {
+                    el.textContent = finalNumber + ' BYN';
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(currentNumber) + ' BYN';
+                }
+            }, 30);
+        });
+    };
+    
+    // Запускаем анимацию чисел через 1.5 секунды после загрузки
+    setTimeout(animateNumbers, 1500);
+    
+    console.log('✨ Премиум страница курса 13-16 лет загружена!');
+});
 </script>
 
 {% endblock %}
