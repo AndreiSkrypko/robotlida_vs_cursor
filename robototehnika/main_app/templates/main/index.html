@@ -127,198 +127,7 @@
 </style>
 
 <style>
-    /* --- Общие стили для мобильных устройств --- */
-    @media (max-width: 991px) {
-
-        .hero-title,
-        .section-title {
-            font-size: 1.5rem !important;
-        }
-
-        .hero-description {
-            font-size: 1.05rem !important;
-        }
-
-        .hero-section {
-            padding: 30px 0 !important;
-            min-height: 60vh !important;
-        }
-
-        .hero-text-block h2 {
-            font-size: 1.5rem !important;
-            margin-left: 0 !important;
-            margin-bottom: 2rem !important;
-        }
-
-        .signup-form {
-            padding: 1rem !important;
-            max-width: 100% !important;
-        }
-
-        .course-card {
-            min-width: 220px;
-            max-width: 90vw;
-            margin: 0 auto 1rem auto;
-        }
-
-        .course-image-wrapper {
-            height: 120px !important;
-        }
-
-        .course-title {
-            font-size: 1rem !important;
-        }
-
-        .accordion-button {
-            font-size: 1rem !important;
-            padding: 1rem !important;
-        }
-
-        .accordion-body {
-            padding: 1rem !important;
-            font-size: 0.98rem !important;
-        }
-    }
-
-    @media (max-width: 576px) {
-
-        .hero-title,
-        .section-title {
-            font-size: 1.1rem !important;
-        }
-
-        .hero-section {
-            padding: 15px 0 !important;
-            min-height: 40vh !important;
-        }
-
-        .hero-text-block h2 {
-            font-size: 1.1rem !important;
-            margin-bottom: 1rem !important;
-        }
-
-        .signup-form {
-            padding: 0.5rem !important;
-        }
-
-        .course-card {
-            min-width: 180px;
-            max-width: 95vw;
-        }
-
-        .course-image-wrapper {
-            height: 90px !important;
-        }
-
-        .course-title {
-            font-size: 0.95rem !important;
-        }
-    }
-
-    /* --- Горизонтальный скролл для карточек курсов на мобильных устройствах --- */
-    @media (max-width: 767px) {
-        .container>.row.g-4 {
-            flex-wrap: nowrap !important;
-            overflow-x: auto !important;
-            -webkit-overflow-scrolling: touch;
-            display: flex !important;
-            scrollbar-width: thin;
-            scrollbar-color: #0d9488 #e9ecef;
-            padding-right: 60px !important;
-            /* Для эффекта peek */
-        }
-
-        .container>.row.g-4>div {
-            flex: 0 0 180px !important;
-            max-width: 180px !important;
-            min-width: 180px !important;
-            margin-right: 12px !important;
-        }
-
-        .container>.row.g-4>div:last-child {
-            margin-right: 0 !important;
-        }
-
-        /* Скрыть скроллбар для красоты (опционально) */
-        .container>.row.g-4::-webkit-scrollbar {
-            height: 6px;
-            background: #e9ecef;
-        }
-
-        .container>.row.g-4::-webkit-scrollbar-thumb {
-            background: #0d9488;
-            border-radius: 4px;
-        }
-
-        /* Градиент справа для намёка на скролл */
-        .scroll-gradient-right {
-            display: block;
-        }
-
-        /* Надпись "Листайте вбок" */
-        .scroll-hint {
-            display: block;
-            animation: fadeInDown 1s;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    }
-
-    @media (min-width: 768px) {
-
-        .scroll-gradient-right,
-        .scroll-hint {
-            display: none !important;
-        }
-
-        .container>.row.g-4>div {
-            min-width: unset !important;
-            max-width: unset !important;
-            flex: unset !important;
-            margin-right: unset !important;
-        }
-
-        .container>.row.g-4 {
-            padding-right: 0 !important;
-        }
-    }
-
-    /* --- Исправление layout hero-блока и форм --- */
-    @media (max-width: 767px) {
-        .hero-section .row {
-            flex-direction: column !important;
-        }
-
-        .hero-section .col-lg-8,
-        .hero-section .col-lg-4 {
-            max-width: 100% !important;
-            flex: 0 0 100% !important;
-        }
-
-        .hero-section .hero-text-block {
-            margin-bottom: 1.5rem !important;
-        }
-    }
-
-    /* --- Уменьшение внутренних отступов и размеров для секций --- */
-    @media (max-width: 767px) {
-
-        .container-fluid.py-5,
-        .content-card,
-        .cta-section {
-            padding: 1rem !important;
-        }
-    }
+    /* УДАЛЕНЫ СТАРЫЕ КОНФЛИКТУЮЩИЕ МЕДИА-ЗАПРОСЫ - ИСПОЛЬЗУЕТСЯ ТОЛЬКО НОВЫЙ КОМПЛЕКСНЫЙ БЛОК ВНИЗУ */
 
     /* === СТИЛИ ДЛЯ КАРТОЧЕК КУРСОВ - ПРЕМИУМ ДИЗАЙН === */
     .course-card {
@@ -777,168 +586,9 @@
         }
     }
 
-    /* === АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ УСТРОЙСТВА === */
-    @media (max-width: 768px) {
-        .course-card {
-            border-radius: 20px;
-        }
-        
-        .course-image-wrapper {
-            height: 180px;
-            border-radius: 20px 20px 0 0;
-        }
+    /* УДАЛЕНЫ СТАРЫЕ МЕДИА-ЗАПРОСЫ ДЛЯ КАРТОЧЕК КУРСОВ - ИСПОЛЬЗУЕТСЯ НОВЫЙ БЛОК ВНИЗУ */
 
-        .course-icon-wrapper {
-            margin-top: -40px;
-        }
-
-        .course-icon {
-            width: 70px;
-            height: 70px;
-        }
-
-        .course-icon i {
-            font-size: 1.8rem;
-        }
-
-        .course-title {
-            font-size: 1.1rem;
-        }
-
-        .course-description {
-            font-size: 0.9rem;
-        }
-
-        .course-content {
-            padding: 1.5rem 1rem 1rem;
-        }
-
-        .topic-tag {
-            font-size: 0.75rem;
-            padding: 5px 10px;
-        }
-
-        .cta-button {
-            padding: 10px 24px;
-            font-size: 0.9rem;
-        }
-
-        .age-badge {
-            padding: 6px 12px;
-            font-size: 0.8rem;
-            top: 12px;
-            left: 12px;
-        }
-
-        .overlay-icon {
-            font-size: 2.5rem;
-        }
-
-        .overlay-text {
-            font-size: 1rem;
-        }
-
-        /* Упрощаем 3D эффект на мобильных */
-        .course-card:hover {
-            transform: translateY(-8px) scale(1.02) !important;
-        }
-
-        .course-icon:hover {
-            transform: rotate(180deg) scale(1.05) !important;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .course-card {
-            border-radius: 18px;
-        }
-
-        .course-image-wrapper {
-            height: 160px;
-            border-radius: 18px 18px 0 0;
-        }
-
-        .course-icon-wrapper {
-            margin-top: -35px;
-        }
-
-        .course-icon {
-            width: 60px;
-            height: 60px;
-            box-shadow: 
-                0 8px 20px rgba(0, 0, 0, 0.15),
-                0 0 0 4px rgba(255, 255, 255, 1);
-        }
-
-        .course-icon i {
-            font-size: 1.5rem;
-        }
-
-        .course-title {
-            font-size: 1rem;
-        }
-
-        .course-description {
-            font-size: 0.85rem;
-        }
-
-        .topic-tag {
-            font-size: 0.7rem;
-            padding: 4px 8px;
-        }
-
-        .cta-button {
-            padding: 8px 20px;
-            font-size: 0.85rem;
-        }
-
-        .age-badge {
-            padding: 5px 10px;
-            font-size: 0.75rem;
-            top: 10px;
-            left: 10px;
-        }
-    }
-
-    /* --- Горизонтальный скролл для карточек курсов на мобильных устройствах (новый класс) --- */
-    @media (max-width: 767px) {
-        .courses-carousel-row {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            overflow-x: auto !important;
-            -webkit-overflow-scrolling: touch;
-            gap: 12px;
-            padding-bottom: 10px;
-            scrollbar-width: thin;
-            scrollbar-color: #0d9488 #e9ecef;
-        }
-
-        .courses-carousel-row>div {
-            flex: 0 0 80vw !important;
-            max-width: 80vw !important;
-            min-width: 220px !important;
-        }
-    }
-
-    @media (min-width: 768px) {
-        .courses-carousel-row {
-            display: flex !important;
-            flex-wrap: wrap !important;
-            justify-content: center;
-            gap: 64px 32px; /* Увеличенный отступ для иконок */
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 1400px;
-            padding-top: 40px; /* Доп. отступ сверху */
-        }
-        .courses-carousel-row > div {
-            flex: 1 1 280px !important;
-            max-width: 320px !important;
-            min-width: 260px !important;
-            margin: 0;
-            display: flex;
-        }
-    }
+    /* УДАЛЕН ДУБЛИРУЮЩИЙСЯ МЕДИА-ЗАПРОС ДЛЯ КУРСОВ - ИСПОЛЬЗУЕТСЯ НОВЫЙ БЛОК ВНИЗУ */
 
 
 </style>
@@ -1034,13 +684,7 @@
         animation: fadeInRight 1.4s ease-out;
     }
 
-    /* Мобильная адаптация */
-    @media (max-width: 767px) {
-        .hero-section {
-            background-attachment: scroll;
-            padding: 60px 0;
-        }
-    }
+    /* УДАЛЕН СТАРЫЙ МЕДИА-ЗАПРОС ДЛЯ HERO - ИСПОЛЬЗУЕТСЯ НОВЫЙ БЛОК ВНИЗУ */
 
     /* === КРАСИВЫЕ ПОЛЯ ФОРМЫ С ЭФФЕКТАМИ === */
     .field-wrapper {
@@ -1448,17 +1092,7 @@
         }
     }
 
-    @media (max-width: 768px) {
-        .float-icon {
-            width: 45px;
-            height: 45px;
-            font-size: 1.3rem;
-        }
-        
-        .floating-icons {
-            display: none; /* Скрываем на мобильных для производительности */
-        }
-    }
+    /* УДАЛЕН СТАРЫЙ МЕДИА-ЗАПРОС ДЛЯ ПЛАВАЮЩИХ ИКОНОК - ИСПОЛЬЗУЕТСЯ НОВЫЙ БЛОК ВНИЗУ */
 </style>
 
 
@@ -2179,73 +1813,7 @@
         font-size: 1.1rem;
     }
 
-    /* Мобильная адаптация */
-    @media (max-width: 768px) {
-        .faq-header {
-            padding: 18px 16px;
-            gap: 12px;
-        }
-
-        .faq-number {
-            width: 40px;
-            height: 40px;
-            font-size: 1rem;
-        }
-
-        .faq-icon {
-            width: 44px;
-            height: 44px;
-            font-size: 1.4rem;
-        }
-
-        .faq-question {
-            font-size: 1rem;
-        }
-
-        .faq-arrow {
-            width: 36px;
-            height: 36px;
-        }
-
-        .faq-answer {
-            padding: 0 16px 20px 72px;
-            font-size: 0.95rem;
-        }
-
-        .faq-answer::before {
-            left: 36px;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .faq-header {
-            gap: 10px;
-            padding: 16px 14px;
-        }
-
-        .faq-number {
-            width: 36px;
-            height: 36px;
-            font-size: 0.9rem;
-        }
-
-        .faq-icon {
-            display: none; /* Скрываем иконку на малых экранах */
-        }
-
-        .faq-question {
-            font-size: 0.95rem;
-        }
-
-        .faq-answer {
-            padding: 0 14px 16px 60px;
-            font-size: 0.9rem;
-        }
-
-        .faq-answer::before {
-            left: 28px;
-        }
-    }
+    /* УДАЛЕНЫ СТАРЫЕ МЕДИА-ЗАПРОСЫ ДЛЯ FAQ - ИСПОЛЬЗУЕТСЯ НОВЫЙ БЛОК ВНИЗУ */
 </style>
 
 <!-- Заголовок "Что вы обычно спрашиваете" -->
@@ -2490,13 +2058,7 @@
         animation: particlesFloat 8s ease-in-out infinite;
     }
 
-    @media (max-width: 767px) {
-        .final-cta-section {
-            background-attachment: scroll;
-            padding: 60px 0;
-            min-height: 80vh;
-        }
-    }
+    /* УДАЛЕН СТАРЫЙ МЕДИА-ЗАПРОС ДЛЯ FINAL-CTA - ИСПОЛЬЗУЕТСЯ НОВЫЙ БЛОК ВНИЗУ */
 </style>
 
 <!-- Контейнер с фоном и призывом к действию -->
@@ -3665,31 +3227,83 @@ document.addEventListener('DOMContentLoaded', function() {
         .courses-carousel-row {
             padding-right: 1rem !important;
             padding-left: 1rem !important;
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch;
+            gap: 12px;
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: #0d9488 #e9ecef;
+        }
+        
+        .courses-carousel-row > div {
+            flex: 0 0 80vw !important;
+            max-width: 80vw !important;
+            min-width: 220px !important;
+        }
+        
+        /* Заголовки курсов */
+        .courses-title-wrapper {
+            text-align: center !important;
+            margin-bottom: 2rem !important;
+        }
+        
+        .courses-main-title {
+            font-size: 1.4rem !important;
+        }
+        
+        .courses-subtitle {
+            font-size: 0.95rem !important;
+        }
+        
+        .courses-icon {
+            font-size: 2rem !important;
         }
         
         /* FAQ */
-        .faq-section {
+        .faq-section-bg {
             padding: 40px 0 !important;
         }
         
-        .faq-section .container {
+        .faq-section-bg .container {
             padding-left: 1rem !important;
             padding-right: 1rem !important;
         }
         
         .faq-header {
-            padding: 14px 12px !important;
-            border-radius: 14px !important;
+            padding: 16px 14px !important;
+            gap: 10px !important;
         }
         
-        .accordion-button {
+        .faq-number {
+            width: 40px !important;
+            height: 40px !important;
+            font-size: 1rem !important;
+        }
+        
+        .faq-icon {
+            width: 44px !important;
+            height: 44px !important;
+            font-size: 1.4rem !important;
+        }
+        
+        .faq-question {
+            font-size: 1rem !important;
+        }
+        
+        .faq-arrow {
+            width: 36px !important;
+            height: 36px !important;
+        }
+        
+        .faq-answer {
+            padding: 0 16px 20px 72px !important;
             font-size: 0.95rem !important;
-            padding: 0.9rem 1rem !important;
         }
         
-        .accordion-body {
-            font-size: 0.9rem !important;
-            padding: 0.9rem !important;
+        .faq-answer::before {
+            left: 36px !important;
         }
         
         /* Финальный CTA */
@@ -3856,19 +3470,52 @@ document.addEventListener('DOMContentLoaded', function() {
             font-size: 0.85rem !important;
         }
         
+        /* Курсы */
+        .courses-carousel-row > div {
+            flex: 0 0 85vw !important;
+            max-width: 85vw !important;
+            min-width: 200px !important;
+        }
+        
+        .courses-main-title {
+            font-size: 1.2rem !important;
+        }
+        
+        .courses-subtitle {
+            font-size: 0.9rem !important;
+        }
+        
+        .courses-icon {
+            font-size: 1.8rem !important;
+        }
+        
         /* FAQ */
         .faq-header {
-            padding: 12px 10px !important;
+            padding: 14px 12px !important;
+            gap: 8px !important;
         }
         
-        .accordion-button {
+        .faq-number {
+            width: 36px !important;
+            height: 36px !important;
             font-size: 0.9rem !important;
-            padding: 0.8rem !important;
         }
         
-        .accordion-body {
-            font-size: 0.85rem !important;
-            padding: 0.8rem !important;
+        .faq-icon {
+            display: none !important; /* Скрываем иконку на малых экранах */
+        }
+        
+        .faq-question {
+            font-size: 0.95rem !important;
+        }
+        
+        .faq-answer {
+            padding: 0 14px 16px 60px !important;
+            font-size: 0.9rem !important;
+        }
+        
+        .faq-answer::before {
+            left: 28px !important;
         }
         
         /* Финальный CTA */
