@@ -3450,6 +3450,489 @@ document.addEventListener('DOMContentLoaded', function() {
             transform: translateY(-8px) scale(1.02) !important;
         }
     }
+
+    /* ============================================================================
+       КОМПЛЕКСНАЯ МОБИЛЬНАЯ АДАПТАЦИЯ - ВСЕ ЭЛЕМЕНТЫ
+       Подход как в about.html - все красиво и адаптивно
+    ============================================================================ */
+    
+    /* === ПЛАНШЕТЫ И БОЛЬШИЕ ТЕЛЕФОНЫ (до 991px) === */
+    @media (max-width: 991px) {
+        /* Hero секция */
+        .hero-section {
+            padding: 60px 0 40px 0 !important;
+            min-height: 70vh !important;
+        }
+        
+        .hero-title {
+            font-size: 1.8rem !important;
+            line-height: 1.3 !important;
+            margin-bottom: 1.5rem !important;
+        }
+        
+        .hero-text-block h2 {
+            font-size: 1.6rem !important;
+            margin-left: 0 !important;
+            margin-bottom: 1.5rem !important;
+        }
+        
+        .hero-description {
+            font-size: 1rem !important;
+            padding: 0 !important;
+            line-height: 1.5 !important;
+        }
+        
+        /* Форма записи */
+        .signup-form {
+            max-width: 100% !important;
+            padding: 1.8rem !important;
+            margin-top: 2rem !important;
+        }
+        
+        .signup-form h5 {
+            font-size: 1.1rem !important;
+        }
+        
+        /* Секция О клубе */
+        .section-title-modern {
+            font-size: 1.8rem !important;
+        }
+        
+        .about-premium-section {
+            padding: 60px 0 !important;
+        }
+        
+        .benefit-card {
+            padding: 1.5rem !important;
+            margin-bottom: 1.5rem !important;
+        }
+        
+        /* FAQ */
+        .faq-section {
+            padding: 60px 0 !important;
+        }
+        
+        .accordion-button {
+            font-size: 1rem !important;
+            padding: 1rem !important;
+        }
+        
+        .accordion-body {
+            font-size: 0.95rem !important;
+            padding: 1rem !important;
+        }
+        
+        /* Финальный CTA */
+        .final-cta-section {
+            padding: 60px 0 !important;
+        }
+        
+        .final-cta-title {
+            font-size: 1.8rem !important;
+        }
+        
+        /* Контакты */
+        .contacts-section {
+            padding: 60px 0 !important;
+        }
+    }
+    
+    /* === МОБИЛЬНЫЕ ТЕЛЕФОНЫ (до 767px) === */
+    @media (max-width: 767px) {
+        /* Hero секция - оптимизация */
+        .hero-section {
+            padding: 40px 0 30px 0 !important;
+            min-height: auto !important;
+            background-attachment: scroll !important;
+        }
+        
+        .hero-section .container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+        
+        .hero-title {
+            font-size: 1.4rem !important;
+            line-height: 1.3 !important;
+            margin-bottom: 1rem !important;
+            text-align: center !important;
+        }
+        
+        .hero-text-block {
+            text-align: center !important;
+            margin-bottom: 2rem !important;
+        }
+        
+        .hero-text-block h2 {
+            font-size: 1.3rem !important;
+            margin-left: 0 !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .hero-description {
+            font-size: 0.95rem !important;
+            padding: 0 0.5rem !important;
+            line-height: 1.5 !important;
+            margin-bottom: 1.5rem !important;
+        }
+        
+        .hero-cta {
+            text-align: center !important;
+        }
+        
+        .hero-cta .btn {
+            font-size: 0.95rem !important;
+            padding: 10px 24px !important;
+        }
+        
+        /* Форма записи - адаптация */
+        .signup-form {
+            max-width: 100% !important;
+            padding: 1.5rem !important;
+            margin-top: 1.5rem !important;
+            border-radius: 20px !important;
+        }
+        
+        .signup-form h5 {
+            font-size: 1rem !important;
+        }
+        
+        .field-wrapper input,
+        .field-wrapper select,
+        .field-wrapper textarea {
+            padding: 10px 16px !important;
+            font-size: 0.9rem !important;
+            border-radius: 12px !important;
+        }
+        
+        .submit-btn {
+            padding: 12px !important;
+            font-size: 0.95rem !important;
+        }
+        
+        /* Разделители */
+        .custom-divider {
+            margin: 40px auto !important;
+            width: 80% !important;
+            height: 3px !important;
+        }
+        
+        /* Секция О клубе */
+        .section-title-modern {
+            font-size: 1.4rem !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .title-underline-modern {
+            width: 100px !important;
+            height: 4px !important;
+            margin-bottom: 2rem !important;
+        }
+        
+        .about-premium-section {
+            padding: 40px 0 !important;
+        }
+        
+        .about-premium-section .container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+        
+        .benefit-card {
+            padding: 1.2rem !important;
+            margin-bottom: 1.2rem !important;
+            border-radius: 18px !important;
+        }
+        
+        .benefit-icon {
+            width: 60px !important;
+            height: 60px !important;
+            font-size: 1.8rem !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .benefit-title {
+            font-size: 1.1rem !important;
+            margin-bottom: 0.8rem !important;
+        }
+        
+        .benefit-text {
+            font-size: 0.9rem !important;
+            line-height: 1.5 !important;
+        }
+        
+        /* Курсы - горизонтальный скролл */
+        .courses-carousel-row {
+            padding-right: 1rem !important;
+            padding-left: 1rem !important;
+        }
+        
+        /* FAQ */
+        .faq-section {
+            padding: 40px 0 !important;
+        }
+        
+        .faq-section .container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+        
+        .faq-header {
+            padding: 14px 12px !important;
+            border-radius: 14px !important;
+        }
+        
+        .accordion-button {
+            font-size: 0.95rem !important;
+            padding: 0.9rem 1rem !important;
+        }
+        
+        .accordion-body {
+            font-size: 0.9rem !important;
+            padding: 0.9rem !important;
+        }
+        
+        /* Финальный CTA */
+        .final-cta-section {
+            padding: 40px 0 !important;
+            background-attachment: scroll !important;
+        }
+        
+        .final-cta-section .container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+        
+        .final-cta-title {
+            font-size: 1.4rem !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .final-cta-text {
+            font-size: 0.95rem !important;
+            line-height: 1.5 !important;
+            margin-bottom: 1.5rem !important;
+        }
+        
+        .final-cta-button {
+            font-size: 0.95rem !important;
+            padding: 12px 28px !important;
+        }
+        
+        /* Контакты и карта */
+        .contacts-section {
+            padding: 40px 0 !important;
+        }
+        
+        .contacts-section .container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+        
+        .contact-item {
+            padding: 1rem !important;
+            margin-bottom: 1rem !important;
+            border-radius: 14px !important;
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem !important;
+        }
+        
+        .contact-item h5 {
+            font-size: 1rem !important;
+        }
+        
+        .contact-item p {
+            font-size: 0.9rem !important;
+        }
+        
+        .map-container {
+            height: 300px !important;
+            border-radius: 18px !important;
+        }
+        
+        /* Убираем плавающие иконки на мобильных */
+        .floating-icons {
+            display: none !important;
+        }
+    }
+    
+    /* === МАЛЕНЬКИЕ МОБИЛЬНЫЕ (до 576px) === */
+    @media (max-width: 576px) {
+        /* Hero секция */
+        .hero-section {
+            padding: 30px 0 20px 0 !important;
+        }
+        
+        .hero-title {
+            font-size: 1.2rem !important;
+            line-height: 1.3 !important;
+        }
+        
+        .hero-text-block h2 {
+            font-size: 1.1rem !important;
+            margin-bottom: 0.8rem !important;
+        }
+        
+        .hero-description {
+            font-size: 0.9rem !important;
+            padding: 0 !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .hero-cta .btn {
+            font-size: 0.9rem !important;
+            padding: 10px 20px !important;
+        }
+        
+        /* Форма */
+        .signup-form {
+            padding: 1.2rem !important;
+            border-radius: 18px !important;
+        }
+        
+        .signup-form h5 {
+            font-size: 0.95rem !important;
+        }
+        
+        .field-wrapper input,
+        .field-wrapper select,
+        .field-wrapper textarea {
+            padding: 9px 14px !important;
+            font-size: 0.85rem !important;
+        }
+        
+        .submit-btn {
+            padding: 11px !important;
+            font-size: 0.9rem !important;
+        }
+        
+        .agreement-text {
+            font-size: 0.7rem !important;
+        }
+        
+        /* Разделители */
+        .custom-divider {
+            margin: 30px auto !important;
+            width: 85% !important;
+        }
+        
+        /* Секции */
+        .section-title-modern {
+            font-size: 1.2rem !important;
+        }
+        
+        .title-underline-modern {
+            width: 80px !important;
+            height: 3px !important;
+            margin-bottom: 1.5rem !important;
+        }
+        
+        .about-premium-section,
+        .faq-section,
+        .final-cta-section,
+        .contacts-section {
+            padding: 30px 0 !important;
+        }
+        
+        /* Benefit карточки */
+        .benefit-card {
+            padding: 1rem !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .benefit-icon {
+            width: 50px !important;
+            height: 50px !important;
+            font-size: 1.5rem !important;
+        }
+        
+        .benefit-title {
+            font-size: 1rem !important;
+        }
+        
+        .benefit-text {
+            font-size: 0.85rem !important;
+        }
+        
+        /* FAQ */
+        .faq-header {
+            padding: 12px 10px !important;
+        }
+        
+        .accordion-button {
+            font-size: 0.9rem !important;
+            padding: 0.8rem !important;
+        }
+        
+        .accordion-body {
+            font-size: 0.85rem !important;
+            padding: 0.8rem !important;
+        }
+        
+        /* Финальный CTA */
+        .final-cta-title {
+            font-size: 1.2rem !important;
+        }
+        
+        .final-cta-text {
+            font-size: 0.9rem !important;
+        }
+        
+        .final-cta-button {
+            font-size: 0.9rem !important;
+            padding: 11px 24px !important;
+        }
+        
+        /* Контакты */
+        .contact-item {
+            padding: 0.9rem !important;
+        }
+        
+        .contact-item i {
+            font-size: 1.3rem !important;
+        }
+        
+        .contact-item h5 {
+            font-size: 0.95rem !important;
+        }
+        
+        .contact-item p {
+            font-size: 0.85rem !important;
+        }
+        
+        .map-container {
+            height: 250px !important;
+        }
+    }
+    
+    /* === ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 400px) === */
+    @media (max-width: 400px) {
+        .hero-title {
+            font-size: 1.1rem !important;
+        }
+        
+        .hero-text-block h2 {
+            font-size: 1rem !important;
+        }
+        
+        .hero-description {
+            font-size: 0.85rem !important;
+        }
+        
+        .signup-form {
+            padding: 1rem !important;
+        }
+        
+        .section-title-modern {
+            font-size: 1.1rem !important;
+        }
+        
+        .custom-divider {
+            margin: 25px auto !important;
+        }
+    }
 </style>
 
 {% endblock %}

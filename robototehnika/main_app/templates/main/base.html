@@ -1025,7 +1025,7 @@ html {
         padding-left: 20px !important;
     }
 }
-/* Для экранов меньше 576px */
+    /* Для экранов меньше 576px */
 @media (max-width: 575.98px) {
     .logo-link svg {
         width: 160px !important;
@@ -1060,6 +1060,271 @@ html {
     /* Отступы для колонок подвала */
     .footer .col-12 {
         margin-bottom: 2rem;
+    }
+}
+
+/* ====================================================================================
+   УЛУЧШЕННАЯ МОБИЛЬНАЯ АДАПТАЦИЯ FOOTER - КАК В ABOUT.HTML
+==================================================================================== */
+
+/* === ПЛАНШЕТЫ (до 991px) === */
+@media (max-width: 991px) {
+    .footer {
+        padding: 60px 0 !important;
+    }
+    
+    .footer-section {
+        padding: 1.8rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .footer-section h6 {
+        font-size: 1.2rem !important;
+    }
+    
+    .logo-link svg {
+        width: 85% !important;
+        height: auto !important;
+    }
+    
+    .social-link {
+        width: 55px !important;
+        height: 55px !important;
+    }
+    
+    .social-link i {
+        font-size: 1.6rem !important;
+    }
+}
+
+/* === МОБИЛЬНЫЕ ТЕЛЕФОНЫ (до 767px) === */
+@media (max-width: 767px) {
+    .footer {
+        padding: 40px 0 !important;
+    }
+    
+    .footer .container {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    
+    /* Секции footer становятся блочными и центрируются */
+    .footer .row.justify-content-center > div {
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+    
+    .footer-section {
+        padding: 1.5rem !important;
+        margin-bottom: 1.2rem !important;
+        border-radius: 20px !important;
+        text-align: center !important;
+    }
+    
+    .footer-section h6 {
+        font-size: 1.1rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Логотип и описание */
+    .logo-link svg {
+        width: 80% !important;
+        height: 70px !important;
+    }
+    
+    .footer-section p {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+    }
+    
+    /* Навигация */
+    .footer-section ul {
+        text-align: center !important;
+    }
+    
+    .footer-section ul li {
+        margin-bottom: 0.8rem !important;
+    }
+    
+    .footer-link {
+        padding: 6px 10px !important;
+        font-size: 0.9rem !important;
+        border-radius: 10px !important;
+        justify-content: center !important;
+    }
+    
+    .footer-link i {
+        font-size: 1rem !important;
+    }
+    
+    /* Контакты */
+    .contact-info {
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .contact-item-footer {
+        padding: 10px !important;
+        margin-bottom: 0.8rem !important;
+        border-radius: 10px !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .contact-item-footer i {
+        font-size: 1.1rem !important;
+    }
+    
+    .contact-item-footer a {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Соцсети */
+    .social-icons {
+        justify-content: center !important;
+        gap: 0.8rem !important;
+    }
+    
+    .social-link {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    
+    .social-link i {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Нижняя часть с копирайтом */
+    .footer .row.mt-5 {
+        margin-top: 2rem !important;
+    }
+    
+    .footer .row.mt-5 p {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+    }
+}
+
+/* === МАЛЕНЬКИЕ МОБИЛЬНЫЕ (до 576px) === */
+@media (max-width: 576px) {
+    .footer {
+        padding: 30px 0 !important;
+    }
+    
+    .footer .container {
+        padding-left: 0.8rem !important;
+        padding-right: 0.8rem !important;
+    }
+    
+    .footer-section {
+        padding: 1.2rem !important;
+        margin-bottom: 1rem !important;
+        border-radius: 18px !important;
+    }
+    
+    .footer-section h6 {
+        font-size: 1rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+    
+    /* Логотип */
+    .logo-link svg {
+        width: 75% !important;
+        height: 60px !important;
+    }
+    
+    .footer-section p {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+    }
+    
+    /* Навигация */
+    .footer-link {
+        padding: 5px 8px !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .footer-link i {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Контакты */
+    .contact-info {
+        margin-bottom: 1.2rem !important;
+    }
+    
+    .contact-item-footer {
+        padding: 9px !important;
+        margin-bottom: 0.7rem !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .contact-item-footer i {
+        font-size: 1rem !important;
+    }
+    
+    .contact-item-footer a {
+        font-size: 0.85rem !important;
+    }
+    
+    /* Соцсети */
+    .social-icons {
+        gap: 0.6rem !important;
+    }
+    
+    .social-link {
+        width: 45px !important;
+        height: 45px !important;
+    }
+    
+    .social-link i {
+        font-size: 1.3rem !important;
+    }
+    
+    /* Копирайт */
+    .footer .row.mt-5 {
+        margin-top: 1.5rem !important;
+    }
+    
+    .footer .row.mt-5 p {
+        font-size: 0.8rem !important;
+    }
+    
+    .footer .row.mt-5 i {
+        font-size: 0.9rem !important;
+    }
+}
+
+/* === ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 400px) === */
+@media (max-width: 400px) {
+    .footer {
+        padding: 25px 0 !important;
+    }
+    
+    .footer-section {
+        padding: 1rem !important;
+    }
+    
+    .footer-section h6 {
+        font-size: 0.95rem !important;
+    }
+    
+    .logo-link svg {
+        width: 70% !important;
+        height: 55px !important;
+    }
+    
+    .footer-section p,
+    .footer-link,
+    .contact-item-footer a {
+        font-size: 0.8rem !important;
+    }
+    
+    .social-link {
+        width: 42px !important;
+        height: 42px !important;
+    }
+    
+    .social-link i {
+        font-size: 1.2rem !important;
     }
 }
 
