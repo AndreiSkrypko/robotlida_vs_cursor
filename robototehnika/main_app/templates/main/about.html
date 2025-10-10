@@ -332,7 +332,7 @@
     box-shadow: 0 8px 32px rgba(23,162,184,0.08);
     opacity: 0;
     animation: fadeInUp 1s ease-out forwards;
-    overflow: visible;
+    overflow: hidden;
 }
 
 .carousel-wrapper::before {
@@ -408,7 +408,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: visible;
+    overflow: hidden;
 }
 
 .carousel-track {
@@ -416,6 +416,7 @@
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
+    touch-action: pan-y pinch-zoom;
 }
 
 /* === 3D ЭЛЕМЕНТЫ ГАЛЕРЕИ С ПЛАВНЫМ ДВИЖЕНИЕМ ИЗДАЛЕКА === */
@@ -827,10 +828,12 @@
     .carousel-wrapper {
         max-width: 98vw;
         padding: 24px 12px 50px 12px;
+        overflow: hidden;
     }
     .carousel-inner-custom {
         height: 400px;
         perspective: 1400px;
+        overflow: hidden;
     }
     .carousel-item-custom {
         width: 500px;
@@ -892,63 +895,71 @@
 
 /* === Адаптация под телефоны === */
 @media (max-width: 600px) {
+    body {
+        overflow-x: hidden;
+    }
+    
     .carousel-wrapper {
         padding: 16px 8px 40px 8px;
+        margin: 0 auto 60px auto;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
     }
     .carousel-wrapper h1 {
         font-size: 1.25rem;
         margin-bottom: 1rem;
     }
+    
+    .carousel-wrapper::before,
+    .carousel-wrapper::after {
+        display: none;
+    }
+    
     .carousel-inner-custom {
         height: 280px;
-        perspective: 1000px;
+        perspective: 800px;
+        overflow: hidden;
     }
     .carousel-item-custom {
-        width: 340px;
-        height: 225px;
-        margin-left: -170px;
-        margin-top: -112px;
+        width: 280px;
+        height: 185px;
+        margin-left: -140px;
+        margin-top: -92.5px;
     }
     .carousel-item-custom[data-position="0"] {
-        transform: translateX(0) translateZ(50px) scale(1.03) rotateY(0deg);
+        transform: translateX(0) translateZ(40px) scale(1.02) rotateY(0deg);
         filter: brightness(1.05) contrast(1.05);
         border: 3px solid #17a2b8;
+        animation: none;
     }
     .carousel-item-custom[data-position="1"] {
-        transform: translateX(250px) translateZ(-200px) scale(0.65) rotateY(-25deg);
-        opacity: 0.6;
+        transform: translateX(180px) translateZ(-150px) scale(0.6) rotateY(-20deg);
+        opacity: 0.5;
         filter: brightness(0.8) blur(1px);
         border: 2px solid rgba(13, 148, 136, 0.25);
     }
     .carousel-item-custom[data-position="-1"] {
-        transform: translateX(-250px) translateZ(-200px) scale(0.65) rotateY(25deg);
-        opacity: 0.6;
+        transform: translateX(-180px) translateZ(-150px) scale(0.6) rotateY(20deg);
+        opacity: 0.5;
         filter: brightness(0.8) blur(1px);
         border: 2px solid rgba(13, 148, 136, 0.25);
     }
-    .carousel-item-custom[data-position="2"] {
-        transform: translateX(400px) translateZ(-380px) scale(0.48) rotateY(-32deg);
-        opacity: 0.3;
-        filter: brightness(0.7) blur(1.5px);
-        border: 2px solid rgba(13, 148, 136, 0.15);
-    }
-    .carousel-item-custom[data-position="-2"] {
-        transform: translateX(-400px) translateZ(-380px) scale(0.48) rotateY(32deg);
-        opacity: 0.3;
-        filter: brightness(0.7) blur(1.5px);
-        border: 2px solid rgba(13, 148, 136, 0.15);
-    }
+    .carousel-item-custom[data-position="2"],
+    .carousel-item-custom[data-position="-2"],
     .carousel-item-custom[data-position="3"],
     .carousel-item-custom[data-position="-3"],
     .carousel-item-custom[data-position="4"],
     .carousel-item-custom[data-position="-4"] {
-        transform: translateX(500px) translateZ(-500px) scale(0.3);
+        transform: translateX(300px) translateZ(-300px) scale(0.4);
         opacity: 0;
         filter: brightness(0.5) blur(2px);
         border: 1px solid rgba(13, 148, 136, 0.1);
+        pointer-events: none;
     }
-    .carousel-item-custom[data-position="0"]:hover {
-        transform: translateX(0) translateZ(80px) scale(1.06) rotateY(0deg);
+    .carousel-item-custom[data-position="0"]:hover,
+    .carousel-item-custom[data-position="0"]:active {
+        transform: translateX(0) translateZ(50px) scale(1.04) rotateY(0deg);
         border: 4px solid #CC5500;
     }
     .carousel-control {
@@ -956,6 +967,12 @@
         height: 42px;
         font-size: 1.7rem;
         border-width: 2px;
+    }
+    .carousel-control-left {
+        left: 5px;
+    }
+    .carousel-control-right {
+        right: 5px;
     }
     .carousel-item-custom::after {
         font-size: 2.2rem;
@@ -980,6 +997,30 @@
     .lightbox-counter {
         font-size: 0.95rem;
         padding: 8px 18px;
+    }
+}
+
+/* === Адаптация для очень маленьких экранов === */
+@media (max-width: 380px) {
+    .carousel-item-custom {
+        width: 260px;
+        height: 172px;
+        margin-left: -130px;
+        margin-top: -86px;
+    }
+    
+    .carousel-item-custom[data-position="1"] {
+        transform: translateX(150px) translateZ(-130px) scale(0.55) rotateY(-18deg);
+    }
+    
+    .carousel-item-custom[data-position="-1"] {
+        transform: translateX(-150px) translateZ(-130px) scale(0.55) rotateY(18deg);
+    }
+    
+    .carousel-control {
+        width: 38px;
+        height: 38px;
+        font-size: 1.5rem;
     }
 }
 
@@ -1514,6 +1555,7 @@
     let carouselItems = [];
     let autoRotateInterval;
     let isTransitioning = false;
+    let isMobile = window.innerWidth <= 600;
 
     document.addEventListener('DOMContentLoaded', function () {
         const track = document.getElementById('carouselTrack');
@@ -1522,7 +1564,7 @@
         // Инициализируем позиции слайдов
         updateCarousel(true);
         
-        // Автоматическое вращение каждые 3 секунды (динамичная прокрутка)
+        // Автоматическое вращение каждые 4 секунды (на мобильных замедляем)
         startAutoRotate();
         
         // Добавляем клики и события наведения для каждого слайда
@@ -1573,6 +1615,52 @@
                 scrollCarousel(1);
             }
         });
+        
+        // Обновление флага isMobile при изменении размера окна
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                const wasMobile = isMobile;
+                isMobile = window.innerWidth <= 600;
+                if (wasMobile !== isMobile) {
+                    // Перезапускаем автовращение с новым интервалом
+                    stopAutoRotate();
+                    startAutoRotate();
+                }
+            }, 250);
+        });
+        
+        // Добавляем поддержку свайпов для мобильных устройств
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const carouselInner = document.getElementById('customCarousel');
+        
+        if (carouselInner) {
+            carouselInner.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            carouselInner.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+        }
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Свайп влево - следующий слайд
+                    scrollCarousel(1);
+                } else {
+                    // Свайп вправо - предыдущий слайд
+                    scrollCarousel(-1);
+                }
+            }
+        }
     });
 
     function updateCarousel(instant = false) {
@@ -1618,9 +1706,10 @@
 
     function startAutoRotate() {
         clearInterval(autoRotateInterval);
+        const interval = isMobile ? 4000 : 3000; // На мобильных замедляем до 4 секунд
         autoRotateInterval = setInterval(() => {
             scrollCarousel(1);
-        }, 3000); // Быстрая автопрокрутка - смена фото каждые 3 секунды
+        }, interval);
     }
 
     function stopAutoRotate() {
