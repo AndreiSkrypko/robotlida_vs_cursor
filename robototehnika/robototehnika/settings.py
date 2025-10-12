@@ -1,5 +1,9 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+# Загружаем переменные окружения из .env файла (если он есть)
+load_dotenv()
 
 # === Базовая директория (там, где manage.py) ===
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -109,3 +113,14 @@ SITE_ID = 1
 # SECURE_BROWSER_XSS_FILTER = True
 # SECURE_CONTENT_TYPE_NOSNIFF = True
 # X_FRAME_OPTIONS = 'DENY'
+
+# === Настройки Telegram Bot ===
+# ВАЖНО: Замените эти значения на свои!
+# Как получить токен: @BotFather в Telegram -> /newbot
+# Как получить chat_id: напишите боту @userinfobot и скопируйте Id
+# 
+# Для безопасности можно использовать переменные окружения (.env файл):
+# TELEGRAM_BOT_TOKEN=ваш_токен
+# TELEGRAM_CHAT_ID=ваш_chat_id
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', 'YOUR_BOT_TOKEN_HERE')
+TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID', 'YOUR_CHAT_ID_HERE')
