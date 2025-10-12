@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # === Безопасность ===
 SECRET_KEY = 'django-insecure--^-$0sj_8oonw7-&v@b^(q$m=3v#l%)-tt4h6nz)dcqe3r@z58'
 DEBUG = True  # В продакшене — False
-ALLOWED_HOSTS = ['robotlida.by', 'www.robotlida.by', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['robotlida.by', 'www.robotlida.by', 'localhost', '127.0.0.1', 'testserver']
 
 # === Приложения ===
 INSTALLED_APPS = [
@@ -20,6 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',  # для динамического sitemap.xml
+    'django.contrib.sites',  # для Django sitemaps
     'forum_app',
     'login_app',
 ]
@@ -95,3 +97,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # === Тип ID по умолчанию ===
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# === Для Django Sites Framework ===
+SITE_ID = 1
+
+# === Настройки для продакшена и SEO ===
+# Безопасность (раскомментировать в продакшене)
+# SECURE_SSL_REDIRECT = True  # Перенаправление на HTTPS
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_BROWSER_XSS_FILTER = True
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+# X_FRAME_OPTIONS = 'DENY'
