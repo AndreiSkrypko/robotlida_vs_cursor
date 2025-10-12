@@ -1575,11 +1575,7 @@ body {
 
                     <a href="{% url 'index' %}#contacts" class="nav-link-custom">КОНТАКТЫ</a>
 
-                    {% if user.is_authenticated %}
                     <a href="/forum_list/" class="nav-link-custom">ФОРУМ</a>
-                    {% else %}
-                    <a href="/login/" class="nav-link-custom">ФОРУМ</a>
-                    {% endif %}
 
                     <!-- Войти/Выйти и Записаться (только на мобилке) -->
                     <div class="d-md-none mt-3">

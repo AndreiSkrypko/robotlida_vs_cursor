@@ -341,9 +341,15 @@
 
     <div class="forum-header">
       <div></div>
+      {% if user.is_authenticated %}
       <a href="{% url 'create_post' %}" class="btn btn-create-post">
         <i class="bi bi-plus-circle-fill me-2"></i>Создать пост
       </a>
+      {% else %}
+      <a href="{% url 'login' %}" class="btn btn-create-post">
+        <i class="bi bi-box-arrow-in-right me-2"></i>Войти для создания поста
+      </a>
+      {% endif %}
     </div>
 
     {% if messages %}
@@ -393,6 +399,7 @@
                     {% endif %}
                 </div>
 
+                {% if user.is_authenticated %}
                 <div class="reply-form-section">
                     <form method="post" action="{% url 'create_reply' post.id %}" class="reply-form">
                         {% csrf_token %}
@@ -402,15 +409,29 @@
                         </button>
                     </form>
                 </div>
+                {% else %}
+                <div class="reply-form-section">
+                    <div class="alert alert-info text-center mb-0">
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                        <a href="{% url 'login' %}">Войдите</a>, чтобы оставить ответ
+                    </div>
+                </div>
+                {% endif %}
             </div>
         {% endfor %}
     {% else %}
         <div class="alert alert-info text-center" style="padding: 2rem; font-size: 1.2rem;">
             <i class="bi bi-inbox-fill me-2" style="font-size: 2rem;"></i>
             <div>Постов пока нет.</div>
+            {% if user.is_authenticated %}
             <a href="{% url 'create_post' %}" class="mt-2 d-inline-block">
               <i class="bi bi-plus-circle me-2"></i>Создайте первый пост!
             </a>
+            {% else %}
+            <a href="{% url 'login' %}" class="mt-2 d-inline-block">
+              <i class="bi bi-box-arrow-in-right me-2"></i>Войдите, чтобы создать первый пост!
+            </a>
+            {% endif %}
         </div>
     {% endif %}
   </div>

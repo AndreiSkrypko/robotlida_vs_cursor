@@ -310,7 +310,10 @@
         <i class="bi bi-person-plus-fill"></i>
     </div>
 
-    <h2>Регистрация</h2>
+    <h2>Быстрая регистрация</h2>
+    <p style="text-align: center; color: #64748b; margin-bottom: 1.5rem; font-size: 0.95rem;">
+        Всего 2 поля — и вы уже с нами! 🚀
+    </p>
 
     <form method="post">
         {% csrf_token %}
@@ -341,47 +344,19 @@
         </div>
 
         <div class="form-group">
-            <label for="{{ form.email.id_for_label }}">
-                <i class="bi bi-envelope-fill"></i>Email
-            </label>
-            {{ form.email }}
-            {% if form.email.errors %}
-            <ul class="errorlist">
-                {% for error in form.email.errors %}
-                <li><i class="bi bi-x-circle-fill me-1"></i>{{ error }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.password1.id_for_label }}">
+            <label for="{{ form.password.id_for_label }}">
                 <i class="bi bi-key-fill"></i>Пароль
             </label>
-            {{ form.password1 }}
-            {% if form.password1.errors %}
+            {{ form.password }}
+            {% if form.password.errors %}
             <ul class="errorlist">
-                {% for error in form.password1.errors %}
+                {% for error in form.password.errors %}
                 <li><i class="bi bi-x-circle-fill me-1"></i>{{ error }}</li>
                 {% endfor %}
             </ul>
             {% endif %}
-            {% if form.password1.help_text %}
-            <div class="helptext">{{ form.password1.help_text|safe }}</div>
-            {% endif %}
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.password2.id_for_label }}">
-                <i class="bi bi-shield-lock-fill"></i>Подтверждение пароля
-            </label>
-            {{ form.password2 }}
-            {% if form.password2.errors %}
-            <ul class="errorlist">
-                {% for error in form.password2.errors %}
-                <li><i class="bi bi-x-circle-fill me-1"></i>{{ error }}</li>
-                {% endfor %}
-            </ul>
+            {% if form.password.help_text %}
+            <div class="helptext">{{ form.password.help_text|safe }}</div>
             {% endif %}
         </div>
 

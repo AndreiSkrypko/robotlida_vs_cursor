@@ -6,7 +6,6 @@ from .models import ForumPost, ForumReply
 from .forms import ForumPostForm, ForumReplyForm
 
 
-@login_required
 def forum_list(request):
     posts = ForumPost.objects.all().order_by('-created_at')
     reply_forms = {post.id: ForumReplyForm() for post in posts}
