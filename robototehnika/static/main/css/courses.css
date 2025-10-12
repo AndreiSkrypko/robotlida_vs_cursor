@@ -1,261 +1,408 @@
 /* ==========================================================================
-       🧱 ОСНОВНАЯ СТРУКТУРА СТРАНИЦЫ
+       🎨 ПРЕМИУМ СТИЛИ ДЛЯ СТРАНИЦ КУРСОВ
        ========================================================================== */
 
     /* Фон страницы */
     body {
-        background-color: var(--main-gray) !important; /* Светло-серый из палитры переменных */
-        margin: 0; /* Убираем отступы по умолчанию */
+        background: linear-gradient(145deg, #f8fafc 0%, #ffffff 50%, #e9ecef 100%);
+        margin: 0;
     }
 
     /* Верхняя навигационная панель */
     .navbar {
-        background-color: var(--main-white) !important; /* Белый фон */
-        border-bottom: none; /* Убираем нижнюю границу */
+        background-color: var(--main-white) !important;
+        border-bottom: none;
     }
 
-    /* Общий контейнер без фона */
+    /* Общий контейнер */
     .container {
         background-color: transparent;
+        position: relative;
+        z-index: 1;
     }
 
-    /* Заголовки секций */
+    /* Заголовки секций - премиум */
     .section-title {
         font-family: 'Poppins', sans-serif;
-        color: var(--main-green);
-        font-weight: 700;
-        letter-spacing: 1px;
-        margin-bottom: 0.5em;
+        color: #1e293b;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #0d9488, #17a2b8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 4px 16px rgba(13, 148, 136, 0.15);
     }
 
 
     /* ==========================================================================
-       🎓 КАРТОЧКИ КУРСОВ (3D стили)
+       🎓 ПРЕМИУМ КАРТОЧКИ КУРСОВ
        ========================================================================== */
 
     .course-card {
-        background: linear-gradient(135deg, #f9fef9 60%, #e3f6f7 100%);
-        border: none;
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border: 2px solid rgba(13, 148, 136, 0.15);
         border-radius: 28px;
-        padding: 2rem 1.5rem 1.5rem 1.5rem;
+        padding: 2.5rem 2rem;
         min-height: 100%;
         display: flex;
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
         box-shadow:
-            0 8px 32px 0 rgba(19, 78, 74, 0.18),
-            0 2px 8px #b2e6ea;
-        transition: box-shadow 0.25s, transform 0.18s;
+            0 12px 40px rgba(0, 0, 0, 0.08),
+            0 6px 20px rgba(13, 148, 136, 0.1);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
-        overflow: visible;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease-out forwards;
     }
 
-    .course-card:hover {
-        /* Эффект наведения */
-        box-shadow: 0 16px 48px 0 rgba(19, 78, 74, 0.28), 0 4px 16px #b2e6ea;
-        transform: translateY(-6px) scale(1.025);
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
+    /* Анимированная градиентная рамка */
     .course-card::before {
-        /* Сияние под карточкой */
-        content: "";
+        content: '';
         position: absolute;
         inset: 0;
         border-radius: 28px;
-        z-index: -1;
-        background: linear-gradient(120deg, #134e4a 0%, #134e4a 100%);
-        opacity: 0.13;
-        filter: blur(8px);
+        padding: 2px;
+        background: linear-gradient(135deg, #0d9488, #17a2b8, #CC5500, #ff9500);
+        background-size: 300% 300%;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        animation: gradientRotate 4s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes gradientRotate {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .course-card:hover::before {
+        opacity: 1;
+    }
+
+    .course-card:hover {
+        transform: translateY(-12px) scale(1.03);
+        box-shadow: 
+            0 20px 60px rgba(13, 148, 136, 0.2),
+            0 10px 30px rgba(204, 85, 0, 0.15);
+        border-color: rgba(13, 148, 136, 0.3);
     }
 
     /* Изображение курса */
     .course-image {
         width: 100%;
-        height: 220px;
+        height: 280px;
         object-fit: cover;
-        border-radius: 18px;
-        margin-bottom: 1.2rem;
-        background: #f9fef9;
-        box-shadow: 0 4px 24px 0 rgba(19, 78, 74, 0.13);
-        border: 2.5px solid #b2e6ea;
+        border-radius: 20px;
+        margin-bottom: 2rem;
+        background: linear-gradient(145deg, #f8fafc, #e9ecef);
+        box-shadow: 0 8px 24px rgba(13, 148, 136, 0.15);
+        border: 3px solid rgba(13, 148, 136, 0.2);
+        transition: all 0.5s ease;
+    }
+
+    .course-card:hover .course-image {
+        transform: scale(1.05) rotate(1deg);
+        box-shadow: 0 12px 32px rgba(13, 148, 136, 0.25);
     }
 
     /* Заголовок курса */
     .course-card h4 {
-        font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+        font-family: 'Poppins', sans-serif;
         font-weight: 800;
-        font-size: 1.45rem;
-        color: #134e4a;
-        letter-spacing: 0.01em;
-        margin-bottom: 0.5rem;
-        text-shadow: 0 2px 8px #b2e6ea33;
+        font-size: 1.6rem;
+        color: #1e293b;
+        letter-spacing: 0.3px;
+        margin-bottom: 1rem;
+        text-shadow: none;
+        transition: all 0.3s ease;
+    }
+
+    .course-card:hover h4 {
+        background: linear-gradient(135deg, #0d9488, #17a2b8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     /* Подзаголовок (метка) */
     .course-card h4 span {
         color: #fff;
-        background: linear-gradient(90deg, #CD5B45 0%, #ffb199 100%);
-        border-radius: 8px;
-        padding: 0.2em 0.7em;
-        font-size: 0.95em;
-        font-weight: 600;
-        margin-top: 0.3em;
+        background: linear-gradient(145deg, #CC5500, #ff9500);
+        border-radius: 50px;
+        padding: 0.4em 1.2em;
+        font-size: 0.9em;
+        font-weight: 700;
+        margin-top: 0.5em;
         display: inline-block;
-        box-shadow: 0 2px 8px #CD5B4533;
-        letter-spacing: 0.01em;
+        box-shadow: 0 6px 20px rgba(204, 85, 0, 0.4);
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
     }
 
     /* Описание курса */
     .course-card p {
-        font-size: 1.08rem;
-        font-weight: 400;
-        color: #444;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #64748b;
         margin: 0;
-        text-align: justify;
+        text-align: center;
+        line-height: 1.8;
     }
 
 
     /* ==========================================================================
-       📌 ИНФОРМАЦИОННЫЕ КАРТОЧКИ
+       📌 ПРЕМИУМ ИНФОРМАЦИОННЫЕ КАРТОЧКИ
        ========================================================================== */
 
-    /* === ИНФОРМАЦИОННЫЕ КАРТОЧКИ (info-card) === */
 .info-card {
-    /* Фон: мягкий градиент в цветовой гамме course-card */
-    background: linear-gradient(135deg, #f9fef9 60%, #e3f6f7 100%);
-
-    /* Скруглённые края и мягкие тени */
-    border-radius: 28px;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 24px;
     box-shadow:
-        0 8px 32px 0 rgba(19, 78, 74, 0.18),
-        0 2px 8px #b2e6ea;
-
-    /* Внутренние отступы и расположение */
-    padding: 2rem 1.2rem;
-    margin-bottom: 1.2rem;
-    min-height: 120px;
+        0 8px 32px rgba(0, 0, 0, 0.08),
+        0 4px 16px rgba(0, 0, 0, 0.04);
+    padding: 2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    min-height: 140px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    /* Дополнительные декоративные элементы */
-    border: none;
+    border: 2px solid rgba(13, 148, 136, 0.1);
     position: relative;
-    overflow: visible;
-    transition: box-shadow 0.25s, transform 0.18s;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
 }
 
+.info-card:nth-child(1) { animation-delay: 0.1s; }
+.info-card:nth-child(2) { animation-delay: 0.2s; }
+.info-card:nth-child(3) { animation-delay: 0.3s; }
+.info-card:nth-child(4) { animation-delay: 0.4s; }
+
 .info-card:hover {
-    /* Эффект "подъема" при наведении */
-    box-shadow: 0 16px 48px 0 rgba(19, 78, 74, 0.28), 0 4px 16px #b2e6ea;
-    transform: translateY(-6px) scale(1.025);
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 
+        0 16px 48px rgba(13, 148, 136, 0.15),
+        0 8px 24px rgba(0, 0, 0, 0.1);
+    border-color: rgba(13, 148, 136, 0.3);
 }
 
 .info-card::before {
-    /* Мягкое внутреннее сияние как у .course-card */
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: 28px;
-    z-index: -1;
-    background: linear-gradient(120deg, #134e4a 0%, #134e4a 100%);
-    opacity: 0.13;
-    filter: blur(8px);
+    border-radius: 24px;
+    background: radial-gradient(circle at top right, rgba(204, 85, 0, 0.06), transparent);
+    pointer-events: none;
 }
 
 /* === ИКОНКА ВНУТРИ info-card === */
 .info-icon {
-    font-size: 2.4rem;
-    color: #134e4a;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 8px #b2e6ea33;
+    font-size: 2.8rem;
+    background: linear-gradient(135deg, #0d9488, #17a2b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.8rem;
+    filter: drop-shadow(0 2px 8px rgba(13, 148, 136, 0.2));
+    transition: all 0.4s ease;
+}
+
+.info-card:hover .info-icon {
+    transform: scale(1.15) rotate(10deg);
 }
 
 /* === ТЕКСТ ВНУТРИ info-card === */
 .info-text {
-    font-size: 1.13rem;
-    font-weight: 500;
-    color: #333;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #475569;
     margin: 0;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.3px;
     text-align: center;
+    line-height: 1.6;
+}
+
+.info-text span {
+    font-weight: 800;
+    background: linear-gradient(135deg, #17a2b8, #0d9488);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
     /* ==========================================================================
-       🪄 ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ
+       🪄 ПРЕМИУМ ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ
        ========================================================================== */
 
     /* Разделительная линия */
     .custom-divider {
         border: none;
-        border-top: 2px solid var(--main-green);
-        width: 80px;
-        margin: 2.5rem auto;
-        opacity: 0.25;
+        height: 4px;
+        background: linear-gradient(90deg, transparent, #0d9488, #CC5500, #ff9500, transparent);
+        width: 60%;
+        margin: 3rem auto;
+        border-radius: 4px;
+        box-shadow: 0 2px 12px rgba(204, 85, 0, 0.3);
     }
 
 
     /* ==========================================================================
-       💳 АБОНЕМЕНТНЫЕ КАРТОЧКИ
+       💳 ПРЕМИУМ АБОНЕМЕНТНЫЕ КАРТОЧКИ
        ========================================================================== */
 
     .abonement-card {
-        border: 2px solid var(--main-green);
-        border-radius: 18px;
-        background: var(--main-white);
-        box-shadow: 0 4px 16px rgba(13, 148, 136, 0.08);
-        padding: 2rem 1.2rem;
-        min-height: 170px;
+        border: 2px solid rgba(13, 148, 136, 0.2);
+        border-radius: 24px;
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.08),
+            0 4px 16px rgba(13, 148, 136, 0.1);
+        padding: 2.5rem 1.5rem;
+        min-height: 200px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        transition: box-shadow 0.2s;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .abonement-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at bottom left, rgba(13, 148, 136, 0.05), transparent);
+        pointer-events: none;
     }
 
     .abonement-card:hover {
-        box-shadow: 0 8px 24px rgba(13, 148, 136, 0.18);
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 
+            0 16px 48px rgba(13, 148, 136, 0.2),
+            0 8px 24px rgba(204, 85, 0, 0.15);
+        border-color: rgba(13, 148, 136, 0.4);
     }
 
     /* Заголовок */
     .abonement-card h4 {
-        color: var(--main-green);
-        font-weight: 700;
-        font-size: 1.25rem;
-        margin-bottom: 0.5rem;
+        color: #1e293b;
+        font-weight: 800;
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: 0.3px;
+    }
+
+    .abonement-card:hover h4 {
+        background: linear-gradient(135deg, #0d9488, #17a2b8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     /* Текст */
     .abonement-card .info-text {
-        color: #444;
+        color: #64748b;
         font-size: 1.05rem;
-        font-weight: 500;
+        font-weight: 600;
     }
 
 
     /* ==========================================================================
-       🟩 КНОПКА "ЗАПИСАТЬСЯ"
+       🟩 ПРЕМИУМ КНОПКА "ЗАПИСАТЬСЯ"
        ========================================================================== */
 
     .btn-signup {
-        background-color: var(--main-green);
-        border: none;
-        border-radius: 6px;
-        font-size: 1.25rem;
-        font-weight: 700;
-        padding: 1.1rem 3.5rem;
+        background: linear-gradient(145deg, var(--main-green), #17a2b8);
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50px;
+        font-size: 1.3rem;
+        font-weight: 800;
+        padding: 1.2rem 4rem;
         color: var(--main-white);
-        box-shadow: 0 4px 16px rgba(13, 148, 136, 0.18);
-        transition: background-color 0.3s, transform 0.2s;
-        letter-spacing: 0.5px;
+        box-shadow: 
+            0 8px 32px rgba(13, 148, 136, 0.4),
+            0 0 24px rgba(13, 148, 136, 0.2);
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+    }
+
+    /* Блик на кнопке */
+    .btn-signup::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+        transition: left 0.7s ease;
+        animation: autoShine 3s ease-in-out infinite;
+    }
+
+    @keyframes autoShine {
+        0%, 100% { left: -100%; }
+        50% { left: 100%; }
+    }
+
+    .btn-signup:hover::before {
+        animation: none;
+        left: 100%;
+    }
+
+    /* Светящийся ореол */
+    .btn-signup::after {
+        content: '';
+        position: absolute;
+        inset: -6px;
+        border-radius: 50px;
+        background: linear-gradient(145deg, #0d9488, #17a2b8);
+        opacity: 0;
+        z-index: -1;
+        filter: blur(20px);
+        transition: opacity 0.4s;
+    }
+
+    .btn-signup:hover::after {
+        opacity: 0.7;
     }
 
     .btn-signup:hover,
     .btn-signup:focus {
-        background-color: var(--main-green-dark);
-        transform: scale(1.04);
+        background: linear-gradient(145deg, #17a2b8, var(--main-green));
+        transform: translateY(-6px) scale(1.08);
+        box-shadow: 
+            0 16px 48px rgba(13, 148, 136, 0.6),
+            0 0 40px rgba(13, 148, 136, 0.3);
         color: var(--main-white);
+    }
+
+    .btn-signup:active {
+        transform: translateY(-3px) scale(1.05);
     }
 
 
@@ -267,11 +414,21 @@
     @media (max-width: 991px) {
         .course-card {
             max-width: 100%;
-            padding: 1.2rem 0.5rem 1rem 0.5rem;
+            padding: 2rem 1.5rem;
         }
 
         .course-image {
             max-width: 100%;
+            height: 240px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+        }
+
+        .btn-signup {
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
         }
     }
 
@@ -279,11 +436,45 @@
     @media (max-width: 767px) {
         .info-card,
         .abonement-card {
-            min-height: 120px;
-            padding: 1.2rem 0.7rem;
+            min-height: 130px;
+            padding: 1.5rem 1rem;
         }
 
         .course-card {
             min-height: unset;
+            padding: 1.8rem 1.2rem;
+        }
+
+        .course-image {
+            height: 200px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+        }
+
+        .btn-signup {
+            padding: 0.9rem 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-icon {
+            font-size: 2.3rem;
+        }
+    }
+
+    /* Очень маленькие экраны */
+    @media (max-width: 576px) {
+        .course-card h4 {
+            font-size: 1.3rem;
+        }
+
+        .course-card p {
+            font-size: 1rem;
+        }
+
+        .btn-signup {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
         }
     }
