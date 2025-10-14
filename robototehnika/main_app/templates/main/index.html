@@ -2747,6 +2747,12 @@ document.addEventListener('DOMContentLoaded', function() {
             faqCards.forEach(otherCard => {
                 if (otherCard !== card && otherCard.classList.contains('active')) {
                     otherCard.classList.remove('active');
+                    // Сбрасываем maxHeight для закрытых карточек
+                    const otherContent = otherCard.querySelector('.faq-content');
+                    if (otherContent) {
+                        otherContent.style.maxHeight = '0';
+                        otherContent.style.opacity = '0';
+                    }
                 }
             });
             
@@ -2757,8 +2763,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (card.classList.contains('active')) {
                 const contentHeight = content.scrollHeight;
                 content.style.maxHeight = contentHeight + 'px';
+                content.style.opacity = '1';
             } else {
                 content.style.maxHeight = '0';
+                content.style.opacity = '0';
             }
         });
         
