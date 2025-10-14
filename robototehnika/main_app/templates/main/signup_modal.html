@@ -70,17 +70,7 @@
         z-index: 1;
     }
 
-    /* Кнопка закрытия */
-    .btn-close-white {
-        filter: brightness(0) invert(1);
-        opacity: 0.9;
-        transition: all 0.3s ease;
-    }
-
-    .btn-close-white:hover {
-        opacity: 1;
-        transform: rotate(90deg) scale(1.1);
-    }
+    /* Кнопка закрытия удалена */
 
     /* Тело модального окна */
     .modal-body {
@@ -221,17 +211,20 @@
                         <i class="bi bi-stars me-2"></i>Запись на пробное занятие 
                     {% endif %}
                 </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Закрыть"></button>
             </div>
 
             <!-- Тело модального окна -->
             <div class="modal-body p-4">
                 {% if success %}
-                <div class="alert alert-success text-center rounded-3 mb-0">
+                <div class="alert alert-success text-center rounded-3 mb-4">
                     <i class="bi bi-heart-fill me-2" style="font-size: 1.5rem;"></i>
                     <div style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem;">Спасибо за обращение!</div>
                     Мы с вами свяжемся в ближайшее время.
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-success btn-lg" onclick="closeModal()">
+                        <i class="bi bi-check-circle-fill me-2"></i>Отлично!
+                    </button>
                 </div>
                 {% else %}
                 <form method="post" novalidate>
@@ -263,10 +256,15 @@
                         {{ form.comment }}
                     </div>
 
-                    <button type="submit" class="btn btn-premium-submit w-100">
-                        <i class="bi bi-rocket-takeoff-fill me-2"></i>
-                        <span style="position: relative; z-index: 1;">Оставить заявку</span>
-                    </button>
+                    <div class="d-flex gap-3">
+                        <button type="submit" class="btn btn-premium-submit flex-grow-1">
+                            <i class="bi bi-rocket-takeoff-fill me-2"></i>
+                            <span style="position: relative; z-index: 1;">Оставить заявку</span>
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary" onclick="closeModal()">
+                            <i class="bi bi-x-lg me-2"></i>Закрыть
+                        </button>
+                    </div>
 
                     <p class="text-muted text-center mt-3 mb-0" style="font-size: 0.9rem;">
                         <i class="bi bi-shield-check-fill me-1" style="color: #0d9488;"></i>
@@ -287,12 +285,70 @@
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('signupModal');
     if (modal) {
+        
+        // Функция для закрытия модального окна (глобальная)
+        window.closeModal = function() {
+            // Пробуем использовать Bootstrap API
+            if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+                const bsModal = bootstrap.Modal.getInstance(modal);
+                if (bsModal) {
+                    bsModal.hide();
+                    return;
+                }
+            }
+            
+            // Fallback: закрываем вручную
+            modal.classList.remove('show');
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+            modal.removeAttribute('aria-modal');
+            
+            // Убираем класс modal-open с body
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+            
+            // Удаляем backdrop если есть
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+            
+            // Возвращаем фокус на элемент, который открыл модальное окно
+            const focusedElement = document.querySelector('[data-bs-toggle="modal"]');
+            if (focusedElement) {
+                focusedElement.focus();
+            }
+        };
+        
+        // Фокус на первое поле при открытии
         modal.addEventListener('shown.bs.modal', function() {
             const firstInput = modal.querySelector('input');
             if (firstInput) {
                 firstInput.focus();
             }
         });
+        
+        // Обработка кнопки закрытия удалена - крестик убран
+        
+        // Обработка клика по фону модального окна
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Обработка клавиши Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('show')) {
+                closeModal();
+            }
+        });
+        
+        // Проверяем, что Bootstrap загружен
+        if (typeof bootstrap === 'undefined') {
+            console.warn('Bootstrap не загружен. Модальное окно может работать некорректно.');
+        }
     }
 });
 </script>
