@@ -121,55 +121,158 @@
         66% { transform: translate(-20px, 20px) rotate(240deg); }
     }
 
+    /* === ЭЛЕГАНТНЫЕ ЗАГОЛОВКИ === */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+    
     .section-title {
-        font-size: 2.5rem;
-        font-weight: 900;
-        font-family: 'Poppins', sans-serif;
-        letter-spacing: 1.5px;
-        opacity: 1;
+        font-size: 3.2rem;
+        font-weight: 600;
+        font-family: 'Playfair Display', serif;
+        letter-spacing: -0.01em;
+        opacity: 0;
         position: relative;
         display: inline-block;
-        transition: transform 0.05s ease-out;
-        background: linear-gradient(135deg, #0d9488 0%, #17a2b8 25%, #14b8a6 50%, #CC5500 75%, #ff9500 100%);
-        background-size: 200% 200%;
+        margin: 0 auto;
+        text-align: center;
+        
+        /* Элегантный градиент */
+        background: linear-gradient(
+            135deg,
+            #1a1a1a 0%,
+            #0d9488 25%,
+            #14b8a6 50%,
+            #CC5500 75%,
+            #1a1a1a 100%
+        );
+        background-size: 300% 300%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        filter: drop-shadow(0 4px 12px rgba(13, 148, 136, 0.4)) drop-shadow(0 2px 6px rgba(204, 85, 0, 0.3));
-        text-transform: uppercase;
-        animation: gradientShift 3s ease-in-out infinite;
+        
+        /* Тонкие тени для элегантности */
+        filter: drop-shadow(0 2px 8px rgba(13, 148, 136, 0.1));
+        
+        text-transform: none;
+        line-height: 1.2;
+        
+        /* Плавная анимация появления */
+        animation: elegantMorphing 12s ease-in-out infinite,
+                   elegantAppear 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+        
+        /* Элегантный эффект */
+        backdrop-filter: blur(0px);
     }
 
-    @keyframes gradientShift {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-    }
-
-    /* Мигающий курсор с градиентом */
-    .section-title::after {
-        content: '|';
-        background: linear-gradient(180deg, #CC5500, #ff9500);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        animation: blink 0.7s infinite;
-        margin-left: 8px;
-        font-weight: 900;
-        filter: drop-shadow(0 0 8px rgba(204, 85, 0, 0.6));
-    }
-
-    .section-title.typing-complete::after {
-        display: none;
-    }
-
-    @keyframes blink {
-        0%, 100% { 
-            opacity: 1;
-            filter: drop-shadow(0 0 8px rgba(204, 85, 0, 0.8));
+    /* Элегантная анимация морфинга градиента */
+    @keyframes elegantMorphing {
+        0% { 
+            background-position: 0% 50%;
+            filter: drop-shadow(0 2px 8px rgba(13, 148, 136, 0.1));
         }
-        50% { 
+        33% { 
+            background-position: 100% 25%;
+            filter: drop-shadow(0 2px 8px rgba(20, 184, 166, 0.15));
+        }
+        66% { 
+            background-position: 100% 75%;
+            filter: drop-shadow(0 2px 8px rgba(204, 85, 0, 0.12));
+        }
+        100% { 
+            background-position: 0% 50%;
+            filter: drop-shadow(0 2px 8px rgba(13, 148, 136, 0.1));
+        }
+    }
+
+    /* Элегантная анимация появления */
+    @keyframes elegantAppear {
+        0% {
             opacity: 0;
-            filter: drop-shadow(0 0 0px rgba(204, 85, 0, 0));
+            transform: translateY(30px) scale(0.95);
+            filter: blur(5px);
+        }
+        60% {
+            opacity: 0.8;
+            transform: translateY(-2px) scale(1.01);
+            filter: blur(1px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: drop-shadow(0 2px 8px rgba(13, 148, 136, 0.1));
+        }
+    }
+
+    /* Элегантный эффект при наведении */
+    .section-title:hover {
+        transform: translateY(-3px) scale(1.02);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        filter: drop-shadow(0 4px 12px rgba(13, 148, 136, 0.2));
+    }
+
+    /* Элегантное подчёркивание */
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 3px;
+        background: linear-gradient(90deg, 
+            transparent 0%,
+            rgba(13, 148, 136, 0.6) 20%,
+            rgba(204, 85, 0, 0.8) 50%,
+            rgba(13, 148, 136, 0.6) 80%,
+            transparent 100%);
+        border-radius: 2px;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+        animation-delay: 2s;
+        animation-fill-mode: forwards;
+        box-shadow: 0 2px 8px rgba(13, 148, 136, 0.3);
+    }
+
+    /* Показываем подчёркивание после загрузки */
+    .section-title.title-loaded::after {
+        opacity: 1;
+    }
+
+    .section-title:hover::after {
+        width: 85%;
+        height: 4px;
+        box-shadow: 0 3px 12px rgba(13, 148, 136, 0.4);
+    }
+
+    /* Класс для активации анимации */
+    .section-title.title-loaded {
+        opacity: 1;
+        animation: elegantMorphing 12s ease-in-out infinite,
+                   elegantAppear 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Адаптивность для элегантных заголовков */
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 2.4rem;
+            font-weight: 500;
+            letter-spacing: -0.005em;
+        }
+        
+        .section-title::after {
+            width: 70%;
+            height: 2px;
+            bottom: -6px;
+        }
+        
+        .section-title:hover::after {
+            width: 90%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .section-title {
+            font-size: 2rem;
+            line-height: 1.3;
         }
     }
 
@@ -661,41 +764,17 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     
-    // === ЭФФЕКТ ПЕЧАТАЮЩЕГОСЯ ТЕКСТА ===
-    const typingElement = document.getElementById('typingTitle');
-    const text = typingElement.getAttribute('data-text');
-    typingElement.textContent = '';
+    // === MORPHING GRADIENT TITLE ANIMATION ===
+    const titleElement = document.getElementById('typingTitle');
+    const titleText = titleElement.getAttribute('data-text');
     
-    let charIndex = 0;
+    // Устанавливаем текст сразу
+    titleElement.textContent = titleText;
     
-    function typeWriter() {
-        if (charIndex < text.length) {
-            typingElement.textContent += text.charAt(charIndex);
-            
-            // Легкая встряска и свечение при печати
-            typingElement.style.transform = 'scale(1.02)';
-            typingElement.style.filter = 'drop-shadow(0 4px 16px rgba(13, 148, 136, 0.6)) drop-shadow(0 2px 8px rgba(204, 85, 0, 0.5)) drop-shadow(0 0 20px rgba(255, 149, 0, 0.4))';
-            
-            setTimeout(() => {
-                typingElement.style.transform = 'scale(1)';
-                typingElement.style.filter = 'drop-shadow(0 4px 12px rgba(13, 148, 136, 0.4)) drop-shadow(0 2px 6px rgba(204, 85, 0, 0.3))';
-            }, 100);
-            
-            charIndex++;
-            
-            // Случайная скорость для реалистичности (70-110мс)
-            const randomSpeed = Math.random() * 40 + 70;
-            setTimeout(typeWriter, randomSpeed);
-        } else {
-            // Убираем мигающий курсор после завершения
-            setTimeout(() => {
-                typingElement.classList.add('typing-complete');
-            }, 500);
-        }
-    }
-    
-    // Начинаем печатать через 400мс после загрузки
-    setTimeout(typeWriter, 400);
+    // Добавляем класс для активации анимации
+    setTimeout(() => {
+        titleElement.classList.add('title-loaded');
+    }, 100);
     
     // === ОТКРЫТИЕ МОДАЛЬНОГО ОКНА ПРИ УСПЕШНОЙ ОТПРАВКЕ ===
     {% if success %}
@@ -726,51 +805,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // === ЭФФЕКТ ПЕЧАТИ ДЛЯ ВТОРОГО ЗАГОЛОВКА ПРИ СКРОЛЛЕ ===
-    const typingElement2 = document.getElementById('typingTitle2');
-    const text2 = typingElement2.getAttribute('data-text');
-    typingElement2.textContent = '';
-    let typed2 = false;
+    // === MORPHING GRADIENT TITLE ANIMATION FOR SECOND TITLE ===
+    const titleElement2 = document.getElementById('typingTitle2');
+    const titleText2 = titleElement2.getAttribute('data-text');
+    let title2Loaded = false;
     
     const titleObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && !typed2) {
-                typed2 = true;
-                let charIndex2 = 0;
+            if (entry.isIntersecting && !title2Loaded) {
+                title2Loaded = true;
                 
-                function typeWriter2() {
-                    if (charIndex2 < text2.length) {
-                        typingElement2.textContent += text2.charAt(charIndex2);
-                        
-                        // Легкая встряска и свечение при печати
-                        typingElement2.style.transform = 'scale(1.02)';
-                        typingElement2.style.filter = 'drop-shadow(0 4px 16px rgba(13, 148, 136, 0.6)) drop-shadow(0 2px 8px rgba(204, 85, 0, 0.5)) drop-shadow(0 0 20px rgba(255, 149, 0, 0.4))';
-                        
-                        setTimeout(() => {
-                            typingElement2.style.transform = 'scale(1)';
-                            typingElement2.style.filter = 'drop-shadow(0 4px 12px rgba(13, 148, 136, 0.4)) drop-shadow(0 2px 6px rgba(204, 85, 0, 0.3))';
-                        }, 100);
-                        
-                        charIndex2++;
-                        const randomSpeed = Math.random() * 40 + 70;
-                        setTimeout(typeWriter2, randomSpeed);
-                    } else {
-                        // Убираем курсор
-                        setTimeout(() => {
-                            typingElement2.classList.add('typing-complete');
-                            
-                            // Запускаем анимацию карточек абонементов
-                            const abonementCards = document.querySelectorAll('.abonement-card');
-                            abonementCards.forEach((card, index) => {
-                                setTimeout(() => {
-                                    card.style.animation = 'bounceIn 0.6s ease-out forwards';
-                                }, index * 100);
-                            });
-                        }, 500);
-                    }
-                }
+                // Устанавливаем текст сразу
+                titleElement2.textContent = titleText2;
                 
-                typeWriter2();
+                // Добавляем класс для активации анимации
+                setTimeout(() => {
+                    titleElement2.classList.add('title-loaded');
+                    
+                    // Запускаем анимацию карточек абонементов после появления заголовка
+                    setTimeout(() => {
+                        const abonementCards = document.querySelectorAll('.abonement-card');
+                        abonementCards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.style.animation = 'bounceIn 0.6s ease-out forwards';
+                            }, index * 150);
+                        });
+                    }, 800);
+                }, 200);
             }
         });
     }, {
@@ -778,7 +839,7 @@ document.addEventListener('DOMContentLoaded', function() {
         rootMargin: '0px'
     });
     
-    titleObserver.observe(typingElement2);
+    titleObserver.observe(titleElement2);
     
     // === ПЛАВНОЕ ПОЯВЛЕНИЕ ЭЛЕМЕНТОВ ПРИ СКРОЛЛЕ ===
     const observer = new IntersectionObserver((entries) => {
