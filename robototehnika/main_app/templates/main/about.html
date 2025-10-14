@@ -337,69 +337,30 @@
         }
     }
 
-    /* === СУПЕР 3D КАРУСЕЛЬ С ЭФФЕКТОМ ГЛУБИНЫ === */
+    /* === ОПТИМИЗИРОВАННАЯ КАРУСЕЛЬ === */
 .carousel-wrapper {
-    max-width: 1400px;
+    max-width: 1200px;
     position: relative;
-    margin: 0 auto 80px auto;
-    padding: 40px 20px 80px 20px;
-    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #e9ecef 100%);
-    border-radius: 2rem;
-    box-shadow: 0 8px 32px rgba(23,162,184,0.08);
+    margin: 0 auto 60px auto;
+    padding: 30px 15px 50px 15px;
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 20px rgba(23,162,184,0.06);
     opacity: 0;
-    animation: fadeInUp 1s ease-out forwards;
+    animation: fadeInUp 0.8s ease-out forwards;
     overflow: hidden;
 }
 
 .carousel-wrapper::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: 
-        radial-gradient(circle at 30% 40%, rgba(13, 148, 136, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 70% 60%, rgba(204, 85, 0, 0.06) 0%, transparent 50%);
-    animation: pulseGlow 10s ease-in-out infinite;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.03) 0%, rgba(204, 85, 0, 0.02) 100%);
     pointer-events: none;
     z-index: 0;
-}
-
-@keyframes pulseGlow {
-    0%, 100% { 
-        opacity: 0.6; 
-        transform: scale(1) rotate(0deg); 
-    }
-    50% { 
-        opacity: 1; 
-        transform: scale(1.15) rotate(5deg); 
-    }
-}
-
-.carousel-wrapper::after {
-    content: '';
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    height: 60px;
-    background: radial-gradient(ellipse at center, rgba(13, 148, 136, 0.15) 0%, transparent 70%);
-    filter: blur(20px);
-    z-index: -1;
-    animation: shadowPulse 4s ease-in-out infinite;
-}
-
-@keyframes shadowPulse {
-    0%, 100% { 
-        opacity: 0.5; 
-        transform: translateX(-50%) scale(1); 
-    }
-    50% { 
-        opacity: 0.8; 
-        transform: translateX(-50%) scale(1.1); 
-    }
 }
 
 .carousel-wrapper h1 {
@@ -417,10 +378,8 @@
 .carousel-inner-custom {
     position: relative;
     width: 100%;
-    height: 550px;
+    height: 400px;
     margin: 0 auto;
-    perspective: 2000px;
-    perspective-origin: center center;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -431,203 +390,86 @@
     position: relative;
     width: 100%;
     height: 100%;
-    transform-style: preserve-3d;
     touch-action: pan-y pinch-zoom;
 }
 
-/* === 3D ЭЛЕМЕНТЫ ГАЛЕРЕИ С ПЛАВНЫМ ДВИЖЕНИЕМ ИЗДАЛЕКА === */
+/* === ОПТИМИЗИРОВАННЫЕ ЭЛЕМЕНТЫ ГАЛЕРЕИ === */
 .carousel-item-custom {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 700px;
-    height: 460px;
-    margin-left: -350px;
-    margin-top: -230px;
-    border-radius: 1.5rem;
+    width: 500px;
+    height: 330px;
+    margin-left: -250px;
+    margin-top: -165px;
+    border-radius: 1rem;
     overflow: hidden;
-    border: 4px solid rgba(13, 148, 136, 0.3);
-    box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.2),
-        0 10px 30px rgba(13, 148, 136, 0.15);
+    border: 2px solid rgba(13, 148, 136, 0.15);
+    box-shadow: none;
     background: #ffffff;
-    transition: all 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.6s ease;
     cursor: pointer;
-    transform-style: preserve-3d;
-    backface-visibility: visible;
-    will-change: transform, opacity;
+    opacity: 0.7;
 }
 
-/* Анимация появления фотографий при загрузке */
-@keyframes slideFromDistance {
-    from {
-        opacity: 0;
-        transform: translateZ(-2000px) scale(0.3);
-    }
-    to {
-        opacity: 1;
-        transform: translateZ(0) scale(1);
-    }
-}
-
-/* Центральный слайд (активный) - максимально близко */
+/* Центральный слайд (активный) */
 .carousel-item-custom[data-position="0"] {
-    transform: translateX(0) translateZ(100px) scale(1.08) rotateY(0deg);
+    transform: translateX(0) scale(1.05);
     opacity: 1;
     z-index: 10;
-    filter: brightness(1.05) contrast(1.05) blur(0px);
-    border: 5px solid #17a2b8;
-    box-shadow: 
-        0 30px 80px rgba(13, 148, 136, 0.35),
-        0 20px 50px rgba(0, 0, 0, 0.25),
-        0 0 40px rgba(13, 148, 136, 0.2);
-    animation: centerGlow 3s ease-in-out infinite;
+    border: 3px solid #17a2b8;
+    box-shadow: none;
 }
 
-@keyframes centerGlow {
-    0%, 100% {
-        border-color: #17a2b8;
-        box-shadow: 
-            0 30px 80px rgba(13, 148, 136, 0.35),
-            0 20px 50px rgba(0, 0, 0, 0.25),
-            0 0 40px rgba(13, 148, 136, 0.2);
-    }
-    50% {
-        border-color: #0d9488;
-        box-shadow: 
-            0 35px 90px rgba(13, 148, 136, 0.45),
-            0 25px 60px rgba(0, 0, 0, 0.3),
-            0 0 50px rgba(13, 148, 136, 0.3);
-    }
-}
-
-/* Слайды справа - плавно уходят вдаль с эффектом глубины */
+/* Боковые слайды */
 .carousel-item-custom[data-position="1"] {
-    transform: translateX(520px) translateZ(-400px) scale(0.75) rotateY(-32deg);
-    opacity: 0.75;
+    transform: translateX(280px) scale(0.8);
+    opacity: 0.6;
     z-index: 9;
-    filter: brightness(0.85) contrast(0.95) blur(0.8px);
-    border: 3px solid rgba(13, 148, 136, 0.25);
-    box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.18),
-        0 10px 30px rgba(13, 148, 136, 0.12);
+    border: 2px solid rgba(13, 148, 136, 0.1);
+    box-shadow: none;
 }
 
-.carousel-item-custom[data-position="2"] {
-    transform: translateX(880px) translateZ(-700px) scale(0.58) rotateY(-42deg);
-    opacity: 0.55;
-    z-index: 8;
-    filter: brightness(0.75) contrast(0.9) blur(1.5px);
-    border: 3px solid rgba(13, 148, 136, 0.18);
-    box-shadow: 
-        0 15px 45px rgba(0, 0, 0, 0.15),
-        0 8px 20px rgba(13, 148, 136, 0.1);
-}
-
-.carousel-item-custom[data-position="3"] {
-    transform: translateX(1150px) translateZ(-950px) scale(0.45) rotateY(-50deg);
-    opacity: 0.35;
-    z-index: 7;
-    filter: brightness(0.65) contrast(0.85) blur(2.2px);
-    border: 2px solid rgba(13, 148, 136, 0.12);
-    box-shadow: 
-        0 12px 35px rgba(0, 0, 0, 0.12),
-        0 6px 15px rgba(13, 148, 136, 0.08);
-}
-
-.carousel-item-custom[data-position="4"] {
-    transform: translateX(1350px) translateZ(-1150px) scale(0.35) rotateY(-55deg);
-    opacity: 0.18;
-    z-index: 6;
-    filter: brightness(0.55) contrast(0.8) blur(3px);
-    border: 2px solid rgba(13, 148, 136, 0.08);
-    box-shadow: 
-        0 8px 25px rgba(0, 0, 0, 0.1),
-        0 4px 10px rgba(13, 148, 136, 0.05);
-}
-
-/* Слайды слева - плавно уходят вдаль с эффектом глубины */
 .carousel-item-custom[data-position="-1"] {
-    transform: translateX(-520px) translateZ(-400px) scale(0.75) rotateY(32deg);
-    opacity: 0.75;
+    transform: translateX(-280px) scale(0.8);
+    opacity: 0.6;
     z-index: 9;
-    filter: brightness(0.85) contrast(0.95) blur(0.8px);
-    border: 3px solid rgba(13, 148, 136, 0.25);
-    box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.18),
-        0 10px 30px rgba(13, 148, 136, 0.12);
+    border: 2px solid rgba(13, 148, 136, 0.1);
+    box-shadow: none;
+}
+
+/* Дальние слайды */
+.carousel-item-custom[data-position="2"],
+.carousel-item-custom[data-position="-2"] {
+    transform: translateX(500px) scale(0.6);
+    opacity: 0.3;
+    z-index: 8;
+    pointer-events: none;
 }
 
 .carousel-item-custom[data-position="-2"] {
-    transform: translateX(-880px) translateZ(-700px) scale(0.58) rotateY(42deg);
-    opacity: 0.55;
-    z-index: 8;
-    filter: brightness(0.75) contrast(0.9) blur(1.5px);
-    border: 3px solid rgba(13, 148, 136, 0.18);
-    box-shadow: 
-        0 15px 45px rgba(0, 0, 0, 0.15),
-        0 8px 20px rgba(13, 148, 136, 0.1);
+    transform: translateX(-500px) scale(0.6);
 }
 
-.carousel-item-custom[data-position="-3"] {
-    transform: translateX(-1150px) translateZ(-950px) scale(0.45) rotateY(50deg);
-    opacity: 0.35;
-    z-index: 7;
-    filter: brightness(0.65) contrast(0.85) blur(2.2px);
-    border: 2px solid rgba(13, 148, 136, 0.12);
-    box-shadow: 
-        0 12px 35px rgba(0, 0, 0, 0.12),
-        0 6px 15px rgba(13, 148, 136, 0.08);
-}
-
-.carousel-item-custom[data-position="-4"] {
-    transform: translateX(-1350px) translateZ(-1150px) scale(0.35) rotateY(55deg);
-    opacity: 0.18;
-    z-index: 6;
-    filter: brightness(0.55) contrast(0.8) blur(3px);
-    border: 2px solid rgba(13, 148, 136, 0.08);
-    box-shadow: 
-        0 8px 25px rgba(0, 0, 0, 0.1),
-        0 4px 10px rgba(13, 148, 136, 0.05);
-}
-
-/* Скрытые слайды - совсем далеко */
+/* Скрытые слайды */
 .carousel-item-custom:not([data-position]),
-.carousel-item-custom[data-position="5"],
-.carousel-item-custom[data-position="6"],
-.carousel-item-custom[data-position="-5"],
-.carousel-item-custom[data-position="-6"] {
-    transform: translateX(1600px) translateZ(-1400px) scale(0.25) rotateY(-60deg);
+.carousel-item-custom[data-position="3"],
+.carousel-item-custom[data-position="-3"],
+.carousel-item-custom[data-position="4"],
+.carousel-item-custom[data-position="-4"] {
     opacity: 0;
-    z-index: 1;
     pointer-events: none;
-    filter: brightness(0.4) blur(3px);
 }
 
 .carousel-item-custom::before {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 1.5rem;
-    background: linear-gradient(135deg, rgba(13, 148, 136, 0.2), rgba(204, 85, 0, 0.2));
+    border-radius: 1rem;
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.15), rgba(204, 85, 0, 0.15));
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.3s ease;
     z-index: 1;
-    pointer-events: none;
-}
-
-.carousel-item-custom::after {
-    content: '🔍';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0) rotate(-15deg);
-    font-size: 3.5rem;
-    color: white;
-    z-index: 2;
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
     pointer-events: none;
 }
 
@@ -635,34 +477,23 @@
     opacity: 1;
 }
 
-.carousel-item-custom[data-position="0"]:hover::after {
-    transform: translate(-50%, -50%) scale(1) rotate(0deg);
-    opacity: 1;
-}
-
 .carousel-item-custom[data-position="0"]:hover {
-    transform: translateX(0) translateZ(150px) scale(1.12) rotateY(0deg);
-    border: 6px solid #CC5500;
-    box-shadow: 
-        0 40px 120px rgba(204, 85, 0, 0.4),
-        0 25px 60px rgba(13, 148, 136, 0.3),
-        0 0 60px rgba(204, 85, 0, 0.3);
-    filter: brightness(1.08) contrast(1.08);
-    animation: none;
+    transform: translateX(0) scale(1.08);
+    border: 3px solid #CC5500;
+    box-shadow: none;
 }
 
 .carousel-item-custom img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 1.5rem;
-    transition: all 0.5s ease;
+    border-radius: 0.8rem;
+    transition: transform 0.3s ease;
     display: block;
-    transform: scale(1);
 }
 
 .carousel-item-custom[data-position="0"]:hover img {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .carousel-control {
@@ -843,69 +674,50 @@
 @media (max-width: 991px) {
     .carousel-wrapper {
         max-width: 98vw;
-        padding: 24px 12px 50px 12px;
+        padding: 20px 10px 40px 10px;
         overflow: hidden;
     }
     .carousel-inner-custom {
-        height: 400px;
-        perspective: 1400px;
+        height: 320px;
         overflow: hidden;
     }
     .carousel-item-custom {
-        width: 500px;
-        height: 330px;
-        margin-left: -250px;
-        margin-top: -165px;
+        width: 400px;
+        height: 260px;
+        margin-left: -200px;
+        margin-top: -130px;
     }
     .carousel-item-custom[data-position="0"] {
-        transform: translateX(0) translateZ(80px) scale(1.05) rotateY(0deg);
-        border: 4px solid #17a2b8;
+        transform: translateX(0) scale(1.05);
+        border: 3px solid #17a2b8;
+        box-shadow: none;
     }
     .carousel-item-custom[data-position="1"] {
-        transform: translateX(380px) translateZ(-300px) scale(0.7) rotateY(-28deg);
-        filter: brightness(0.8) blur(0.8px);
-        border: 3px solid rgba(13, 148, 136, 0.25);
+        transform: translateX(250px) scale(0.8);
+        opacity: 0.6;
+        border: 2px solid rgba(13, 148, 136, 0.1);
+        box-shadow: none;
     }
     .carousel-item-custom[data-position="-1"] {
-        transform: translateX(-380px) translateZ(-300px) scale(0.7) rotateY(28deg);
-        filter: brightness(0.8) blur(0.8px);
-        border: 3px solid rgba(13, 148, 136, 0.25);
-    }
-    .carousel-item-custom[data-position="2"] {
-        transform: translateX(620px) translateZ(-550px) scale(0.55) rotateY(-38deg);
-        filter: brightness(0.7) blur(1.2px);
-        border: 2px solid rgba(13, 148, 136, 0.18);
-    }
-    .carousel-item-custom[data-position="-2"] {
-        transform: translateX(-620px) translateZ(-550px) scale(0.55) rotateY(38deg);
-        filter: brightness(0.7) blur(1.2px);
-        border: 2px solid rgba(13, 148, 136, 0.18);
-    }
-    .carousel-item-custom[data-position="3"] {
-        transform: translateX(850px) translateZ(-750px) scale(0.42) rotateY(-45deg);
-        opacity: 0.25;
-        filter: brightness(0.6) blur(1.8px);
-        border: 2px solid rgba(13, 148, 136, 0.12);
-    }
-    .carousel-item-custom[data-position="-3"] {
-        transform: translateX(-850px) translateZ(-750px) scale(0.42) rotateY(45deg);
-        opacity: 0.25;
-        filter: brightness(0.6) blur(1.8px);
-        border: 2px solid rgba(13, 148, 136, 0.12);
+        transform: translateX(-250px) scale(0.8);
+        opacity: 0.6;
+        border: 2px solid rgba(13, 148, 136, 0.1);
+        box-shadow: none;
     }
     .carousel-item-custom[data-position="0"]:hover {
-        transform: translateX(0) translateZ(120px) scale(1.1) rotateY(0deg);
-        border: 5px solid #CC5500;
+        transform: translateX(0) scale(1.08);
+        border: 3px solid #CC5500;
+        box-shadow: none;
     }
     .carousel-control {
-        width: 50px;
-        height: 50px;
-        font-size: 2rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1.8rem;
     }
     .lightbox-nav {
-        width: 48px;
-        height: 48px;
-        font-size: 2rem;
+        width: 44px;
+        height: 44px;
+        font-size: 1.8rem;
     }
 }
 
@@ -916,103 +728,91 @@
     }
     
     .carousel-wrapper {
-        padding: 16px 8px 40px 8px;
-        margin: 0 auto 60px auto;
+        padding: 15px 5px 30px 5px;
+        margin: 0 auto 40px auto;
         overflow-x: hidden;
         width: 100%;
         max-width: 100vw;
     }
     .carousel-wrapper h1 {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         margin-bottom: 1rem;
     }
     
-    .carousel-wrapper::before,
-    .carousel-wrapper::after {
+    .carousel-wrapper::before {
         display: none;
     }
     
     .carousel-inner-custom {
-        height: 280px;
-        perspective: 800px;
+        height: 240px;
         overflow: hidden;
     }
     .carousel-item-custom {
-        width: 280px;
-        height: 185px;
-        margin-left: -140px;
-        margin-top: -92.5px;
+        width: 240px;
+        height: 160px;
+        margin-left: -120px;
+        margin-top: -80px;
     }
     .carousel-item-custom[data-position="0"] {
-        transform: translateX(0) translateZ(40px) scale(1.02) rotateY(0deg);
-        filter: brightness(1.05) contrast(1.05);
+        transform: translateX(0) scale(1.02);
         border: 3px solid #17a2b8;
-        animation: none;
+        box-shadow: none;
     }
     .carousel-item-custom[data-position="1"] {
-        transform: translateX(180px) translateZ(-150px) scale(0.6) rotateY(-20deg);
+        transform: translateX(150px) scale(0.7);
         opacity: 0.5;
-        filter: brightness(0.8) blur(1px);
-        border: 2px solid rgba(13, 148, 136, 0.25);
+        border: 2px solid rgba(13, 148, 136, 0.15);
+        box-shadow: none;
     }
     .carousel-item-custom[data-position="-1"] {
-        transform: translateX(-180px) translateZ(-150px) scale(0.6) rotateY(20deg);
+        transform: translateX(-150px) scale(0.7);
         opacity: 0.5;
-        filter: brightness(0.8) blur(1px);
-        border: 2px solid rgba(13, 148, 136, 0.25);
+        border: 2px solid rgba(13, 148, 136, 0.15);
+        box-shadow: none;
     }
     .carousel-item-custom[data-position="2"],
-    .carousel-item-custom[data-position="-2"],
-    .carousel-item-custom[data-position="3"],
-    .carousel-item-custom[data-position="-3"],
-    .carousel-item-custom[data-position="4"],
-    .carousel-item-custom[data-position="-4"] {
-        transform: translateX(300px) translateZ(-300px) scale(0.4);
+    .carousel-item-custom[data-position="-2"] {
         opacity: 0;
-        filter: brightness(0.5) blur(2px);
-        border: 1px solid rgba(13, 148, 136, 0.1);
         pointer-events: none;
     }
     .carousel-item-custom[data-position="0"]:hover,
     .carousel-item-custom[data-position="0"]:active {
-        transform: translateX(0) translateZ(50px) scale(1.04) rotateY(0deg);
-        border: 4px solid #CC5500;
+        transform: translateX(0) scale(1.04);
+        border: 3px solid #CC5500;
+        box-shadow: none;
     }
     .carousel-control {
-        width: 42px;
-        height: 42px;
-        font-size: 1.7rem;
+        width: 38px;
+        height: 38px;
+        font-size: 1.5rem;
         border-width: 2px;
     }
     .carousel-control-left {
-        left: 5px;
+        left: 3px;
     }
     .carousel-control-right {
-        right: 5px;
-    }
-    .carousel-item-custom::after {
-        font-size: 2.2rem;
+        right: 3px;
     }
     .lightbox-nav {
-        width: 40px;
-        height: 40px;
-        font-size: 1.6rem;
+        width: 36px;
+        height: 36px;
+        font-size: 1.4rem;
     }
     .lightbox-nav-left {
-        left: 10px;
+        left: 8px;
     }
     .lightbox-nav-right {
-        right: 10px;
+        right: 8px;
     }
     .lightbox-close {
-        width: 40px;
-        height: 40px;
-        font-size: 1.6rem;
-        top: -45px;
+        width: 36px;
+        height: 36px;
+        font-size: 1.4rem;
+        top: -40px;
     }
     .lightbox-counter {
-        font-size: 0.95rem;
-        padding: 8px 18px;
+        font-size: 0.9rem;
+        padding: 6px 15px;
     }
 }
 
@@ -1444,99 +1244,99 @@
     </button>
     <div class="carousel-inner-custom" id="customCarousel">
         <div class="carousel-track" id="carouselTrack">
-            <!-- Фотографии занятий -->
+            <!-- Фотографии занятий с ленивой загрузкой -->
             <div class="carousel-item-custom" data-photo-index="0">
-                <img src="{% static 'main/img/fotocarusel/photo_1_2025-03-18_19-28-04.jpg' %}" alt="Фото занятий 1">
+                <img data-src="{% static 'main/img/fotocarusel/photo_1_2025-03-18_19-28-04.jpg' %}" alt="Фото занятий 1" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="1">
-                <img src="{% static 'main/img/fotocarusel/photo_2_2025-03-18_19-28-04.jpg' %}" alt="Фото занятий 2">
+                <img data-src="{% static 'main/img/fotocarusel/photo_2_2025-03-18_19-28-04.jpg' %}" alt="Фото занятий 2" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="2">
-                <img src="{% static 'main/img/fotocarusel/photo_3_2025-03-18_19-28-04.jpg' %}" alt="Фото занятий 3">
+                <img data-src="{% static 'main/img/fotocarusel/photo_3_2025-03-18_19-28-04.jpg' %}" alt="Фото занятий 3" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="3">
-                <img src="{% static 'main/img/fotocarusel/photo_4_2025-03-18_19-28-04.jpg' %}" alt="Фото занятий 4">
+                <img data-src="{% static 'main/img/fotocarusel/photo_4_2025-03-18_19-28-04.jpg' %}" alt="Фото занятий 4" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="4">
-                <img src="{% static 'main/img/fotocarusel/20240217_174745.jpg' %}" alt="Фото занятий 5">
+                <img data-src="{% static 'main/img/fotocarusel/20240217_174745.jpg' %}" alt="Фото занятий 5" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="5">
-                <img src="{% static 'main/img/fotocarusel/20240224_164125.jpg' %}" alt="Фото занятий 6">
+                <img data-src="{% static 'main/img/fotocarusel/20240224_164125.jpg' %}" alt="Фото занятий 6" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="6">
-                <img src="{% static 'main/img/fotocarusel/20240224_164134.jpg' %}" alt="Фото занятий 7">
+                <img data-src="{% static 'main/img/fotocarusel/20240224_164134.jpg' %}" alt="Фото занятий 7" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="7">
-                <img src="{% static 'main/img/fotocarusel/8.jpg' %}" alt="Фото занятий 8">
+                <img data-src="{% static 'main/img/fotocarusel/8.jpg' %}" alt="Фото занятий 8" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="8">
-                <img src="{% static 'main/img/fotocarusel/9.jpg' %}" alt="Фото занятий 9">
+                <img data-src="{% static 'main/img/fotocarusel/9.jpg' %}" alt="Фото занятий 9" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="9">
-                <img src="{% static 'main/img/fotocarusel/1.jpg' %}" alt="Фото занятий 10">
+                <img data-src="{% static 'main/img/fotocarusel/1.jpg' %}" alt="Фото занятий 10" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="10">
-                <img src="{% static 'main/img/fotocarusel/2.jpg' %}" alt="Фото занятий 11">
+                <img data-src="{% static 'main/img/fotocarusel/2.jpg' %}" alt="Фото занятий 11" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="11">
-                <img src="{% static 'main/img/fotocarusel/3.jpg' %}" alt="Фото занятий 12">
+                <img data-src="{% static 'main/img/fotocarusel/3.jpg' %}" alt="Фото занятий 12" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="12">
-                <img src="{% static 'main/img/fotocarusel/4.jpg' %}" alt="Фото занятий 13">
+                <img data-src="{% static 'main/img/fotocarusel/4.jpg' %}" alt="Фото занятий 13" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="13">
-                <img src="{% static 'main/img/fotocarusel/5.jpg' %}" alt="Фото занятий 14">
+                <img data-src="{% static 'main/img/fotocarusel/5.jpg' %}" alt="Фото занятий 14" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="14">
-                <img src="{% static 'main/img/fotocarusel/6.jpg' %}" alt="Фото занятий 15">
+                <img data-src="{% static 'main/img/fotocarusel/6.jpg' %}" alt="Фото занятий 15" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="15">
-                <img src="{% static 'main/img/fotocarusel/7.jpg' %}" alt="Фото занятий 16">
+                <img data-src="{% static 'main/img/fotocarusel/7.jpg' %}" alt="Фото занятий 16" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="16">
-                <img src="{% static 'main/img/fotocarusel/10.jpg' %}" alt="Фото занятий 17">
+                <img data-src="{% static 'main/img/fotocarusel/10.jpg' %}" alt="Фото занятий 17" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="17">
-                <img src="{% static 'main/img/fotocarusel/11.jpg' %}" alt="Фото занятий 18">
+                <img data-src="{% static 'main/img/fotocarusel/11.jpg' %}" alt="Фото занятий 18" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="18">
-                <img src="{% static 'main/img/fotocarusel/12.jpg' %}" alt="Фото занятий 19">
+                <img data-src="{% static 'main/img/fotocarusel/12.jpg' %}" alt="Фото занятий 19" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="19">
-                <img src="{% static 'main/img/fotocarusel/13.jpg' %}" alt="Фото занятий 20">
+                <img data-src="{% static 'main/img/fotocarusel/13.jpg' %}" alt="Фото занятий 20" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="20">
-                <img src="{% static 'main/img/fotocarusel/14.jpg' %}" alt="Фото занятий 21">
+                <img data-src="{% static 'main/img/fotocarusel/14.jpg' %}" alt="Фото занятий 21" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="21">
-                <img src="{% static 'main/img/fotocarusel/15.jpg' %}" alt="Фото занятий 22">
+                <img data-src="{% static 'main/img/fotocarusel/15.jpg' %}" alt="Фото занятий 22" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="22">
-                <img src="{% static 'main/img/fotocarusel/16.jpg' %}" alt="Фото занятий 23">
+                <img data-src="{% static 'main/img/fotocarusel/16.jpg' %}" alt="Фото занятий 23" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="23">
-                <img src="{% static 'main/img/fotocarusel/17.jpg' %}" alt="Фото занятий 24">
+                <img data-src="{% static 'main/img/fotocarusel/17.jpg' %}" alt="Фото занятий 24" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="24">
-                <img src="{% static 'main/img/fotocarusel/18.jpg' %}" alt="Фото занятий 25">
+                <img data-src="{% static 'main/img/fotocarusel/18.jpg' %}" alt="Фото занятий 25" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="25">
-                <img src="{% static 'main/img/fotocarusel/19.jpg' %}" alt="Фото занятий 26">
+                <img data-src="{% static 'main/img/fotocarusel/19.jpg' %}" alt="Фото занятий 26" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="26">
-                <img src="{% static 'main/img/fotocarusel/20.jpg' %}" alt="Фото занятий 27">
+                <img data-src="{% static 'main/img/fotocarusel/20.jpg' %}" alt="Фото занятий 27" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="27">
-                <img src="{% static 'main/img/fotocarusel/21.jpg' %}" alt="Фото занятий 28">
+                <img data-src="{% static 'main/img/fotocarusel/21.jpg' %}" alt="Фото занятий 28" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="28">
-                <img src="{% static 'main/img/fotocarusel/22.jpg' %}" alt="Фото занятий 29">
+                <img data-src="{% static 'main/img/fotocarusel/22.jpg' %}" alt="Фото занятий 29" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="29">
-                <img src="{% static 'main/img/fotocarusel/23.jpg' %}" alt="Фото занятий 30">
+                <img data-src="{% static 'main/img/fotocarusel/23.jpg' %}" alt="Фото занятий 30" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="30">
-                <img src="{% static 'main/img/fotocarusel/24.jpg' %}" alt="Фото занятий 31">
+                <img data-src="{% static 'main/img/fotocarusel/24.jpg' %}" alt="Фото занятий 31" loading="lazy">
             </div>
         </div>
 
@@ -1576,6 +1376,9 @@
     document.addEventListener('DOMContentLoaded', function () {
         const track = document.getElementById('carouselTrack');
         carouselItems = Array.from(track.querySelectorAll('.carousel-item-custom[data-photo-index]'));
+        
+        // Инициализируем ленивую загрузку изображений
+        initializeLazyLoading();
         
         // Инициализируем позиции слайдов
         updateCarousel(true);
@@ -1714,15 +1517,15 @@
         
         updateCarousel(false);
         
-        // Увеличили время для более плавной анимации
+        // Оптимизированное время для плавной анимации
         setTimeout(() => {
             isTransitioning = false;
-        }, 850);
+        }, 600);
     }
 
     function startAutoRotate() {
         clearInterval(autoRotateInterval);
-        const interval = isMobile ? 4000 : 3000; // На мобильных замедляем до 4 секунд
+        const interval = isMobile ? 5000 : 4000; // Увеличили интервал для меньшей нагрузки
         autoRotateInterval = setInterval(() => {
             scrollCarousel(1);
         }, interval);
@@ -1730,6 +1533,42 @@
 
     function stopAutoRotate() {
         clearInterval(autoRotateInterval);
+    }
+
+    // Функция ленивой загрузки изображений
+    function initializeLazyLoading() {
+        // Загружаем первые 3 изображения сразу
+        for (let i = 0; i < Math.min(3, carouselItems.length); i++) {
+            loadImage(carouselItems[i]);
+        }
+        
+        // Загружаем остальные при прокрутке
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadImage(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '50px'
+        });
+        
+        // Наблюдаем за элементами, которые еще не загружены
+        carouselItems.forEach(item => {
+            const img = item.querySelector('img');
+            if (img && img.dataset.src && !img.src) {
+                observer.observe(item);
+            }
+        });
+    }
+    
+    function loadImage(item) {
+        const img = item.querySelector('img');
+        if (img && img.dataset.src && !img.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+        }
     }
 
     // Глобальная функция для кнопок
