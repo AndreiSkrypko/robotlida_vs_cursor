@@ -12,4 +12,9 @@ urlpatterns = [
                   path('', include('forum_app.urls')),
                   path('login/', include('login_app.urls')),
                   path('robots.txt', robots_txt, name='robots_txt'),
-              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+              ]
+
+# Раздача статических файлов только в режиме разработки
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

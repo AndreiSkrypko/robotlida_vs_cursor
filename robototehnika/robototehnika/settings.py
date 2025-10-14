@@ -97,8 +97,31 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+# Настройки для статических файлов в продакшене
+STATICFILES_DIRS = [
+    BASE_DIR / 'main_app' / 'static',
+]
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# === БЕЗОПАСНОЕ ДОБАВЛЕНИЕ WHITENOISE ===
+try:
+    import whitenoise
+    # WhiteNoise доступен - добавляем настройки для продакшена
+    if not DEBUG:
+        STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+        
+        # Добавляем WhiteNoise middleware в начало списка (после SecurityMiddleware)
+        if 'whitenoise.middleware.WhiteNoiseMiddleware' not in MIDDLEWARE:
+            # Находим позицию SecurityMiddleware и добавляем WhiteNoise после него
+            security_index = MIDDLEWARE.index('django.middleware.security.SecurityMiddleware')
+            MIDDLEWARE.insert(security_index + 1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+            
+        print("WhiteNoise настроен для продакшена")
+except ImportError:
+    print("WhiteNoise не установлен - используем стандартную раздачу статики")
+    pass
 
 # === Тип ID по умолчанию ===
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
