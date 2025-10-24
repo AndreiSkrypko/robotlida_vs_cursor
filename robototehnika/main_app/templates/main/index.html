@@ -1649,13 +1649,96 @@
         75% { transform: translate(50px, 50px) rotate(270deg); }
     }
 
-    /* Контейнер для вопросов */
+    /* Контейнер для двух колонок */
     .faq-container {
-        max-width: 900px;
+        max-width: 1400px;
         margin: 0 auto;
         padding: 0 20px;
         position: relative;
         z-index: 1;
+    }
+
+    /* Сетка для двух колонок */
+    .faq-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-top: 60px;
+    }
+
+    /* Стили для каждой колонки */
+    .faq-column {
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 24px;
+        padding: 40px 30px;
+        box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.1),
+            0 2px 8px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .faq-column::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #0d9488, #17a2b8);
+    }
+
+    .faq-column.parents::before {
+        background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+
+    .faq-column.students::before {
+        background: linear-gradient(90deg, #f093fb, #f5576c);
+    }
+
+    /* Заголовки колонок */
+    .faq-column-title {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid rgba(13, 148, 136, 0.1);
+    }
+
+    .faq-column-title h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1a202c;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .faq-column-title .column-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+    }
+
+    .faq-column.parents .faq-column-title .column-icon {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .faq-column.students .faq-column-title .column-icon {
+        background: linear-gradient(135deg, #f093fb, #f5576c);
+    }
+
+    .faq-column-title p {
+        color: #64748b;
+        font-size: 1rem;
+        margin: 0;
     }
 
     /* Карточка вопроса */
@@ -1891,7 +1974,54 @@
         font-size: 1.1rem;
     }
 
-    /* УДАЛЕНЫ СТАРЫЕ МЕДИА-ЗАПРОСЫ ДЛЯ FAQ - ИСПОЛЬЗУЕТСЯ НОВЫЙ БЛОК ВНИЗУ */
+    /* Адаптивные стили для мобильных устройств */
+    @media (max-width: 768px) {
+        .faq-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .faq-column {
+            padding: 30px 20px;
+        }
+        
+        .faq-column-title h3 {
+            font-size: 1.3rem;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .faq-column-title .column-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+        }
+        
+        .faq-container {
+            padding: 0 15px;
+        }
+        
+        .faq-section-bg {
+            padding: 60px 0;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .faq-column {
+            padding: 25px 15px;
+        }
+        
+        .faq-column-title h3 {
+            font-size: 1.2rem;
+        }
+        
+        .faq-column-title .column-icon {
+            width: 35px;
+            height: 35px;
+            font-size: 1rem;
+        }
+    }
 </style>
 
 <!-- Заголовок "Что вы обычно спрашиваете" -->
@@ -1911,184 +2041,231 @@
         </div>
 
 
-<!-- FAQ - Современный дизайн -->
+<!-- FAQ - Двухколоночный дизайн -->
 <div class="faq-container">
-    <!-- Вопрос 1 -->
-    <div class="faq-card" data-faq-item>
-        <div class="faq-header">
-            <div class="faq-number">1</div>
-            <div class="faq-icon" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.1)); color: #667eea;">
-                <i class="bi bi-pencil-square"></i>
+    <div class="faq-grid">
+        <!-- Колонка для родителей -->
+        <div class="faq-column parents">
+            <div class="faq-column-title">
+                <h3>
+                    <div class="column-icon">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    Вопросы родителей
+                </h3>
+                <p>Ответы на самые важные вопросы мам и пап</p>
             </div>
-            <div class="faq-question">Как записаться на курс?</div>
-            <div class="faq-arrow">
-                <i class="bi bi-chevron-down"></i>
+            <!-- Вопрос 1 - Родители -->
+            <div class="faq-card" data-faq-item>
+                <div class="faq-header">
+                    <div class="faq-number">1</div>
+                    <div class="faq-icon" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.1)); color: #667eea;">
+                        <i class="bi bi-pencil-square"></i>
+                    </div>
+                    <div class="faq-question">Как записаться на курс?</div>
+                    <div class="faq-arrow">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="faq-content">
+                    <div class="faq-answer">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Вы можете записаться через форму на сайте или позвонить нам напрямую. Мы свяжемся с вами для уточнения деталей и выбора удобного времени занятий.
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="faq-content">
-            <div class="faq-answer">
-                <i class="bi bi-check-circle-fill"></i>
-                Вы можете записаться через форму на сайте или позвонить нам напрямую. Мы свяжемся с вами для уточнения деталей и выбора удобного времени занятий.
-            </div>
-        </div>
-    </div>
 
-    <!-- Вопрос 2 -->
-    <div class="faq-card" data-faq-item>
-        <div class="faq-header">
-            <div class="faq-number">2</div>
-            <div class="faq-icon" style="background: linear-gradient(135deg, rgba(240, 147, 251, 0.15), rgba(245, 87, 108, 0.1)); color: #f093fb;">
-                <i class="bi bi-star-fill"></i>
+            <!-- Вопрос 2 - Родители -->
+            <div class="faq-card" data-faq-item>
+                <div class="faq-header">
+                    <div class="faq-number">2</div>
+                    <div class="faq-icon" style="background: linear-gradient(135deg, rgba(240, 147, 251, 0.15), rgba(245, 87, 108, 0.1)); color: #f093fb;">
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <div class="faq-question">Есть ли пробные занятия?</div>
+                    <div class="faq-arrow">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="faq-content">
+                    <div class="faq-answer">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Да, мы предлагаем пробное занятие для новых учеников! Это отличная возможность познакомиться с нашими методиками и преподавателями.
+                    </div>
+                </div>
             </div>
-            <div class="faq-question">Есть ли пробные занятия?</div>
-            <div class="faq-arrow">
-                <i class="bi bi-chevron-down"></i>
-            </div>
-        </div>
-        <div class="faq-content">
-            <div class="faq-answer">
-                <i class="bi bi-check-circle-fill"></i>
-                Да, мы предлагаем бесплатное пробное занятие для новых учеников! Это отличная возможность познакомиться с нашими методиками и преподавателями.
-            </div>
-        </div>
-    </div>
 
-    <!-- Вопрос 3 -->
-    <div class="faq-card" data-faq-item>
-        <div class="faq-header">
-            <div class="faq-number">3</div>
-            <div class="faq-icon" style="background: linear-gradient(135deg, rgba(250, 112, 154, 0.15), rgba(254, 225, 64, 0.1)); color: #fa709a;">
-                <i class="bi bi-trophy-fill"></i>
+            <!-- Вопрос 3 - Родители -->
+            <div class="faq-card" data-faq-item>
+                <div class="faq-header">
+                    <div class="faq-number">3</div>
+                    <div class="faq-icon" style="background: linear-gradient(135deg, rgba(250, 112, 154, 0.15), rgba(254, 225, 64, 0.1)); color: #fa709a;">
+                        <i class="bi bi-currency-dollar"></i>
+                    </div>
+                    <div class="faq-question">Сколько стоят занятия?</div>
+                    <div class="faq-arrow">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="faq-content">
+                    <div class="faq-answer">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Стоимость зависит от выбранного курса и формата занятий. У нас есть гибкая система оплаты и скидки на второй и последующие курсы. Подробности уточняйте у наших менеджеров.
+                    </div>
+                </div>
             </div>
-            <div class="faq-question">Какие курсы самые популярные?</div>
-            <div class="faq-arrow">
-                <i class="bi bi-chevron-down"></i>
-            </div>
-        </div>
-        <div class="faq-content">
-            <div class="faq-answer">
-                <i class="bi bi-check-circle-fill"></i>
-                Самыми популярными являются курсы по программированию на Python, веб-разработке, робототехнике и 3D-моделированию. Выбирайте то, что интересует вашего ребенка!
-            </div>
-        </div>
-    </div>
 
-    <!-- Вопрос 4 -->
-    <div class="faq-card" data-faq-item>
-        <div class="faq-header">
-            <div class="faq-number">4</div>
-            <div class="faq-icon" style="background: linear-gradient(135deg, rgba(48, 207, 208, 0.15), rgba(51, 8, 103, 0.1)); color: #30cfd0;">
-                <i class="bi bi-gender-female"></i>
+            <!-- Вопрос 4 - Родители -->
+            <div class="faq-card" data-faq-item>
+                <div class="faq-header">
+                    <div class="faq-number">4</div>
+                    <div class="faq-icon" style="background: linear-gradient(135deg, rgba(48, 207, 208, 0.15), rgba(51, 8, 103, 0.1)); color: #30cfd0;">
+                        <i class="bi bi-clock-fill"></i>
+                    </div>
+                    <div class="faq-question">Как часто проходят занятия?</div>
+                    <div class="faq-arrow">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="faq-content">
+                    <div class="faq-answer">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Занятия проходят 1-2 раза в неделю по от 90 до 120 минут в зависимости от возраста и сложности курса. Мы подбираем удобное время для каждой группы, учитывая школьное расписание детей.
+                    </div>
+                </div>
             </div>
-            <div class="faq-question">Подходит ли курс для девочек?</div>
-            <div class="faq-arrow">
-                <i class="bi bi-chevron-down"></i>
-            </div>
-        </div>
-        <div class="faq-content">
-            <div class="faq-answer">
-                <i class="bi bi-check-circle-fill"></i>
-                Конечно! Технологии — это для всех. Девочки активно участвуют в наших курсах и добиваются отличных результатов. У нас дружелюбная и инклюзивная атмосфера!
-            </div>
-        </div>
-    </div>
 
-    <!-- Вопрос 5 -->
-    <div class="faq-card" data-faq-item>
-        <div class="faq-header">
-            <div class="faq-number">5</div>
-            <div class="faq-icon" style="background: linear-gradient(135deg, rgba(168, 237, 234, 0.15), rgba(254, 214, 227, 0.1)); color: #a8edea;">
-                <i class="bi bi-robot"></i>
-            </div>
-            <div class="faq-question">Что изучают на курсе по робототехнике?</div>
-            <div class="faq-arrow">
-                <i class="bi bi-chevron-down"></i>
+            <!-- Вопрос 5 - Родители -->
+            <div class="faq-card" data-faq-item>
+                <div class="faq-header">
+                    <div class="faq-number">5</div>
+                    <div class="faq-icon" style="background: linear-gradient(135deg, rgba(168, 237, 234, 0.15), rgba(254, 214, 227, 0.1)); color: #a8edea;">
+                        <i class="bi bi-mortarboard-fill"></i>
+                    </div>
+                    <div class="faq-question">Какие навыки получит мой ребенок?</div>
+                    <div class="faq-arrow">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="faq-content">
+                    <div class="faq-answer">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Дети развивают логическое мышление, креативность, учатся решать задачи, работать в команде и создавать собственные проекты. Это навыки будущего!
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="faq-content">
-            <div class="faq-answer">
-                <i class="bi bi-check-circle-fill"></i>
-                Дети учатся собирать и программировать роботов, осваивают работу с сенсорами, моторами, изучают основы логики и алгоритмического мышления.
-            </div>
-        </div>
-    </div>
 
-    <!-- Вопрос 6 -->
-    <div class="faq-card" data-faq-item>
-        <div class="faq-header">
-            <div class="faq-number">6</div>
-            <div class="faq-icon" style="background: linear-gradient(135deg, rgba(255, 154, 158, 0.15), rgba(254, 207, 239, 0.1)); color: #ff9a9e;">
-                <i class="bi bi-brain"></i>
+        <!-- Колонка для учеников -->
+        <div class="faq-column students">
+            <div class="faq-column-title">
+                <h3>
+                    <div class="column-icon">
+                        <i class="bi bi-emoji-smile-fill"></i>
+                    </div>
+                    Вопросы учеников
+                </h3>
+                <p>Интересные вопросы от наших юных программистов</p>
             </div>
-            <div class="faq-question">Чем полезно программирование для ребёнка?</div>
-            <div class="faq-arrow">
-                <i class="bi bi-chevron-down"></i>
-            </div>
-        </div>
-        <div class="faq-content">
-            <div class="faq-answer">
-                <i class="bi bi-check-circle-fill"></i>
-                Программирование развивает логическое мышление, внимание к деталям, креативность, учит решать задачи и работать в команде. Это навыки будущего!
-            </div>
-        </div>
-    </div>
 
-    <!-- Вопрос 7 -->
-    <div class="faq-card" data-faq-item>
-        <div class="faq-header">
-            <div class="faq-number">7</div>
-            <div class="faq-icon" style="background: linear-gradient(135deg, rgba(255, 236, 210, 0.15), rgba(252, 182, 159, 0.1)); color: #ffecd2;">
-                <i class="bi bi-box-seam"></i>
+            <!-- Вопрос 1 - Ученики -->
+            <div class="faq-card" data-faq-item>
+                <div class="faq-header">
+                    <div class="faq-number">1</div>
+                    <div class="faq-icon" style="background: linear-gradient(135deg, rgba(255, 154, 158, 0.15), rgba(254, 207, 239, 0.1)); color: #ff9a9e;">
+                        <i class="bi bi-controller"></i>
+                    </div>
+                    <div class="faq-question">Могу ли я создать свою игру?</div>
+                    <div class="faq-arrow">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="faq-content">
+                    <div class="faq-answer">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Конечно! Мы научим тебя создавать игры на Scratch, Unity и других платформах. Ты сможешь придумать свою историю и воплотить её в жизнь!
+                    </div>
+                </div>
             </div>
-            <div class="faq-question">С какого возраста можно заниматься 3D-моделированием?</div>
-            <div class="faq-arrow">
-                <i class="bi bi-chevron-down"></i>
-            </div>
-        </div>
-        <div class="faq-content">
-            <div class="faq-answer">
-                <i class="bi bi-check-circle-fill"></i>
-                Обычно с 9–10 лет. Наши курсы адаптированы под возраст и начинаются с простых, увлекательных проектов, постепенно переходя к более сложным.
-            </div>
-        </div>
-    </div>
 
-    <!-- Вопрос 8 -->
-    <div class="faq-card" data-faq-item>
-        <div class="faq-header">
-            <div class="faq-number">8</div>
-            <div class="faq-icon" style="background: linear-gradient(135deg, rgba(13, 148, 136, 0.15), rgba(23, 162, 184, 0.1)); color: #0d9488;">
-                <i class="bi bi-mortarboard-fill"></i>
+            <!-- Вопрос 2 - Ученики -->
+            <div class="faq-card" data-faq-item>
+                <div class="faq-header">
+                    <div class="faq-number">2</div>
+                    <div class="faq-icon" style="background: linear-gradient(135deg, rgba(255, 236, 210, 0.15), rgba(252, 182, 159, 0.1)); color: #ffecd2;">
+                        <i class="bi bi-robot"></i>
+                    </div>
+                    <div class="faq-question">Как работает робот?</div>
+                    <div class="faq-arrow">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="faq-content">
+                    <div class="faq-answer">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Роботы работают благодаря программе, которую мы для них пишем! Они могут двигаться, реагировать на свет, звук и даже обходить препятствия. Это очень круто!
+                    </div>
+                </div>
             </div>
-            <div class="faq-question">Где применяются знания, полученные на курсах?</div>
-            <div class="faq-arrow">
-                <i class="bi bi-chevron-down"></i>
-            </div>
-        </div>
-        <div class="faq-content">
-            <div class="faq-answer">
-                <i class="bi bi-check-circle-fill"></i>
-                Знания полезны в школе, на олимпиадах, в IT-проектах и при поступлении в технические вузы. Многие наши выпускники успешно строят карьеру в IT!
-            </div>
-        </div>
-    </div>
 
-    <!-- Вопрос 9 -->
-    <div class="faq-card" data-faq-item>
-        <div class="faq-header">
-            <div class="faq-number">9</div>
-            <div class="faq-icon" style="background: linear-gradient(135deg, rgba(204, 85, 0, 0.15), rgba(255, 149, 0, 0.1)); color: #CC5500;">
-                <i class="bi bi-laptop"></i>
+            <!-- Вопрос 3 - Ученики -->
+            <div class="faq-card" data-faq-item>
+                <div class="faq-header">
+                    <div class="faq-number">3</div>
+                    <div class="faq-icon" style="background: linear-gradient(135deg, rgba(13, 148, 136, 0.15), rgba(23, 162, 184, 0.1)); color: #0d9488;">
+                        <i class="bi bi-code-slash"></i>
+                    </div>
+                    <div class="faq-question">Что такое Python?</div>
+                    <div class="faq-arrow">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="faq-content">
+                    <div class="faq-answer">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Python — это язык программирования, на котором пишут настоящие программисты! Он простой и понятный, поэтому идеально подходит для изучения. На нём можно создавать игры, сайты и даже искусственный интеллект!
+                    </div>
+                </div>
             </div>
-            <div class="faq-question">Нужно ли покупать оборудование для занятий?</div>
-            <div class="faq-arrow">
-                <i class="bi bi-chevron-down"></i>
+
+            <!-- Вопрос 4 - Ученики -->
+            <div class="faq-card" data-faq-item>
+                <div class="faq-header">
+                    <div class="faq-number">4</div>
+                    <div class="faq-icon" style="background: linear-gradient(135deg, rgba(204, 85, 0, 0.15), rgba(255, 149, 0, 0.1)); color: #CC5500;">
+                        <i class="bi bi-cube"></i>
+                    </div>
+                    <div class="faq-question">Можно ли напечатать на 3D-принтере?</div>
+                    <div class="faq-arrow">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="faq-content">
+                    <div class="faq-answer">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Да! Мы научим тебя создавать 3D-модели, а потом напечатаем их на настоящем 3D-принтере. Ты сможешь забрать домой свои творения!
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="faq-content">
-            <div class="faq-answer">
-                <i class="bi bi-check-circle-fill"></i>
-                Нет, всё необходимое оборудование и материалы предоставляются в классе. Вам ничего не нужно покупать дополнительно!
+
+            <!-- Вопрос 5 - Ученики -->
+            <div class="faq-card" data-faq-item>
+                <div class="faq-header">
+                    <div class="faq-number">5</div>
+                    <div class="faq-icon" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.1)); color: #667eea;">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="faq-question">Буду ли я работать в команде?</div>
+                    <div class="faq-arrow">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="faq-content">
+                    <div class="faq-answer">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Конечно! Мы часто работаем в командах, где каждый делает свою часть проекта. Это очень весело и помогает научиться работать вместе!
+                    </div>
+                </div>
             </div>
         </div>
     </div>
