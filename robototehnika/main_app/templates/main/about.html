@@ -1977,8 +1977,9 @@
             <div class="col-md-4 d-flex">
                 <div class="video-review-card p-4 text-center w-100">
                     <div class="ratio ratio-16x9 mb-3 rounded shadow-sm overflow-hidden">
-                        <video controls poster="{% static 'main/img/video_thumbs_optimized/nikita.webp' %}">
-                            <source src="{% static 'main/video/review_nikita.mp4' %}" type="video/mp4">
+                        <video controls preload="none" poster="{% static 'main/img/video_thumbs_optimized/nikita.webp' %}">
+                            <source src="{% static 'main/video_optimized/review_nikita_optimized.webm' %}" type="video/webm">
+                            <source src="{% static 'main/video_optimized/review_nikita_optimized.mp4' %}" type="video/mp4">
                             Ваш браузер не поддерживает видео.
                         </video>
                     </div>
@@ -1990,8 +1991,9 @@
             <div class="col-md-4 d-flex">
                 <div class="video-review-card p-4 text-center w-100">
                     <div class="ratio ratio-16x9 mb-3 rounded shadow-sm overflow-hidden">
-                        <video controls poster="{% static 'main/img/video_thumbs_optimized/makar.webp' %}">
-                            <source src="{% static 'main/video/review_makar.MOV' %}" type="video/mp4">
+                        <video controls preload="none" poster="{% static 'main/img/video_thumbs_optimized/makar.webp' %}">
+                            <source src="{% static 'main/video_optimized/review_makar_optimized.webm' %}" type="video/webm">
+                            <source src="{% static 'main/video_optimized/review_makar_optimized.mp4' %}" type="video/mp4">
                             Ваш браузер не поддерживает видео.
                         </video>
                     </div>
@@ -2002,8 +2004,9 @@
             <div class="col-md-4 d-flex">
                 <div class="video-review-card p-4 text-center w-100">
                     <div class="ratio ratio-16x9 mb-3 rounded shadow-sm overflow-hidden">
-                        <video controls poster="{% static 'main/img/video_thumbs_optimized/genia.webp' %}">
-                            <source src="{% static 'main/video/review_genia.MOV' %}" type="video/mp4">
+                        <video controls preload="none" poster="{% static 'main/img/video_thumbs_optimized/genia.webp' %}">
+                            <source src="{% static 'main/video_optimized/review_genia_optimized.webm' %}" type="video/webm">
+                            <source src="{% static 'main/video_optimized/review_genia_optimized.mp4' %}" type="video/mp4">
                             Ваш браузер не поддерживает видео.
                         </video>
                     </div>
@@ -2102,6 +2105,26 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(reviewRippleStyle);
     
+    
+    // Ленивая загрузка видео
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const video = entry.target;
+                // Загружаем метаданные видео при появлении в viewport
+                video.preload = 'metadata';
+                videoObserver.unobserve(video);
+            }
+        });
+    }, {
+        rootMargin: '50px',
+        threshold: 0.1
+    });
+
+    // Наблюдаем за всеми видео с preload="none"
+    document.querySelectorAll('video[preload="none"]').forEach(video => {
+        videoObserver.observe(video);
+    });
     
     console.log('✨ Премиум About страница загружена!');
 });
