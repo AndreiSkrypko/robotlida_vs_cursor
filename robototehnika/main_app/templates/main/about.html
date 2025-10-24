@@ -65,7 +65,7 @@
     /* === HERO-БЛОК (верхний баннер с изображением) === */
 
     .about-hero-bg {
-        background-image: url("{% static 'main/img/about/1.jpeg' %}"); /* Фоновое изображение */
+        background-image: url("{% static 'main/img/about_optimized/1.webp' %}"); /* Фоновое изображение */
         background-size: cover; /* Растягиваем фон по блоку */
         background-position: center; /* Центрируем изображение */
         position: relative;
@@ -351,6 +351,46 @@
     overflow: hidden;
 }
 
+/* Прелоадер для галереи */
+.gallery-preloader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.gallery-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(13, 148, 136, 0.1);
+    border-top: 4px solid #0d9488;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.gallery-loading-text {
+    color: #0d9488;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.gallery-preloader.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
 .carousel-wrapper::before {
     content: '';
     position: absolute;
@@ -488,8 +528,37 @@
     height: 100%;
     object-fit: cover;
     border-radius: 0.8rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
     display: block;
+    background: linear-gradient(135deg, #f8fafc, #e9ecef);
+}
+
+/* Состояния загрузки изображений */
+.carousel-item-custom img.loading {
+    opacity: 0.3;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.carousel-item-custom img.loaded {
+    opacity: 1;
+    animation: fadeInImage 0.5s ease-out;
+}
+
+.carousel-item-custom img.error {
+    opacity: 0.5;
+    background: linear-gradient(135deg, #ffebee, #ffcdd2);
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes fadeInImage {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 .carousel-item-custom[data-position="0"]:hover img {
@@ -741,6 +810,21 @@
     
     .carousel-wrapper::before {
         display: none;
+    }
+    
+    /* Оптимизированный прелоадер для мобильных */
+    .gallery-preloader {
+        gap: 0.8rem;
+    }
+    
+    .gallery-spinner {
+        width: 40px;
+        height: 40px;
+        border-width: 3px;
+    }
+    
+    .gallery-loading-text {
+        font-size: 1rem;
     }
     
     .carousel-inner-custom {
@@ -1114,14 +1198,14 @@
 <!--
     Модальное окно открывается автоматически при успешной отправке формы
 -->
+{% if success %}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-      {% if success %}
         var signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
         signupModal.show();
-      {% endif %}
     });
 </script>
+{% endif %}
 
 <!--
     =========================
@@ -1239,6 +1323,13 @@
 -->
 <div class="carousel-wrapper mx-auto">
     <h1 class="mb-5 text-center fw-bold">Фото наших занятий</h1>
+    
+    <!-- Прелоадер галереи -->
+    <div class="gallery-preloader" id="galleryPreloader">
+        <div class="gallery-spinner"></div>
+        <div class="gallery-loading-text">Загружаем фотографии...</div>
+    </div>
+    
     <button class="carousel-control carousel-control-left" type="button" aria-label="Назад"
             onclick="scrollCarousel(-1)">‹
     </button>
@@ -1246,97 +1337,97 @@
         <div class="carousel-track" id="carouselTrack">
             <!-- Фотографии занятий с ленивой загрузкой -->
             <div class="carousel-item-custom" data-photo-index="0">
-                <img data-src="{% static 'main/img/fotocarusel/photo_1_2025-03-18_19-28-04.jpg' %}" alt="Фото занятий 1" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/photo_1_2025-03-18_19-28-04.webp' %}" alt="Фото занятий 1" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="1">
-                <img data-src="{% static 'main/img/fotocarusel/photo_2_2025-03-18_19-28-04.jpg' %}" alt="Фото занятий 2" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/photo_2_2025-03-18_19-28-04.webp' %}" alt="Фото занятий 2" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="2">
-                <img data-src="{% static 'main/img/fotocarusel/photo_3_2025-03-18_19-28-04.jpg' %}" alt="Фото занятий 3" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/photo_3_2025-03-18_19-28-04.webp' %}" alt="Фото занятий 3" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="3">
-                <img data-src="{% static 'main/img/fotocarusel/photo_4_2025-03-18_19-28-04.jpg' %}" alt="Фото занятий 4" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/photo_4_2025-03-18_19-28-04.webp' %}" alt="Фото занятий 4" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="4">
-                <img data-src="{% static 'main/img/fotocarusel/20240217_174745.jpg' %}" alt="Фото занятий 5" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/20240217_174745.webp' %}" alt="Фото занятий 5" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="5">
-                <img data-src="{% static 'main/img/fotocarusel/20240224_164125.jpg' %}" alt="Фото занятий 6" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/20240224_164125.webp' %}" alt="Фото занятий 6" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="6">
-                <img data-src="{% static 'main/img/fotocarusel/20240224_164134.jpg' %}" alt="Фото занятий 7" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/20240224_164134.webp' %}" alt="Фото занятий 7" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="7">
-                <img data-src="{% static 'main/img/fotocarusel/8.jpg' %}" alt="Фото занятий 8" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/8.webp' %}" alt="Фото занятий 8" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="8">
-                <img data-src="{% static 'main/img/fotocarusel/9.jpg' %}" alt="Фото занятий 9" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/9.webp' %}" alt="Фото занятий 9" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="9">
-                <img data-src="{% static 'main/img/fotocarusel/1.jpg' %}" alt="Фото занятий 10" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/1.webp' %}" alt="Фото занятий 10" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="10">
-                <img data-src="{% static 'main/img/fotocarusel/2.jpg' %}" alt="Фото занятий 11" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/2.webp' %}" alt="Фото занятий 11" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="11">
-                <img data-src="{% static 'main/img/fotocarusel/3.jpg' %}" alt="Фото занятий 12" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/3.webp' %}" alt="Фото занятий 12" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="12">
-                <img data-src="{% static 'main/img/fotocarusel/4.jpg' %}" alt="Фото занятий 13" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/4.webp' %}" alt="Фото занятий 13" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="13">
-                <img data-src="{% static 'main/img/fotocarusel/5.jpg' %}" alt="Фото занятий 14" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/5.webp' %}" alt="Фото занятий 14" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="14">
-                <img data-src="{% static 'main/img/fotocarusel/6.jpg' %}" alt="Фото занятий 15" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/6.webp' %}" alt="Фото занятий 15" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="15">
-                <img data-src="{% static 'main/img/fotocarusel/7.jpg' %}" alt="Фото занятий 16" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/7.webp' %}" alt="Фото занятий 16" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="16">
-                <img data-src="{% static 'main/img/fotocarusel/10.jpg' %}" alt="Фото занятий 17" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/10.webp' %}" alt="Фото занятий 17" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="17">
-                <img data-src="{% static 'main/img/fotocarusel/11.jpg' %}" alt="Фото занятий 18" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/11.webp' %}" alt="Фото занятий 18" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="18">
-                <img data-src="{% static 'main/img/fotocarusel/12.jpg' %}" alt="Фото занятий 19" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/12.webp' %}" alt="Фото занятий 19" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="19">
-                <img data-src="{% static 'main/img/fotocarusel/13.jpg' %}" alt="Фото занятий 20" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/13.webp' %}" alt="Фото занятий 20" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="20">
-                <img data-src="{% static 'main/img/fotocarusel/14.jpg' %}" alt="Фото занятий 21" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/14.webp' %}" alt="Фото занятий 21" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="21">
-                <img data-src="{% static 'main/img/fotocarusel/15.jpg' %}" alt="Фото занятий 22" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/15.webp' %}" alt="Фото занятий 22" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="22">
-                <img data-src="{% static 'main/img/fotocarusel/16.jpg' %}" alt="Фото занятий 23" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/16.webp' %}" alt="Фото занятий 23" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="23">
-                <img data-src="{% static 'main/img/fotocarusel/17.jpg' %}" alt="Фото занятий 24" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/17.webp' %}" alt="Фото занятий 24" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="24">
-                <img data-src="{% static 'main/img/fotocarusel/18.jpg' %}" alt="Фото занятий 25" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/18.webp' %}" alt="Фото занятий 25" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="25">
-                <img data-src="{% static 'main/img/fotocarusel/19.jpg' %}" alt="Фото занятий 26" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/19.webp' %}" alt="Фото занятий 26" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="26">
-                <img data-src="{% static 'main/img/fotocarusel/20.jpg' %}" alt="Фото занятий 27" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/20.webp' %}" alt="Фото занятий 27" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="27">
-                <img data-src="{% static 'main/img/fotocarusel/21.jpg' %}" alt="Фото занятий 28" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/21.webp' %}" alt="Фото занятий 28" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="28">
-                <img data-src="{% static 'main/img/fotocarusel/22.jpg' %}" alt="Фото занятий 29" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/22.webp' %}" alt="Фото занятий 29" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="29">
-                <img data-src="{% static 'main/img/fotocarusel/23.jpg' %}" alt="Фото занятий 30" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/23.webp' %}" alt="Фото занятий 30" loading="lazy">
             </div>
             <div class="carousel-item-custom" data-photo-index="30">
-                <img data-src="{% static 'main/img/fotocarusel/24.jpg' %}" alt="Фото занятий 31" loading="lazy">
+                <img data-src="{% static 'main/img/fotocarusel_optimized/24.webp' %}" alt="Фото занятий 31" loading="lazy">
             </div>
         </div>
 
@@ -1375,13 +1466,26 @@
 
     document.addEventListener('DOMContentLoaded', function () {
         const track = document.getElementById('carouselTrack');
+        const preloader = document.getElementById('galleryPreloader');
         carouselItems = Array.from(track.querySelectorAll('.carousel-item-custom[data-photo-index]'));
+        
+        // Показываем прелоадер
+        if (preloader) {
+            preloader.classList.remove('hidden');
+        }
         
         // Инициализируем ленивую загрузку изображений
         initializeLazyLoading();
         
         // Инициализируем позиции слайдов
         updateCarousel(true);
+        
+        // Скрываем прелоадер после загрузки первых изображений
+        setTimeout(() => {
+            if (preloader) {
+                preloader.classList.add('hidden');
+            }
+        }, 1000);
         
         // Автоматическое вращение каждые 4 секунды (на мобильных замедляем)
         startAutoRotate();
@@ -1500,6 +1604,13 @@
                 }, 50);
             }
         });
+        
+        // Загружаем видимые изображения после обновления позиций
+        if (!instant) {
+            setTimeout(() => {
+                loadVisibleImages();
+            }, 100);
+        }
     }
 
     function scrollCarousel(direction) {
@@ -1535,14 +1646,22 @@
         clearInterval(autoRotateInterval);
     }
 
-    // Функция ленивой загрузки изображений
+    // Улучшенная функция ленивой загрузки изображений
     function initializeLazyLoading() {
-        // Загружаем первые 3 изображения сразу
-        for (let i = 0; i < Math.min(3, carouselItems.length); i++) {
+        // Загружаем первые 7 изображений сразу для лучшего UX
+        const initialLoadCount = Math.min(7, carouselItems.length);
+        for (let i = 0; i < initialLoadCount; i++) {
             loadImage(carouselItems[i]);
         }
         
-        // Загружаем остальные при прокрутке
+        // Загружаем остальные изображения с небольшой задержкой
+        setTimeout(() => {
+            for (let i = initialLoadCount; i < carouselItems.length; i++) {
+                loadImage(carouselItems[i]);
+            }
+        }, 1000);
+        
+        // Создаем observer для загрузки остальных изображений (резервный механизм)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1551,7 +1670,8 @@
                 }
             });
         }, {
-            rootMargin: '50px'
+            rootMargin: '300px',
+            threshold: 0.1
         });
         
         // Наблюдаем за элементами, которые еще не загружены
@@ -1563,12 +1683,67 @@
         });
     }
     
+    // Функция для загрузки изображений при прокрутке карусели
+    function loadVisibleImages() {
+        carouselItems.forEach((item, index) => {
+            const position = parseInt(item.getAttribute('data-position') || '999');
+            const img = item.querySelector('img');
+            
+            // Загружаем изображения, которые видны или скоро будут видны
+            if (Math.abs(position) <= 3 && img && img.dataset.src && !img.src) {
+                loadImage(item);
+            }
+        });
+    }
+    
     function loadImage(item) {
         const img = item.querySelector('img');
         if (img && img.dataset.src && !img.src) {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
+            // Добавляем класс загрузки
+            img.classList.add('loading');
+            
+            // Проверяем поддержку WebP
+            const supportsWebP = checkWebPSupport();
+            let imageSrc = img.dataset.src;
+            
+            // Если поддерживается WebP, пытаемся загрузить WebP версию
+            if (supportsWebP) {
+                const webpSrc = imageSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+                // Сначала пробуем WebP, если не загрузится - fallback на оригинал
+                loadImageWithFallback(img, webpSrc, imageSrc);
+            } else {
+                loadImageWithFallback(img, imageSrc, imageSrc);
+            }
         }
+    }
+    
+    function loadImageWithFallback(img, primarySrc, fallbackSrc) {
+        const tempImg = new Image();
+        tempImg.onload = function() {
+            img.src = this.src;
+            img.removeAttribute('data-src');
+            img.classList.remove('loading');
+            img.classList.add('loaded');
+        };
+        tempImg.onerror = function() {
+            // Если WebP не загрузился, пробуем оригинал
+            if (primarySrc !== fallbackSrc) {
+                loadImageWithFallback(img, fallbackSrc, fallbackSrc);
+            } else {
+                img.classList.remove('loading');
+                img.classList.add('error');
+                console.warn('Не удалось загрузить изображение:', fallbackSrc);
+            }
+        };
+        tempImg.src = primarySrc;
+    }
+    
+    function checkWebPSupport() {
+        // Проверяем поддержку WebP
+        const canvas = document.createElement('canvas');
+        canvas.width = 1;
+        canvas.height = 1;
+        return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
     }
 
     // Глобальная функция для кнопок
@@ -1802,7 +1977,7 @@
             <div class="col-md-4 d-flex">
                 <div class="video-review-card p-4 text-center w-100">
                     <div class="ratio ratio-16x9 mb-3 rounded shadow-sm overflow-hidden">
-                        <video controls poster="{% static 'main/img/video_thumbs/nikita.jpg' %}">
+                        <video controls poster="{% static 'main/img/video_thumbs_optimized/nikita.webp' %}">
                             <source src="{% static 'main/video/review_nikita.mp4' %}" type="video/mp4">
                             Ваш браузер не поддерживает видео.
                         </video>
@@ -1815,7 +1990,7 @@
             <div class="col-md-4 d-flex">
                 <div class="video-review-card p-4 text-center w-100">
                     <div class="ratio ratio-16x9 mb-3 rounded shadow-sm overflow-hidden">
-                        <video controls poster="{% static 'main/img/video_thumbs/makar.jpg' %}">
+                        <video controls poster="{% static 'main/img/video_thumbs_optimized/makar.webp' %}">
                             <source src="{% static 'main/video/review_makar.MOV' %}" type="video/mp4">
                             Ваш браузер не поддерживает видео.
                         </video>
@@ -1827,7 +2002,7 @@
             <div class="col-md-4 d-flex">
                 <div class="video-review-card p-4 text-center w-100">
                     <div class="ratio ratio-16x9 mb-3 rounded shadow-sm overflow-hidden">
-                        <video controls poster="{% static 'main/img/video_thumbs/genia.jpg' %}">
+                        <video controls poster="{% static 'main/img/video_thumbs_optimized/genia.webp' %}">
                             <source src="{% static 'main/video/review_genia.MOV' %}" type="video/mp4">
                             Ваш браузер не поддерживает видео.
                         </video>
